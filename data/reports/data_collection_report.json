@@ -1,0 +1,68 @@
+{
+  "dataset_id": "emmarex/plantdisease",
+  "image_root": "data/raw/PlantVillage",
+  "total_classes": 15,
+  "total_images": 20638,
+  "classes": {
+    "Pepper__bell___Bacterial_spot": {
+      "path": "data/raw/PlantVillage/Pepper__bell___Bacterial_spot",
+      "count": 997
+    },
+    "Pepper__bell___healthy": {
+      "path": "data/raw/PlantVillage/Pepper__bell___healthy",
+      "count": 1478
+    },
+    "Potato___Early_blight": {
+      "path": "data/raw/PlantVillage/Potato___Early_blight",
+      "count": 1000
+    },
+    "Potato___Late_blight": {
+      "path": "data/raw/PlantVillage/Potato___Late_blight",
+      "count": 1000
+    },
+    "Potato___healthy": {
+      "path": "data/raw/PlantVillage/Potato___healthy",
+      "count": 152
+    },
+    "Tomato_Bacterial_spot": {
+      "path": "data/raw/PlantVillage/Tomato_Bacterial_spot",
+      "count": 2127
+    },
+    "Tomato_Early_blight": {
+      "path": "data/raw/PlantVillage/Tomato_Early_blight",
+      "count": 1000
+    },
+    "Tomato_Late_blight": {
+      "path": "data/raw/PlantVillage/Tomato_Late_blight",
+      "count": 1909
+    },
+    "Tomato_Leaf_Mold": {
+      "path": "data/raw/PlantVillage/Tomato_Leaf_Mold",
+      "count": 952
+    },
+    "Tomato_Septoria_leaf_spot": {
+      "path": "data/raw/PlantVillage/Tomato_Septoria_leaf_spot",
+      "count": 1771
+    },
+    "Tomato_Spider_mites_Two_spotted_spider_mite": {
+      "path": "data/raw/PlantVillage/Tomato_Spider_mites_Two_spotted_spider_mite",
+      "count": 1676
+    },
+    "Tomato__Target_Spot": {
+      "path": "data/raw/PlantVillage/Tomato__Target_Spot",
+      "count": 1404
+    },
+    "Tomato__Tomato_YellowLeaf__Curl_Virus": {
+      "path": "data/raw/PlantVillage/Tomato__Tomato_YellowLeaf__Curl_Virus",
+      "count": 3208
+    },
+    "Tomato__Tomato_mosaic_virus": {
+      "path": "data/raw/PlantVillage/Tomato__Tomato_mosaic_virus",
+      "count": 373
+    },
+    "Tomato_healthy": {
+      "path": "data/raw/PlantVillage/Tomato_healthy",
+      "count": 1591
+    }
+  }
+}
