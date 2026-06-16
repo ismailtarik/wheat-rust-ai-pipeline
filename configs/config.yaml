@@ -1,7 +1,7 @@
 project:
   name: "wheat-rust-ai-pipeline"
   author: "Tarik Ismail"
-  lab: "MDSET — Hassan First University, Settat"
+  lab: "MDSET"
   seed: 42
 
 # ------------------------------------------------------------
@@ -79,7 +79,7 @@ pipeline:
 # Chemins de sortie
 # ------------------------------------------------------------
 paths:
-  raw_data:      "data/raw/WheatPlantDiseases"
+  raw_data:      "data/raw/data"
   processed:     "data/processed"
   reports:       "data/reports"
   outputs:       "outputs"

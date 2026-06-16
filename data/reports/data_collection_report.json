@@ -1,68 +1,68 @@
 {
-  "dataset_id": "emmarex/plantdisease",
-  "image_root": "data/raw/PlantVillage",
+  "dataset_id": "kushagra3204/wheat-plant-diseases",
+  "image_root": "data/raw/data/train",
   "total_classes": 15,
-  "total_images": 20638,
+  "total_images": 13104,
   "classes": {
-    "Pepper__bell___Bacterial_spot": {
-      "path": "data/raw/PlantVillage/Pepper__bell___Bacterial_spot",
-      "count": 997
+    "Aphid": {
+      "path": "data/raw/data/train/Aphid",
+      "count": 903
     },
-    "Pepper__bell___healthy": {
-      "path": "data/raw/PlantVillage/Pepper__bell___healthy",
-      "count": 1478
+    "Black Rust": {
+      "path": "data/raw/data/train/Black Rust",
+      "count": 576
     },
-    "Potato___Early_blight": {
-      "path": "data/raw/PlantVillage/Potato___Early_blight",
+    "Blast": {
+      "path": "data/raw/data/train/Blast",
+      "count": 647
+    },
+    "Brown Rust": {
+      "path": "data/raw/data/train/Brown Rust",
+      "count": 1271
+    },
+    "Common Root Rot": {
+      "path": "data/raw/data/train/Common Root Rot",
+      "count": 614
+    },
+    "Fusarium Head Blight": {
+      "path": "data/raw/data/train/Fusarium Head Blight",
+      "count": 611
+    },
+    "Healthy": {
+      "path": "data/raw/data/train/Healthy",
       "count": 1000
     },
-    "Potato___Late_blight": {
-      "path": "data/raw/PlantVillage/Potato___Late_blight",
-      "count": 1000
+    "Leaf Blight": {
+      "path": "data/raw/data/train/Leaf Blight",
+      "count": 842
     },
-    "Potato___healthy": {
-      "path": "data/raw/PlantVillage/Potato___healthy",
-      "count": 152
+    "Mildew": {
+      "path": "data/raw/data/train/Mildew",
+      "count": 1081
     },
-    "Tomato_Bacterial_spot": {
-      "path": "data/raw/PlantVillage/Tomato_Bacterial_spot",
-      "count": 2127
+    "Mite": {
+      "path": "data/raw/data/train/Mite",
+      "count": 800
     },
-    "Tomato_Early_blight": {
-      "path": "data/raw/PlantVillage/Tomato_Early_blight",
-      "count": 1000
+    "Septoria": {
+      "path": "data/raw/data/train/Septoria",
+      "count": 1144
     },
-    "Tomato_Late_blight": {
-      "path": "data/raw/PlantVillage/Tomato_Late_blight",
-      "count": 1909
+    "Smut": {
+      "path": "data/raw/data/train/Smut",
+      "count": 1310
     },
-    "Tomato_Leaf_Mold": {
-      "path": "data/raw/PlantVillage/Tomato_Leaf_Mold",
-      "count": 952
+    "Stem fly": {
+      "path": "data/raw/data/train/Stem fly",
+      "count": 234
     },
-    "Tomato_Septoria_leaf_spot": {
-      "path": "data/raw/PlantVillage/Tomato_Septoria_leaf_spot",
-      "count": 1771
+    "Tan spot": {
+      "path": "data/raw/data/train/Tan spot",
+      "count": 770
     },
-    "Tomato_Spider_mites_Two_spotted_spider_mite": {
-      "path": "data/raw/PlantVillage/Tomato_Spider_mites_Two_spotted_spider_mite",
-      "count": 1676
-    },
-    "Tomato__Target_Spot": {
-      "path": "data/raw/PlantVillage/Tomato__Target_Spot",
-      "count": 1404
-    },
-    "Tomato__Tomato_YellowLeaf__Curl_Virus": {
-      "path": "data/raw/PlantVillage/Tomato__Tomato_YellowLeaf__Curl_Virus",
-      "count": 3208
-    },
-    "Tomato__Tomato_mosaic_virus": {
-      "path": "data/raw/PlantVillage/Tomato__Tomato_mosaic_virus",
-      "count": 373
-    },
-    "Tomato_healthy": {
-      "path": "data/raw/PlantVillage/Tomato_healthy",
-      "count": 1591
+    "Yellow Rust": {
+      "path": "data/raw/data/train/Yellow Rust",
+      "count": 1301
     }
   }
 }
