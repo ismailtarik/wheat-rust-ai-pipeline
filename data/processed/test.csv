@@ -1,0 +1,1967 @@
+filepath,class_raw,label,label_idx
+data/raw/data/train/Leaf Blight/leaf_blight_838.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Healthy/healthy_289.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_115.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_755.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_762.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_178.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_420.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_671.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_250.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_732.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Black Rust/black_rust_410.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_519.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_512.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_639.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mite/mite_385.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_533.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_765.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_1068.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_883.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_261.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_179.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_1190.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_578.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_418.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_522.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_404.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_525.png,Black Rust,Black_Rust,1
+data/raw/data/train/Common Root Rot/common_root_rot_156.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_190.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_601.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_673.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_391.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_1284.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_907.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_178.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_78.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_32.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1228.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_1169.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_274.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_379.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_732.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_537.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_508.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_1061.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_666.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_509.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_596.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_294.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_79.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_387.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_215.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_604.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_546.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_685.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_1014.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Black Rust/black_rust_233.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_1018.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_136.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_211.png,Blast,Blast,2
+data/raw/data/train/Common Root Rot/common_root_rot_415.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_471.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1147.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1019.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_176.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_905.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_878.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_19.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_435.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_926.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_98.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_332.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_576.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1087.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_1132.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_117.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_608.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_839.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_356.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_1235.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_747.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_572.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_307.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_483.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_1172.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_348.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_804.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_837.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_1163.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_481.png,Black Rust,Black_Rust,1
+data/raw/data/train/Yellow Rust/yellow_rust_196.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_989.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_530.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_302.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_116.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_854.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_494.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_153.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_910.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_943.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_119.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_497.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_417.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_719.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_802.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_863.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_755.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_181.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_629.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_555.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_347.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_344.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_151.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_470.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_359.png,Black Rust,Black_Rust,1
+data/raw/data/train/Yellow Rust/yellow_rust_386.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_692.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_1230.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_986.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_975.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_40.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_494.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_805.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_75.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_536.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_112.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_802.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_159.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_265.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_630.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_327.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_242.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_1001.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_128.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_328.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_208.png,Tan spot,Tan_spot,13
+data/raw/data/train/Blast/blast_199.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_111.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_1040.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_847.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_493.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1236.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_1072.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_304.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_907.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_919.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_16.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_672.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_111.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_347.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_457.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_1020.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_736.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_410.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_633.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_300.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_91.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Black Rust/black_rust_364.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_1102.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_151.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_433.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_584.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_964.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_318.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_225.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_261.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_255.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_430.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_140.png,Blast,Blast,2
+data/raw/data/train/Leaf Blight/leaf_blight_689.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_14.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_154.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_1149.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_84.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_743.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_389.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_292.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_848.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_330.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_322.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_257.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_1202.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_177.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_376.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_693.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1202.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_650.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_251.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_1032.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_717.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_315.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_1017.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_333.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_950.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_74.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_127.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1113.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_39.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_201.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_305.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_993.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_265.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_1008.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_195.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_981.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_308.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Stem fly/stem_fly_0.png,Stem fly,Stem_fly,12
+data/raw/data/train/Black Rust/black_rust_171.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_34.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_930.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_684.png,Mite,Mite,9
+data/raw/data/train/Common Root Rot/common_root_rot_388.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_848.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_39.png,Black Rust,Black_Rust,1
+data/raw/data/train/Blast/blast_611.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_535.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_370.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_339.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_844.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_56.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_1076.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_1268.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_268.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_88.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_818.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_961.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_44.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_731.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_1088.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_409.png,Mite,Mite,9
+data/raw/data/train/Black Rust/black_rust_91.png,Black Rust,Black_Rust,1
+data/raw/data/train/Common Root Rot/common_root_rot_213.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Blast/blast_327.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_770.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_859.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_228.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_241.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_461.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_205.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_1053.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_475.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_224.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_267.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_587.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_192.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Blast/blast_298.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_75.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_364.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_453.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_215.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_43.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_218.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_224.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_68.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_806.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_621.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_953.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_119.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_84.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_720.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_193.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_226.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_204.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_855.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_86.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_62.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_936.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_701.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_325.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_233.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_387.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_507.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Black Rust/black_rust_565.png,Black Rust,Black_Rust,1
+data/raw/data/train/Healthy/healthy_30.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_678.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_476.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_90.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_230.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_267.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_685.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_102.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_399.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_653.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_1241.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_2.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_703.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_316.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_328.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_301.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_272.png,Black Rust,Black_Rust,1
+data/raw/data/train/Septoria/septoria_242.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_776.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_165.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_544.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_561.png,Healthy,Healthy,6
+data/raw/data/train/Tan spot/tan_spot_16.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_181.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_895.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_130.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_865.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_525.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_111.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_424.png,Blast,Blast,2
+data/raw/data/train/Tan spot/tan_spot_60.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_1252.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_589.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_136.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_1037.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_463.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_625.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_88.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_298.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_363.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Blast/blast_388.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_16.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_183.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_780.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_1044.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_901.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_176.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_731.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_53.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_223.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_709.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_318.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_774.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_239.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_783.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_809.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_1042.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_179.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_1096.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_95.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_649.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_910.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_254.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Black Rust/black_rust_314.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_152.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_442.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_515.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_520.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_199.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_275.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_723.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_382.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_890.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_244.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_777.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_502.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_843.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_207.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_225.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_686.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_794.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_345.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_335.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_790.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_438.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_351.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_896.png,Mildew,Mildew,8
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_439.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_863.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_1077.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_369.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_293.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_672.png,Mite,Mite,9
+data/raw/data/train/Black Rust/black_rust_324.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_1058.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1114.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_878.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_83.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_393.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_108.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1074.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_361.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_420.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_95.png,Tan spot,Tan_spot,13
+data/raw/data/train/Blast/blast_111.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_1056.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_651.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_337.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_15.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_703.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_956.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_159.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_19.png,Black Rust,Black_Rust,1
+data/raw/data/train/Stem fly/stem_fly_126.png,Stem fly,Stem_fly,12
+data/raw/data/train/Blast/blast_249.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_4.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_113.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_763.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_999.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_540.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_964.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_654.png,Healthy,Healthy,6
+data/raw/data/train/Stem fly/stem_fly_190.png,Stem fly,Stem_fly,12
+data/raw/data/train/Leaf Blight/leaf_blight_456.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_944.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_650.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_250.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_1159.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_359.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_474.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_460.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_401.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_720.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_196.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_503.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Stem fly/stem_fly_38.png,Stem fly,Stem_fly,12
+data/raw/data/train/Yellow Rust/yellow_rust_743.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_609.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1222.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_37.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_616.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Black Rust/black_rust_42.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_323.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_1151.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Black Rust/black_rust_193.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_299.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_374.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_520.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_604.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_153.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_1180.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_595.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_1206.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_338.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_279.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_286.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_786.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_654.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_483.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_287.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_980.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_678.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_217.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_809.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_440.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_296.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_67.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_224.png,Mite,Mite,9
+data/raw/data/train/Aphid/aphid_568.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_205.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_792.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_1036.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_71.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_291.png,Blast,Blast,2
+data/raw/data/train/Stem fly/stem_fly_25.png,Stem fly,Stem_fly,12
+data/raw/data/train/Common Root Rot/common_root_rot_490.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_552.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_492.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_1073.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_815.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_534.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_1286.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_684.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1183.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_506.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_294.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_749.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_1208.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_526.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_286.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_317.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_575.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_479.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_564.png,Black Rust,Black_Rust,1
+data/raw/data/train/Yellow Rust/yellow_rust_1026.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_45.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_521.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_457.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_965.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_325.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_304.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_996.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_92.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_412.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_1164.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_29.png,Black Rust,Black_Rust,1
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_32.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Common Root Rot/common_root_rot_444.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_188.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_16.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_254.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_122.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_431.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_858.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_432.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_769.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_549.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_292.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_995.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_119.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_966.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_383.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_180.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_524.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_985.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_1020.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_917.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_65.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_202.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_54.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1161.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_450.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Stem fly/stem_fly_180.png,Stem fly,Stem_fly,12
+data/raw/data/train/Smut/smut_107.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_586.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_697.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_185.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_489.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Common Root Rot/common_root_rot_114.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_347.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_293.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_224.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_722.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_737.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_29.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_594.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_419.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_487.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Healthy/healthy_715.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_174.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_664.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_858.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_96.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_228.png,Mite,Mite,9
+data/raw/data/train/Black Rust/black_rust_70.png,Black Rust,Black_Rust,1
+data/raw/data/train/Yellow Rust/yellow_rust_238.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_698.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_466.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Black Rust/black_rust_330.png,Black Rust,Black_Rust,1
+data/raw/data/train/Healthy/healthy_156.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_278.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Black Rust/black_rust_184.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_709.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_321.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_196.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_126.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_509.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_218.png,Mite,Mite,9
+data/raw/data/train/Stem fly/stem_fly_132.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mite/mite_600.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_47.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_835.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_52.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_291.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_56.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_228.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Common Root Rot/common_root_rot_138.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_494.png,Healthy,Healthy,6
+data/raw/data/train/Stem fly/stem_fly_114.png,Stem fly,Stem_fly,12
+data/raw/data/train/Septoria/septoria_151.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_319.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_158.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_1137.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_559.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_313.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_108.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_479.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_933.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_718.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_926.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_212.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_596.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_793.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_587.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_1247.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_127.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Black Rust/black_rust_504.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_464.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_451.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_571.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_412.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_705.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1057.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_297.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_520.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_939.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_64.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_351.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_1138.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_649.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_77.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_913.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_644.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_1239.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_216.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_574.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_725.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_245.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_527.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_1021.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_159.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_502.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_311.png,Septoria,Septoria,10
+data/raw/data/train/Stem fly/stem_fly_78.png,Stem fly,Stem_fly,12
+data/raw/data/train/Yellow Rust/yellow_rust_1179.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_1089.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_68.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_924.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_747.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_24.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_78.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_62.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_688.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_147.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_368.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_647.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_880.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_1093.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_173.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_235.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_414.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_420.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_1052.png,Mildew,Mildew,8
+data/raw/data/train/Common Root Rot/common_root_rot_409.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_186.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_285.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_117.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_515.png,Black Rust,Black_Rust,1
+data/raw/data/train/Septoria/septoria_89.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_338.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_258.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_552.png,Black Rust,Black_Rust,1
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_86.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_659.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Stem fly/stem_fly_107.png,Stem fly,Stem_fly,12
+data/raw/data/train/Smut/smut_1174.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_623.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_719.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_191.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_144.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_1064.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_100.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_623.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_434.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_129.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_802.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_442.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_90.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_971.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_34.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_397.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_338.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_202.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_421.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_383.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_512.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1277.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_846.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_423.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_34.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_399.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_10.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_452.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_246.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_58.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_245.png,Black Rust,Black_Rust,1
+data/raw/data/train/Black Rust/black_rust_560.png,Black Rust,Black_Rust,1
+data/raw/data/train/Black Rust/black_rust_394.png,Black Rust,Black_Rust,1
+data/raw/data/train/Black Rust/black_rust_494.png,Black Rust,Black_Rust,1
+data/raw/data/train/Black Rust/black_rust_317.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_645.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_401.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_204.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_553.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_249.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_567.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_888.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_484.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_245.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_1057.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_493.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_235.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_582.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_677.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_147.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_41.png,Black Rust,Black_Rust,1
+data/raw/data/train/Blast/blast_470.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_269.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_411.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1210.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_199.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_677.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_92.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_482.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_150.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_807.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_542.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_770.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_17.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_915.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_730.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_141.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_258.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_1048.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_279.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_881.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_362.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_727.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_232.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_615.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_584.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_173.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_719.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_281.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_218.png,Blast,Blast,2
+data/raw/data/train/Tan spot/tan_spot_767.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_907.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_676.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_648.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_1239.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_166.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_1.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_449.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_525.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_713.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_462.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_1183.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_817.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_382.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_407.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_268.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_155.png,Mite,Mite,9
+data/raw/data/train/Aphid/aphid_884.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_362.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_515.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_1003.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_939.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_307.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_504.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_1099.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_343.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_400.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_139.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_156.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_12.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_471.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_14.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_10.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_689.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_67.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_324.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_321.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_269.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_396.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_99.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_165.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_780.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_480.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_230.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_428.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mite/mite_353.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_951.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_229.png,Aphid,Aphid,0
+data/raw/data/train/Stem fly/stem_fly_178.png,Stem fly,Stem_fly,12
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_505.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_582.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_22.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_321.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_325.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_639.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_1053.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_530.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_294.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1027.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_371.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_103.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_539.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_341.png,Mite,Mite,9
+data/raw/data/train/Common Root Rot/common_root_rot_332.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_731.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_958.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_863.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_462.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_664.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mite/mite_142.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_673.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_460.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_405.png,Mite,Mite,9
+data/raw/data/train/Common Root Rot/common_root_rot_589.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_399.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Common Root Rot/common_root_rot_147.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_745.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_1017.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_390.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_1064.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_228.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_573.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_621.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_264.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_121.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_32.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_1118.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_324.png,Tan spot,Tan_spot,13
+data/raw/data/train/Blast/blast_375.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_755.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_33.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_3.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_443.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_427.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_513.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_116.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_329.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_694.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_1074.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_164.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_1032.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_604.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Common Root Rot/common_root_rot_41.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Leaf Blight/leaf_blight_724.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_841.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_606.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_537.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_152.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Leaf Blight/leaf_blight_740.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_980.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_126.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_666.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_82.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_250.png,Blast,Blast,2
+data/raw/data/train/Tan spot/tan_spot_258.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_285.png,Black Rust,Black_Rust,1
+data/raw/data/train/Common Root Rot/common_root_rot_167.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_768.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_12.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_231.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_198.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_246.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_382.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_77.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_182.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_392.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_1256.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_730.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_896.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_436.png,Tan spot,Tan_spot,13
+data/raw/data/train/Common Root Rot/common_root_rot_510.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_723.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_692.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_947.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_651.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_462.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_1161.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_537.png,Blast,Blast,2
+data/raw/data/train/Common Root Rot/common_root_rot_607.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_927.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_159.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1208.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_585.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_605.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_937.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_135.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_186.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_703.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_408.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_388.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_544.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_389.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_236.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_296.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_1065.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_390.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_953.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_390.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_610.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_107.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_371.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Black Rust/black_rust_456.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_333.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_501.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_142.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_385.png,Mildew,Mildew,8
+data/raw/data/train/Common Root Rot/common_root_rot_445.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_512.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_76.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_526.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_941.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_188.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_663.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_347.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_832.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_751.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_124.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_182.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_642.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_883.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_735.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_831.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_662.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_749.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_407.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_796.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1040.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_133.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_211.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_10.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_498.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Black Rust/black_rust_186.png,Black Rust,Black_Rust,1
+data/raw/data/train/Septoria/septoria_434.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_1055.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_138.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_1124.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_614.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_717.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_541.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_715.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_867.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_813.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_708.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_501.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_330.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_9.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_289.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_359.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_579.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_303.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_20.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_361.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Stem fly/stem_fly_82.png,Stem fly,Stem_fly,12
+data/raw/data/train/Healthy/healthy_244.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_576.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_9.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_679.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_589.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_603.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_46.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_254.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_531.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_262.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_829.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_768.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_1073.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_500.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_165.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_140.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_721.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_113.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_144.png,Tan spot,Tan_spot,13
+data/raw/data/train/Stem fly/stem_fly_21.png,Stem fly,Stem_fly,12
+data/raw/data/train/Leaf Blight/leaf_blight_488.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Aphid/aphid_639.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_686.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_176.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_901.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_701.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_423.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_756.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_559.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_527.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_184.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_731.png,Healthy,Healthy,6
+data/raw/data/train/Tan spot/tan_spot_565.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_799.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Black Rust/black_rust_155.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_499.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_373.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_369.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_401.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_761.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_159.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_1105.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_687.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_729.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_227.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_1170.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_263.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mite/mite_559.png,Mite,Mite,9
+data/raw/data/train/Stem fly/stem_fly_1.png,Stem fly,Stem_fly,12
+data/raw/data/train/Common Root Rot/common_root_rot_144.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_394.png,Aphid,Aphid,0
+data/raw/data/train/Stem fly/stem_fly_133.png,Stem fly,Stem_fly,12
+data/raw/data/train/Smut/smut_918.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_481.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_557.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_543.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_1069.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_1244.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_607.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_356.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_407.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_171.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_536.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_53.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_398.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_1072.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_815.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_51.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_88.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_404.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_921.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_962.png,Healthy,Healthy,6
+data/raw/data/train/Tan spot/tan_spot_739.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_277.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_322.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_956.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_358.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_1102.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_298.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_679.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_249.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_59.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_534.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_498.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_877.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_414.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_139.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_583.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_588.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_1026.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_680.png,Smut,Smut,11
+data/raw/data/train/Stem fly/stem_fly_15.png,Stem fly,Stem_fly,12
+data/raw/data/train/Aphid/aphid_446.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_140.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_757.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_341.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Black Rust/black_rust_531.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_118.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_220.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_204.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_660.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_819.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_565.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_278.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_310.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_727.png,Mite,Mite,9
+data/raw/data/train/Aphid/aphid_231.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_392.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mite/mite_86.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_71.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_152.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_768.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_400.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_681.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_31.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_14.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_140.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_95.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_88.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_568.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_835.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_369.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_111.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Tan spot/tan_spot_697.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_107.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_111.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_902.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_456.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_1149.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_613.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_1106.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_587.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_92.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_292.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Common Root Rot/common_root_rot_586.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_593.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Black Rust/black_rust_83.png,Black Rust,Black_Rust,1
+data/raw/data/train/Yellow Rust/yellow_rust_821.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_988.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_243.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_350.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_121.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_560.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_972.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_514.png,Black Rust,Black_Rust,1
+data/raw/data/train/Healthy/healthy_196.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_221.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_443.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_31.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_454.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_1115.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_13.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_871.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_956.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_737.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_282.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_652.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_892.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_64.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_250.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_242.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_191.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_368.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_267.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1018.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_913.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_1070.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_447.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_670.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_397.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_42.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_649.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_335.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_10.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_481.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_186.png,Tan spot,Tan_spot,13
+data/raw/data/train/Common Root Rot/common_root_rot_538.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_278.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_660.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_405.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_803.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1131.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_324.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_94.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_455.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_832.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_288.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_588.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_429.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_547.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_77.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_684.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_43.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_219.png,Black Rust,Black_Rust,1
+data/raw/data/train/Septoria/septoria_550.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_944.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_182.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_921.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_150.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_590.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_278.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_210.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_764.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1176.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_121.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1012.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_357.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_531.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_380.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_71.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_338.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_1264.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_389.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_433.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_367.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_601.png,Blast,Blast,2
+data/raw/data/train/Common Root Rot/common_root_rot_576.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_68.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_989.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_1030.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_217.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_158.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Blast/blast_109.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_1041.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_931.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_375.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_351.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_561.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_354.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_262.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_274.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_723.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_421.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_597.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_17.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_341.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_638.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_839.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_561.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_262.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_1114.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_505.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_475.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Healthy/healthy_101.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_161.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_428.png,Tan spot,Tan_spot,13
+data/raw/data/train/Stem fly/stem_fly_182.png,Stem fly,Stem_fly,12
+data/raw/data/train/Septoria/septoria_2.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_548.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1003.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1191.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_510.png,Blast,Blast,2
+data/raw/data/train/Stem fly/stem_fly_216.png,Stem fly,Stem_fly,12
+data/raw/data/train/Blast/blast_98.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_265.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_856.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_246.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_781.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_153.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_425.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Stem fly/stem_fly_74.png,Stem fly,Stem_fly,12
+data/raw/data/train/Brown Rust/brown_rust_495.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_329.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Healthy/healthy_578.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_243.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_511.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_557.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_346.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_374.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_357.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_705.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_416.png,Mite,Mite,9
+data/raw/data/train/Aphid/aphid_425.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_313.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_854.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_488.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_591.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_640.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_139.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_282.png,Tan spot,Tan_spot,13
+data/raw/data/train/Common Root Rot/common_root_rot_36.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Leaf Blight/leaf_blight_208.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_112.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_73.png,Black Rust,Black_Rust,1
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_200.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_205.png,Healthy,Healthy,6
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_497.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Tan spot/tan_spot_684.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_240.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_675.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_367.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_324.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_636.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_384.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_22.png,Smut,Smut,11
+data/raw/data/train/Common Root Rot/common_root_rot_19.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_177.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mite/mite_316.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_101.png,Mite,Mite,9
+data/raw/data/train/Aphid/aphid_861.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_92.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_141.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_125.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_709.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_578.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mite/mite_510.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_547.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Stem fly/stem_fly_203.png,Stem fly,Stem_fly,12
+data/raw/data/train/Yellow Rust/yellow_rust_805.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_691.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_753.png,Healthy,Healthy,6
+data/raw/data/train/Tan spot/tan_spot_611.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_956.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_275.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_260.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_257.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_134.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_96.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_852.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_643.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_310.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1126.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_1176.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_22.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_823.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_349.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_561.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Stem fly/stem_fly_156.png,Stem fly,Stem_fly,12
+data/raw/data/train/Tan spot/tan_spot_729.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_10.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_391.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_131.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_742.png,Healthy,Healthy,6
+data/raw/data/train/Healthy/healthy_674.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_232.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_460.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_150.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_189.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_712.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_770.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_997.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_1077.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_227.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_118.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_191.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_969.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_456.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_906.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_609.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_784.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_718.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_2.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_62.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_484.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_702.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_233.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_96.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_614.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_413.png,Aphid,Aphid,0
+data/raw/data/train/Tan spot/tan_spot_82.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_1050.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_281.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_292.png,Black Rust,Black_Rust,1
+data/raw/data/train/Common Root Rot/common_root_rot_94.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_407.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_58.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_780.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_728.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_116.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_516.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_925.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_57.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1243.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_638.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_419.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Blast/blast_634.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_46.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_287.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_551.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_155.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_248.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_627.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_299.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Tan spot/tan_spot_599.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_569.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_499.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_691.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_562.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_93.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_609.png,Mite,Mite,9
+data/raw/data/train/Common Root Rot/common_root_rot_140.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_305.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_543.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_968.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_618.png,Aphid,Aphid,0
+data/raw/data/train/Septoria/septoria_592.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_186.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_113.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_87.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_192.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_790.png,Septoria,Septoria,10
+data/raw/data/train/Mite/mite_427.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_563.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_533.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_84.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_869.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_225.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_303.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_241.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_542.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_374.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Common Root Rot/common_root_rot_311.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Common Root Rot/common_root_rot_304.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Stem fly/stem_fly_222.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mildew/mildew_1046.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_538.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_307.png,Black Rust,Black_Rust,1
+data/raw/data/train/Septoria/septoria_761.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_217.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Stem fly/stem_fly_65.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mildew/mildew_434.png,Mildew,Mildew,8
+data/raw/data/train/Stem fly/stem_fly_50.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mite/mite_796.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_826.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_956.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_833.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_600.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_222.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_151.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_766.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_48.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_206.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_502.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_428.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_695.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_227.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_237.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_840.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1118.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_36.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_1171.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_398.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_306.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_763.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_316.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_720.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_72.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_4.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_65.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_100.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_563.png,Mildew,Mildew,8
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_250.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_664.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_715.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Black Rust/black_rust_38.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_628.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_476.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_202.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_780.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_873.png,Aphid,Aphid,0
+data/raw/data/train/Healthy/healthy_14.png,Healthy,Healthy,6
+data/raw/data/train/Tan spot/tan_spot_429.png,Tan spot,Tan_spot,13
+data/raw/data/train/Stem fly/stem_fly_131.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mite/mite_395.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_453.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_709.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_80.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_564.png,Mite,Mite,9
+data/raw/data/train/Black Rust/black_rust_127.png,Black Rust,Black_Rust,1
+data/raw/data/train/Blast/blast_492.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_71.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_137.png,Mildew,Mildew,8
+data/raw/data/train/Common Root Rot/common_root_rot_387.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_329.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_435.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_777.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_129.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_829.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_534.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_244.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_609.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_228.png,Mildew,Mildew,8
+data/raw/data/train/Common Root Rot/common_root_rot_559.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_859.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_385.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_734.png,Tan spot,Tan_spot,13
+data/raw/data/train/Aphid/aphid_640.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_135.png,Mildew,Mildew,8
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_219.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_298.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_104.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_527.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_386.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Healthy/healthy_280.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_153.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_185.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_532.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_358.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_84.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_356.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_889.png,Mildew,Mildew,8
+data/raw/data/train/Black Rust/black_rust_166.png,Black Rust,Black_Rust,1
+data/raw/data/train/Blast/blast_79.png,Blast,Blast,2
+data/raw/data/train/Mite/mite_650.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_918.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_463.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mite/mite_459.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_117.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_1271.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_125.png,Black Rust,Black_Rust,1
+data/raw/data/train/Common Root Rot/common_root_rot_319.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_710.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_177.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_231.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_613.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_916.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_774.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_567.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_933.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1188.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_1045.png,Mildew,Mildew,8
+data/raw/data/train/Mildew/mildew_318.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_160.png,Blast,Blast,2
+data/raw/data/train/Common Root Rot/common_root_rot_335.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_564.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_49.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_270.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_308.png,Aphid,Aphid,0
+data/raw/data/train/Aphid/aphid_170.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_469.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_787.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_303.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_170.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_237.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_368.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_406.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_486.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_596.png,Tan spot,Tan_spot,13
+data/raw/data/train/Stem fly/stem_fly_146.png,Stem fly,Stem_fly,12
+data/raw/data/train/Healthy/healthy_668.png,Healthy,Healthy,6
+data/raw/data/train/Black Rust/black_rust_113.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_50.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_0.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_780.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_1033.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_688.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_363.png,Black Rust,Black_Rust,1
+data/raw/data/train/Tan spot/tan_spot_351.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_24.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_655.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_468.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_133.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_522.png,Septoria,Septoria,10
+data/raw/data/train/Black Rust/black_rust_295.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_161.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_422.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_206.png,Healthy,Healthy,6
+data/raw/data/train/Stem fly/stem_fly_41.png,Stem fly,Stem_fly,12
+data/raw/data/train/Healthy/healthy_207.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_18.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_847.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_42.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mildew/mildew_446.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_154.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_537.png,Septoria,Septoria,10
+data/raw/data/train/Stem fly/stem_fly_120.png,Stem fly,Stem_fly,12
+data/raw/data/train/Blast/blast_82.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_403.png,Aphid,Aphid,0
+data/raw/data/train/Stem fly/stem_fly_81.png,Stem fly,Stem_fly,12
+data/raw/data/train/Aphid/aphid_646.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1297.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_31.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_876.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_190.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_1033.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_420.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_564.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_764.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_606.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Aphid/aphid_311.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_628.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_276.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_715.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_538.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_525.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_707.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_365.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_240.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_753.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_5.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_247.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_212.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_868.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_745.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_491.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_39.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1026.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_217.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_448.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_998.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_781.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_950.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_41.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_455.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_1059.png,Septoria,Septoria,10
+data/raw/data/train/Leaf Blight/leaf_blight_793.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_1273.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_461.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_356.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_590.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_184.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_68.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_1204.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_938.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_498.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_137.png,Aphid,Aphid,0
+data/raw/data/train/Black Rust/black_rust_192.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_159.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_521.png,Blast,Blast,2
+data/raw/data/train/Healthy/healthy_306.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_476.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_819.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_637.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_464.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_1077.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_468.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Blast/blast_45.png,Blast,Blast,2
+data/raw/data/train/Mildew/mildew_676.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_500.png,Septoria,Septoria,10
+data/raw/data/train/Blast/blast_456.png,Blast,Blast,2
+data/raw/data/train/Common Root Rot/common_root_rot_422.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_660.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_1224.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_722.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_496.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_741.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_452.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_149.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_303.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_509.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Tan spot/tan_spot_425.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_812.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_24.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_162.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_774.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_644.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_179.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_440.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_899.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_426.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_105.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_171.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_570.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Healthy/healthy_599.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_184.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_723.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_535.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_34.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_514.png,Mildew,Mildew,8
+data/raw/data/train/Healthy/healthy_744.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_339.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_287.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_470.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_6.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_267.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_1201.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_73.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_468.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_1065.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_456.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_116.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_578.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_985.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_1.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_979.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_1142.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_292.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_205.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_592.png,Mite,Mite,9
+data/raw/data/train/Black Rust/black_rust_122.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_356.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_475.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_408.png,Tan spot,Tan_spot,13
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_512.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Tan spot/tan_spot_52.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_258.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_414.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_681.png,Tan spot,Tan_spot,13
+data/raw/data/train/Leaf Blight/leaf_blight_528.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_716.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_62.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_421.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_381.png,Healthy,Healthy,6
+data/raw/data/train/Mildew/mildew_180.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_228.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_242.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_1255.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_289.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_87.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_33.png,Black Rust,Black_Rust,1
+data/raw/data/train/Aphid/aphid_847.png,Aphid,Aphid,0
+data/raw/data/train/Mite/mite_289.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_423.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_174.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_425.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_1203.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_908.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_139.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_599.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_280.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Smut/smut_345.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_730.png,Mite,Mite,9
+data/raw/data/train/Mite/mite_170.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_428.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_249.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_661.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_226.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Tan spot/tan_spot_141.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_365.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_318.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_49.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_681.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_114.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_857.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_1139.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_1069.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_250.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_629.png,Blast,Blast,2
+data/raw/data/train/Yellow Rust/yellow_rust_364.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_430.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Stem fly/stem_fly_30.png,Stem fly,Stem_fly,12
+data/raw/data/train/Mite/mite_71.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_1004.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_586.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_632.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1248.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_400.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1147.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_123.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_505.png,Blast,Blast,2
+data/raw/data/train/Stem fly/stem_fly_64.png,Stem fly,Stem_fly,12
+data/raw/data/train/Healthy/healthy_9.png,Healthy,Healthy,6
+data/raw/data/train/Aphid/aphid_759.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_767.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_364.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_511.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_665.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_97.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_609.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_212.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_400.png,Septoria,Septoria,10
+data/raw/data/train/Mildew/mildew_268.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_652.png,Mite,Mite,9
+data/raw/data/train/Common Root Rot/common_root_rot_286.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_605.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_146.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Black Rust/black_rust_212.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_547.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_22.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_45.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Leaf Blight/leaf_blight_463.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mildew/mildew_340.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_451.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_862.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_227.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_565.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_491.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Septoria/septoria_217.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_867.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_685.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_916.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_680.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_684.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_626.png,Healthy,Healthy,6
+data/raw/data/train/Septoria/septoria_617.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_852.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_566.png,Aphid,Aphid,0
+data/raw/data/train/Leaf Blight/leaf_blight_267.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_517.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Septoria/septoria_449.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_170.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_278.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Brown Rust/brown_rust_377.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_464.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_332.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_237.png,Black Rust,Black_Rust,1
+data/raw/data/train/Healthy/healthy_748.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_1158.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_1217.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Tan spot/tan_spot_382.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_796.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_637.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_29.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_770.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Stem fly/stem_fly_45.png,Stem fly,Stem_fly,12
+data/raw/data/train/Black Rust/black_rust_311.png,Black Rust,Black_Rust,1
+data/raw/data/train/Black Rust/black_rust_337.png,Black Rust,Black_Rust,1
+data/raw/data/train/Blast/blast_408.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_562.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_618.png,Tan spot,Tan_spot,13
+data/raw/data/train/Black Rust/black_rust_557.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_697.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_448.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_177.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_487.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mildew/mildew_692.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_341.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_605.png,Aphid,Aphid,0
+data/raw/data/train/Yellow Rust/yellow_rust_66.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_511.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_470.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_664.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_101.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_1001.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_687.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_333.png,Mite,Mite,9
+data/raw/data/train/Healthy/healthy_359.png,Healthy,Healthy,6
+data/raw/data/train/Leaf Blight/leaf_blight_357.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_371.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_30.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_693.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Stem fly/stem_fly_195.png,Stem fly,Stem_fly,12
+data/raw/data/train/Brown Rust/brown_rust_1234.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_573.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_801.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_290.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1220.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_262.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mite/mite_343.png,Mite,Mite,9
+data/raw/data/train/Blast/blast_148.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_287.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_57.png,Black Rust,Black_Rust,1
+data/raw/data/train/Smut/smut_597.png,Smut,Smut,11
+data/raw/data/train/Tan spot/tan_spot_78.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_151.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_317.png,Blast,Blast,2
+data/raw/data/train/Mite/mite_620.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_768.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_995.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mite/mite_595.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_137.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_558.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Brown Rust/brown_rust_975.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_340.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_432.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_135.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_507.png,Black Rust,Black_Rust,1
+data/raw/data/train/Leaf Blight/leaf_blight_7.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_197.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_874.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_712.png,Septoria,Septoria,10
+data/raw/data/train/Aphid/aphid_363.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_155.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_1018.png,Septoria,Septoria,10
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_462.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_743.png,Mildew,Mildew,8
+data/raw/data/train/Aphid/aphid_610.png,Aphid,Aphid,0
+data/raw/data/train/Common Root Rot/common_root_rot_468.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_636.png,Tan spot,Tan_spot,13
+data/raw/data/train/Tan spot/tan_spot_592.png,Tan spot,Tan_spot,13
+data/raw/data/train/Mildew/mildew_943.png,Mildew,Mildew,8
+data/raw/data/train/Common Root Rot/common_root_rot_430.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_357.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_1207.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_272.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_112.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Brown Rust/brown_rust_736.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_221.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_480.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_518.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_1214.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_643.png,Blast,Blast,2
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_374.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_203.png,Mildew,Mildew,8
+data/raw/data/train/Smut/smut_318.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_425.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_72.png,Blast,Blast,2
+data/raw/data/train/Aphid/aphid_811.png,Aphid,Aphid,0
+data/raw/data/train/Mildew/mildew_426.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_546.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_312.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_531.png,Tan spot,Tan_spot,13
+data/raw/data/train/Common Root Rot/common_root_rot_503.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_551.png,Tan spot,Tan_spot,13
+data/raw/data/train/Smut/smut_995.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_998.png,Mildew,Mildew,8
+data/raw/data/train/Yellow Rust/yellow_rust_65.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Blast/blast_210.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_669.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_50.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_582.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_142.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Mildew/mildew_762.png,Mildew,Mildew,8
+data/raw/data/train/Mite/mite_515.png,Mite,Mite,9
+data/raw/data/train/Yellow Rust/yellow_rust_243.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_429.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_241.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_473.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Smut/smut_1039.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_93.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_598.png,Mite,Mite,9
+data/raw/data/train/Tan spot/tan_spot_165.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_747.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_915.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_542.png,Septoria,Septoria,10
+data/raw/data/train/Tan spot/tan_spot_498.png,Tan spot,Tan_spot,13
+data/raw/data/train/Healthy/healthy_349.png,Healthy,Healthy,6
+data/raw/data/train/Blast/blast_460.png,Blast,Blast,2
+data/raw/data/train/Leaf Blight/leaf_blight_788.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_231.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_160.png,Smut,Smut,11
+data/raw/data/train/Blast/blast_239.png,Blast,Blast,2
+data/raw/data/train/Black Rust/black_rust_395.png,Black Rust,Black_Rust,1
+data/raw/data/train/Brown Rust/brown_rust_824.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_32.png,Mite,Mite,9
+data/raw/data/train/Brown Rust/brown_rust_846.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_123.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_172.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_971.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_883.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_523.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_174.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_222.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Leaf Blight/leaf_blight_241.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_77.png,Smut,Smut,11
+data/raw/data/train/Leaf Blight/leaf_blight_476.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_445.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_604.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Yellow Rust/yellow_rust_352.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Common Root Rot/common_root_rot_113.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_422.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Healthy/healthy_261.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_587.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_766.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_1095.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_681.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_775.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_611.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_603.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_1118.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_667.png,Mite,Mite,9
+data/raw/data/train/Mildew/mildew_136.png,Mildew,Mildew,8
+data/raw/data/train/Tan spot/tan_spot_470.png,Tan spot,Tan_spot,13
+data/raw/data/train/Septoria/septoria_364.png,Septoria,Septoria,10
+data/raw/data/train/Smut/smut_608.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_913.png,Smut,Smut,11
+data/raw/data/train/Black Rust/black_rust_49.png,Black Rust,Black_Rust,1
+data/raw/data/train/Mildew/mildew_1034.png,Mildew,Mildew,8
+data/raw/data/train/Septoria/septoria_703.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_768.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Brown Rust/brown_rust_812.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_320.png,Blast,Blast,2
+data/raw/data/train/Septoria/septoria_1032.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_296.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Mite/mite_622.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_183.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_598.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_13.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Brown Rust/brown_rust_3.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Leaf Blight/leaf_blight_400.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Mite/mite_754.png,Mite,Mite,9
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_314.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Aphid/aphid_141.png,Aphid,Aphid,0
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_236.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Mildew/mildew_402.png,Mildew,Mildew,8
+data/raw/data/train/Brown Rust/brown_rust_613.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Smut/smut_182.png,Smut,Smut,11
+data/raw/data/train/Yellow Rust/yellow_rust_735.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_1167.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_836.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Blast/blast_55.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_44.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_188.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_236.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_578.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_929.png,Healthy,Healthy,6
+data/raw/data/train/Mite/mite_141.png,Mite,Mite,9
+data/raw/data/train/Leaf Blight/leaf_blight_197.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_305.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_137.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_365.png,Mildew,Mildew,8
+data/raw/data/train/Leaf Blight/leaf_blight_608.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Common Root Rot/common_root_rot_331.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Blast/blast_473.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_1154.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Healthy/healthy_671.png,Healthy,Healthy,6
+data/raw/data/train/Smut/smut_379.png,Smut,Smut,11
+data/raw/data/train/Smut/smut_1030.png,Smut,Smut,11
+data/raw/data/train/Healthy/healthy_854.png,Healthy,Healthy,6
+data/raw/data/train/Brown Rust/brown_rust_1149.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Mite/mite_572.png,Mite,Mite,9
+data/raw/data/train/Smut/smut_910.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_251.png,Septoria,Septoria,10
+data/raw/data/train/Common Root Rot/common_root_rot_441.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Tan spot/tan_spot_444.png,Tan spot,Tan_spot,13
+data/raw/data/train/Brown Rust/brown_rust_893.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Aphid/aphid_388.png,Aphid,Aphid,0
+data/raw/data/train/Blast/blast_145.png,Blast,Blast,2
+data/raw/data/train/Smut/smut_1262.png,Smut,Smut,11
+data/raw/data/train/Mildew/mildew_611.png,Mildew,Mildew,8
+data/raw/data/train/Blast/blast_437.png,Blast,Blast,2
+data/raw/data/train/Stem fly/stem_fly_90.png,Stem fly,Stem_fly,12
+data/raw/data/train/Aphid/aphid_654.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1159.png,Smut,Smut,11
+data/raw/data/train/Aphid/aphid_797.png,Aphid,Aphid,0
+data/raw/data/train/Brown Rust/brown_rust_995.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Common Root Rot/common_root_rot_481.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Septoria/septoria_330.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_836.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Healthy/healthy_699.png,Healthy,Healthy,6
+data/raw/data/train/Common Root Rot/common_root_rot_520.png,Common Root Rot,Common_Root_Rot,4
+data/raw/data/train/Yellow Rust/yellow_rust_848.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_734.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_766.png,Smut,Smut,11
+data/raw/data/train/Stem fly/stem_fly_169.png,Stem fly,Stem_fly,12
+data/raw/data/train/Smut/smut_607.png,Smut,Smut,11
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_209.png,Fusarium Head Blight,Fusarium_Head_Blight,5
+data/raw/data/train/Yellow Rust/yellow_rust_552.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Yellow Rust/yellow_rust_252.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Tan spot/tan_spot_201.png,Tan spot,Tan_spot,13
+data/raw/data/train/Yellow Rust/yellow_rust_6.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Septoria/septoria_805.png,Septoria,Septoria,10
+data/raw/data/train/Septoria/septoria_494.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_985.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Blast/blast_144.png,Blast,Blast,2
+data/raw/data/train/Blast/blast_202.png,Blast,Blast,2
+data/raw/data/train/Brown Rust/brown_rust_1189.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Yellow Rust/yellow_rust_299.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Aphid/aphid_699.png,Aphid,Aphid,0
+data/raw/data/train/Smut/smut_1002.png,Smut,Smut,11
+data/raw/data/train/Brown Rust/brown_rust_560.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Septoria/septoria_529.png,Septoria,Septoria,10
+data/raw/data/train/Yellow Rust/yellow_rust_604.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Smut/smut_1092.png,Smut,Smut,11
+data/raw/data/train/Mite/mite_355.png,Mite,Mite,9
+data/raw/data/train/Septoria/septoria_405.png,Septoria,Septoria,10
+data/raw/data/train/Healthy/healthy_475.png,Healthy,Healthy,6
+data/raw/data/train/Yellow Rust/yellow_rust_645.png,Yellow Rust,Yellow_Rust,14
+data/raw/data/train/Leaf Blight/leaf_blight_665.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Leaf Blight/leaf_blight_320.png,Leaf Blight,Leaf_Blight,7
+data/raw/data/train/Smut/smut_25.png,Smut,Smut,11
+data/raw/data/train/Septoria/septoria_310.png,Septoria,Septoria,10
+data/raw/data/train/Brown Rust/brown_rust_517.png,Brown Rust,Brown_Rust,3
+data/raw/data/train/Fusarium Head Blight/fusarium_head_blight_381.png,Fusarium Head Blight,Fusarium_Head_Blight,5

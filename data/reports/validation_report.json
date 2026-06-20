@@ -55,11 +55,11 @@
   },
   "corrupted_images": [],
   "dim_stats": {
-    "width_min": 168,
-    "width_max": 5782,
-    "width_mean": 476.5,
+    "width_min": 144,
+    "width_max": 3840,
+    "width_mean": 526.2,
     "height_min": 112,
-    "height_max": 3946,
-    "height_mean": 351.8
+    "height_max": 3021,
+    "height_mean": 377.3
   }
 }

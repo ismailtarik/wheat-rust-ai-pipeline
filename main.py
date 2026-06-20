@@ -1,3 +1,24 @@
+"""
+main.py — Orchestrateur Principal
+===================================
+Thèse : Deep Learning, Computer Vision, and IoT for
+        Real-Time Monitoring and Epidemic Forecasting in Agriculture
+
+Auteur : Tarik Ismail
+Lab    : MDSET — Hassan First University, Settat
+
+Exécution dans Google Colab :
+    !python main.py --phase 1
+    !python main.py --phase 1 --kaggle_json /content/kaggle.json
+
+Structure des phases :
+    Phase 1 → Acquisition, Validation, Split, Preprocessing
+    Phase 2 → Modèles Baseline (ResNet50, EfficientNetB0, YOLOv8)   [à venir]
+    Phase 3 → Generative AI (GAN, cGAN, VAE)                         [à venir]
+    Phase 4 → Unsupervised Learning (SOM, DBN, RBM)                  [à venir]
+    Phase 5 → Multimodal Fusion (CNN + LSTM, Transformers)            [à venir]
+"""
+
 import argparse
 import json
 import os
@@ -17,10 +38,10 @@ def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Charge le fichier de configuration YAML."""
     path = Path(config_path)
     if not path.exists():
-        raise FileNotFoundError(f" Fichier config introuvable : {config_path}")
+        raise FileNotFoundError(f"❌ Fichier config introuvable : {config_path}")
     with open(path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
-    print(f"  Config chargée : {config_path}")
+    print(f"  ✅ Config chargée : {config_path}")
     return config
 
 
@@ -38,11 +59,11 @@ def set_seeds(seed: int) -> None:
 
 def print_banner(phase: int) -> None:
     print("\n" + "=" * 60)
-    print("   WHEAT RUST AI PIPELINE")
+    print("  🌾 WHEAT RUST AI PIPELINE")
     print("  Deep Learning & Computer Vision for Agriculture")
     print("  MDSET Lab — Hassan First University, Settat")
     print("=" * 60)
-    print(f"  Exécution : Phase {phase}")
+    print(f"  ▶  Exécution : Phase {phase}")
     print("=" * 60 + "\n")
 
 
@@ -97,7 +118,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     total    = len(train_df) + len(val_df) + len(test_df)
 
     print("\n" + "=" * 60)
-    print("   PHASE 1 — RÉSUMÉ")
+    print("  ✅  PHASE 1 — RÉSUMÉ")
     print("=" * 60)
     print(f"  Dataset        : PlantVillage")
     print(f"  Cible          : Wheat Rust (Yellow / Brown / Stem + Healthy)")
@@ -107,9 +128,9 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"  Image size     : {config['preprocessing']['img_size']}")
     print(f"  Normalisation  : [0, 1]")
     print(f"  Split          : {len(train_df)} train / {len(val_df)} val / {len(test_df)} test")
-    print(f"  Augmentation   : (8 transformations)")
+    print(f"  Augmentation   : ✅ (8 transformations)")
     print()
-    print(f"   Fichiers générés :")
+    print(f"  📁 Fichiers générés :")
     print(f"     data/processed/train.csv")
     print(f"     data/processed/val.csv")
     print(f"     data/processed/test.csv")
@@ -120,7 +141,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"     data/reports/04_augmentation_preview.png")
     print(f"     data/reports/05_split_distribution.png")
     print()
-    print(f"     PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
+    print(f"  ➡️   PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
     print(f"       (ResNet50 / EfficientNetB0 / YOLOv8)")
     print("=" * 60 + "\n")
 
@@ -129,27 +150,75 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
 # Phases futures (stubs)
 # ─────────────────────────────────────────────────────────────
 
-def run_phase2(config: dict) -> None:
-    """Phase 2 — Modèles Baseline (ResNet50, EfficientNetB0, YOLOv8) [à venir]"""
-    print("   Phase 2 non encore implémentée.")
-    print("     → Implémentation prochaine : ResNet50, EfficientNetB0, YOLOv8")
+def run_phase2(config: dict) -> dict:
+    """
+    Phase 2 — Modèles Baseline (Classification).
+
+    Recharge les artefacts de la Phase 1 (CSV + métadonnées) pour ne pas
+    avoir à refaire le téléchargement/preprocessing, reconstruit les
+    pipelines tf.data, puis entraîne et compare les modèles configurés
+    dans phase2.classification.models.
+    """
+    import pandas as pd
+    from pipelines.preprocessing import build_tf_datasets
+    from pipelines.train_classification import run_classification_phase
+
+    processed_dir = Path(config["paths"]["processed"])
+    train_csv = processed_dir / "train.csv"
+    val_csv   = processed_dir / "val.csv"
+    test_csv  = processed_dir / "test.csv"
+    meta_path = Path(config["paths"]["metadata_json"])
+
+    for p in (train_csv, val_csv, test_csv, meta_path):
+        if not p.exists():
+            raise FileNotFoundError(
+                f"❌ Fichier manquant : {p}\n"
+                f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
+            )
+
+    with open(meta_path, "r", encoding="utf-8") as f:
+        metadata = json.load(f)
+
+    label2idx = metadata["label2idx"]
+    idx2label = {int(k): v for k, v in metadata["idx2label"].items()}
+    class_weights = {int(k): v for k, v in metadata["class_weights"].items()}
+    config["classes"]["num_classes"] = metadata["num_classes"]
+
+    split_result = {
+        "train_df"     : pd.read_csv(train_csv),
+        "val_df"       : pd.read_csv(val_csv),
+        "test_df"      : pd.read_csv(test_csv),
+        "label2idx"    : label2idx,
+        "idx2label"    : idx2label,
+        "class_weights": class_weights,
+    }
+
+    print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
+    print(f"     Train: {len(split_result['train_df'])} | "
+          f"Val: {len(split_result['val_df'])} | "
+          f"Test: {len(split_result['test_df'])} | "
+          f"Classes: {config['classes']['num_classes']}")
+
+    train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
+
+    return run_classification_phase(split_result, train_ds, val_ds, test_ds, config)
 
 
 def run_phase3(config: dict) -> None:
     """Phase 3 — Generative AI (GAN, cGAN, VAE) [à venir]"""
-    print("   Phase 3 non encore implémentée.")
+    print("  ⏳ Phase 3 non encore implémentée.")
     print("     → Implémentation prochaine : GAN, cGAN, VAE")
 
 
 def run_phase4(config: dict) -> None:
     """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) [à venir]"""
-    print("   Phase 4 non encore implémentée.")
+    print("  ⏳ Phase 4 non encore implémentée.")
     print("     → Implémentation prochaine : SOM, DBN, RBM")
 
 
 def run_phase5(config: dict) -> None:
     """Phase 5 — Multimodal Fusion [à venir]"""
-    print("   Phase 5 non encore implémentée.")
+    print("  ⏳ Phase 5 non encore implémentée.")
     print("     → Implémentation prochaine : CNN+LSTM, Attention, Transformers")
 
 
@@ -168,7 +237,7 @@ PHASE_RUNNERS = {
 
 def main():
     parser = argparse.ArgumentParser(
-        description=" Wheat Rust AI Pipeline — MDSET Lab",
+        description="🌾 Wheat Rust AI Pipeline — MDSET Lab",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument(
@@ -198,7 +267,7 @@ def main():
     # Dispatch vers la phase sélectionnée
     runner = PHASE_RUNNERS.get(args.phase)
     if runner is None:
-        print(f" Phase {args.phase} inconnue.")
+        print(f"❌ Phase {args.phase} inconnue.")
         sys.exit(1)
 
     if args.phase == 1:

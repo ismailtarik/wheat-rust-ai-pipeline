@@ -1,0 +1,89 @@
+{
+  "thesis": "Deep Learning, CV & IoT for Epidemic Forecasting in Agriculture",
+  "author": "Tarik Ismail",
+  "lab": "MDSET",
+  "phase": "Phase 1 — Dataset Acquisition & Preprocessing",
+  "dataset": "PlantVillage",
+  "target": "Wheat Rust (Yellow / Brown / Stem)",
+  "framework": "TensorFlow / Keras",
+  "img_size": [
+    256,
+    256
+  ],
+  "num_classes": 15,
+  "label2idx": {
+    "Aphid": 0,
+    "Black_Rust": 1,
+    "Blast": 2,
+    "Brown_Rust": 3,
+    "Common_Root_Rot": 4,
+    "Fusarium_Head_Blight": 5,
+    "Healthy": 6,
+    "Leaf_Blight": 7,
+    "Mildew": 8,
+    "Mite": 9,
+    "Septoria": 10,
+    "Smut": 11,
+    "Stem_fly": 12,
+    "Tan_spot": 13,
+    "Yellow_Rust": 14
+  },
+  "idx2label": {
+    "0": "Aphid",
+    "1": "Black_Rust",
+    "2": "Blast",
+    "3": "Brown_Rust",
+    "4": "Common_Root_Rot",
+    "5": "Fusarium_Head_Blight",
+    "6": "Healthy",
+    "7": "Leaf_Blight",
+    "8": "Mildew",
+    "9": "Mite",
+    "10": "Septoria",
+    "11": "Smut",
+    "12": "Stem_fly",
+    "13": "Tan_spot",
+    "14": "Yellow_Rust"
+  },
+  "class_weights": {
+    "0": 0.9675105485232067,
+    "1": 1.5172870140612076,
+    "2": 1.3498160412067697,
+    "3": 0.6878140232470941,
+    "4": 1.422015503875969,
+    "5": 1.4286604361370716,
+    "6": 0.8735238095238095,
+    "7": 1.0381437464629315,
+    "8": 0.8077498899163364,
+    "9": 1.091904761904762,
+    "10": 0.7633791094465252,
+    "11": 0.6668120683387859,
+    "12": 3.7284552845528456,
+    "13": 1.1344465058750772,
+    "14": 0.6719413919413919
+  },
+  "splits": {
+    "train": 9172,
+    "val": 1966,
+    "test": 1966,
+    "total": 13104
+  },
+  "augmentation": {
+    "enabled": true,
+    "flip_horizontal": true,
+    "flip_vertical": true,
+    "brightness_delta": 0.2,
+    "contrast_range": [
+      0.8,
+      1.2
+    ],
+    "saturation_range": [
+      0.8,
+      1.2
+    ],
+    "hue_delta": 0.05,
+    "zoom_factor": 1.1
+  },
+  "normalization": "divide by 255 → [0, 1]",
+  "seed": 42
+}

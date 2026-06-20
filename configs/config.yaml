@@ -1,7 +1,13 @@
+# ============================================================
+# config.yaml — Configuration Centrale
+# Thèse : Deep Learning, CV & IoT for Epidemic Forecasting
+# Auteur : Tarik Ismail | MDSET Lab, Hassan First University
+# ============================================================
+
 project:
   name: "wheat-rust-ai-pipeline"
   author: "Tarik Ismail"
-  lab: "MDSET"
+  lab: "MDSET — Hassan First University, Settat"
   seed: 42
 
 # ------------------------------------------------------------
@@ -9,7 +15,7 @@ project:
 # ------------------------------------------------------------
 kaggle:
   dataset_id: "kushagra3204/wheat-plant-diseases"
-  download_path: "data/raw/WheatPlantDiseases"
+  download_path: "data/raw/data"
 
 # ------------------------------------------------------------
 # Classes ciblées
@@ -76,7 +82,7 @@ pipeline:
   prefetch: true                # tf.data.AUTOTUNE
 
 # ------------------------------------------------------------
-# Chemins de sortie
+# Chemins de sortie — Phase 1
 # ------------------------------------------------------------
 paths:
   raw_data:      "data/raw/data"
@@ -88,3 +94,47 @@ paths:
   val_csv:       "data/processed/val.csv"
   test_csv:      "data/processed/test.csv"
   metadata_json: "data/processed/metadata.json"
+
+# ============================================================
+# PHASE 2 — Modèles Baseline (Classification + Détection)
+# ============================================================
+
+phase2:
+  # --------------------------------------------------------
+  # Classification (CNN custom / ResNet50 / EfficientNetB0)
+  # --------------------------------------------------------
+  classification:
+    models: ["cnn_custom", "resnet50", "efficientnetb0"]
+    epochs: 30
+    learning_rate: 0.0001
+    fine_tune_epochs: 10        # epochs supplémentaires en fine-tuning (transfer learning)
+    fine_tune_lr: 0.00001
+    early_stopping_patience: 5
+    reduce_lr_patience: 3
+    use_class_weights: true
+
+    # Augmentation ciblée renforcée pour les classes minoritaires
+    minority_augmentation:
+      enabled: true
+      # Classe considérée minoritaire si son nombre d'images < ce ratio
+      # du nombre d'images de la classe majoritaire
+      threshold_ratio: 0.5
+      extra_augmentation_factor: 3   # x3 passages d'augmentation supplémentaires
+
+  # --------------------------------------------------------
+  # Détection (YOLO) — bounding boxes auto-générées
+  # --------------------------------------------------------
+  detection:
+    model: "yolo11n.pt"          # yolo11n.pt (stable) ou yolo26n.pt (dernier modèle)
+    epochs: 50
+    imgsz: 256
+    batch: 16
+    # Mode bbox : 'full_image' = bbox couvrant toute l'image (classification
+    # déguisée en détection, en l'absence d'annotations réelles).
+    bbox_mode: "full_image"
+    bbox_margin: 0.05             # marge (%) retirée des bords de l'image
+
+  paths:
+    classification_outputs: "outputs/phase2_classification"
+    detection_outputs: "outputs/phase2_detection"
+    yolo_dataset: "data/processed/yolo_dataset"
