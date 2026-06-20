@@ -1,6 +1,6 @@
 plantdisease.zip
 data/raw/
-data/processed/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+wheat-plant-diseases.zip
