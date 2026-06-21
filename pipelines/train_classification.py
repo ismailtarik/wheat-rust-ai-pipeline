@@ -329,16 +329,57 @@ def _plot_model_comparison(all_metrics: list, output_dir: Path) -> None:
 # Orchestrateur principal
 # ─────────────────────────────────────────────────────────────
 
-def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
-                              config: dict) -> dict:
+def _load_existing_metrics(model_name: str, output_dir: Path) -> dict:
     """
-    Pipeline complet : entraîne et compare tous les modèles configurés
+    Tente de recharger les métriques d'un modèle déjà entraîné lors d'une
+    exécution précédente (à partir de son dossier de sortie), pour éviter
+    de le ré-entraîner après une coupure de session.
+
+    Retourne None si rien d'exploitable n'est trouvé.
+    """
+    model_dir = output_dir / model_name
+    final_model_path = model_dir / f"{model_name}_final.keras"
+    report_path = model_dir / "classification_report.json"
+
+    if not final_model_path.exists() or not report_path.exists():
+        return None
+
+    try:
+        with open(report_path) as f:
+            report = json.load(f)
+        weighted = report.get("weighted avg", {})
+        return {
+            "model_name": model_name,
+            "accuracy"  : round(float(report.get("accuracy", 0.0)), 4),
+            "precision" : round(float(weighted.get("precision", 0.0)), 4),
+            "recall"    : round(float(weighted.get("recall", 0.0)), 4),
+            "f1_score"  : round(float(weighted.get("f1-score", 0.0)), 4),
+            "train_time_min": None,
+            "num_params": None,
+        }
+    except Exception:
+        return None
+
+
+def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
+                              config: dict, models: list = None,
+                              skip_existing: bool = True) -> dict:
+    """
+    Pipeline complet : entraîne et compare les modèles configurés
     dans phase2.classification.models.
 
     Args:
         split_result : résultat de split_dataset() (Phase 1)
         train_ds, val_ds, test_ds : pipelines tf.data (Phase 1)
-        config       : configuration globale
+        config        : configuration globale
+        models        : liste de noms de modèles à traiter, pour ne lancer
+                        qu'un sous-ensemble (ex: après une coupure de
+                        session). Si None, utilise phase2.classification.models
+                        du config.
+        skip_existing : si True (par défaut), un modèle déjà entraîné lors
+                        d'une session précédente (fichier *_final.keras +
+                        classification_report.json présents) est rechargé
+                        depuis le disque au lieu d'être ré-entraîné.
 
     Returns:
         dict { model_name: metrics_dict }, plus un résumé comparatif
@@ -354,18 +395,42 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
     output_dir   = Path(config["phase2"]["paths"]["classification_outputs"])
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n  Modèles à entraîner : {cfg['models']}")
+    models_to_run = models if models is not None else cfg["models"]
+
+    print(f"\n  Modèles demandés     : {models_to_run}")
+    print(f"  Reprise automatique  : {'activée' if skip_existing else 'désactivée'}")
     print(f"  Epochs (stage 1)    : {cfg['epochs']}")
     print(f"  Epochs (fine-tune)  : {cfg.get('fine_tune_epochs', 0)}")
     print(f"  Class weights       : {'activés' if cfg.get('use_class_weights') else 'désactivés'}")
 
     all_metrics = []
-    for model_name in cfg["models"]:
+    for model_name in models_to_run:
+        existing = _load_existing_metrics(model_name, output_dir) if skip_existing else None
+
+        if existing is not None:
+            print(f"\n{'='*55}")
+            print(f"  ⏭️  Modèle déjà entraîné — rechargé depuis le disque : {model_name.upper()}")
+            print(f"{'='*55}")
+            print(f"  Accuracy: {existing['accuracy']}  Precision: {existing['precision']}  "
+                  f"Recall: {existing['recall']}  F1: {existing['f1_score']}")
+            all_metrics.append(existing)
+            continue
+
         metrics = _train_single_model(
             model_name, train_ds, val_ds, test_ds,
             num_classes, class_weights, idx2label, config, output_dir
         )
         all_metrics.append(metrics)
+
+    # Si on n'a traité qu'un sous-ensemble, on recharge aussi les métriques
+    # des modèles "hors scope" déjà présents sur disque pour un comparatif complet
+    full_model_list = cfg["models"]
+    processed_names = {m["model_name"] for m in all_metrics}
+    for model_name in full_model_list:
+        if model_name not in processed_names:
+            existing = _load_existing_metrics(model_name, output_dir)
+            if existing is not None:
+                all_metrics.append(existing)
 
     # Comparaison finale
     print("\n" + "=" * 55)

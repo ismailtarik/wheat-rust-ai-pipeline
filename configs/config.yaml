@@ -1,4 +1,187 @@
+project:
+  name: "wheat-rust-ai-pipeline"
+  author: "Tarik Ismail"
+  lab: "MDSET — Hassan First University, Settat"
+  seed: 42
+
+# ------------------------------------------------------------
+# Kaggle Dataset
+# ------------------------------------------------------------
+kaggle:
+  dataset_id: "kushagra3204/wheat-plant-diseases"
+  download_path: "data/raw/WheatPlantDiseases"
+
+# ------------------------------------------------------------
+# Classes ciblées
+# ------------------------------------------------------------
+# Ce dataset est 100% Wheat (pas besoin de filtrer par plante).
+#
+# mode: "auto"   → toutes les classes du dataset sont utilisées
+#                   automatiquement, quels que soient leurs noms exacts
+#                   de dossier (recommandé pour ce dataset).
+# mode: "manual" → seules les classes listées dans label_map sont gardées
+#                   (comportement précédent, utile pour PlantVillage).
+classes:
+  target_plant: "Wheat"
+  mode: "auto"
+  label_map:
+    # Utilisé seulement si mode = "manual".
+    # Laisse vide ou complète après avoir vu les noms réels des dossiers
+    # (affichés automatiquement à l'étape 1 du pipeline).
+    Wheat___Yellow_Rust:  "Yellow_Rust"
+    Wheat___Stripe_Rust:  "Yellow_Rust"
+    Wheat___Brown_Rust:   "Brown_Rust"
+    Wheat___Leaf_Rust:    "Brown_Rust"
+    Wheat___Stem_Rust:    "Stem_Rust"
+    Wheat___Black_Rust:   "Stem_Rust"
+    Wheat___Healthy:      "Healthy"
+  num_classes: "auto"   # calculé automatiquement si mode = "auto"
+
+# ------------------------------------------------------------
+# Preprocessing
+# ------------------------------------------------------------
+preprocessing:
+  img_size: [256, 256]
+  channels: 3
+  normalization: "minmax"       # minmax → [0,1]
+  noise_std: 0.02               # bruit gaussien terrain
+
+# ------------------------------------------------------------
+# Augmentation (train seulement)
+# ------------------------------------------------------------
+augmentation:
+  enabled: true
+  flip_horizontal: true
+  flip_vertical: true
+  brightness_delta: 0.2
+  contrast_range: [0.8, 1.2]
+  saturation_range: [0.8, 1.2]
+  hue_delta: 0.05
+  zoom_factor: 1.1              # crop depuis 110% de la taille
+
+# ------------------------------------------------------------
+# Split dataset
+# ------------------------------------------------------------
+split:
+  train_ratio: 0.70
+  val_ratio:   0.15
+  test_ratio:  0.15
+  stratify: true
+
+# ------------------------------------------------------------
+# Pipeline tf.data
+# ------------------------------------------------------------
+pipeline:
+  batch_size: 32
+  prefetch: true                # tf.data.AUTOTUNE
+
+# ------------------------------------------------------------
+# Chemins de sortie — Phase 1
+# ------------------------------------------------------------
+paths:
+  raw_data:      "data/raw/WheatPlantDiseases"
+  processed:     "data/processed"
+  reports:       "data/reports"
+  outputs:       "outputs"
+  notebooks:     "notebooks"
+  train_csv:     "data/processed/train.csv"
+  val_csv:       "data/processed/val.csv"
+  test_csv:      "data/processed/test.csv"
+  metadata_json: "data/processed/metadata.json"
+
 # ============================================================
+# PHASE 2 — Modèles Baseline (Classification + Détection)
+# ============================================================
+
+phase2:
+  # --------------------------------------------------------
+  # Classification (CNN custom / ResNet50 / EfficientNetB0)
+  # --------------------------------------------------------
+  classification:
+    models: ["cnn_custom", "resnet50", "efficientnetb0"]
+    epochs: 30
+    learning_rate: 0.0001
+    fine_tune_epochs: 10        # epochs supplémentaires en fine-tuning (transfer learning)
+    fine_tune_lr: 0.00001
+    early_stopping_patience: 5
+    reduce_lr_patience: 3
+    use_class_weights: true
+
+    # Augmentation ciblée renforcée pour les classes minoritaires
+    minority_augmentation:
+      enabled: true
+      # Classe considérée minoritaire si son nombre d'images < ce ratio
+      # du nombre d'images de la classe majoritaire
+      threshold_ratio: 0.5
+      extra_augmentation_factor: 3   # x3 passages d'augmentation supplémentaires
+
+  # --------------------------------------------------------
+  # Détection (YOLO) — bounding boxes auto-générées
+  # --------------------------------------------------------
+  detection:
+    model: "yolo11n.pt"          # yolo11n.pt (stable) ou yolo26n.pt (dernier modèle)
+    epochs: 50
+    imgsz: 256
+    batch: 16
+    # Mode bbox : 'full_image' = bbox couvrant toute l'image (classification
+    # déguisée en détection, en l'absence d'annotations réelles).
+    bbox_mode: "full_image"
+    bbox_margin: 0.05             # marge (%) retirée des bords de l'image
+
+  paths:
+    classification_outputs: "outputs/phase2_classification"
+    detection_outputs: "outputs/phase2_detection"
+    yolo_dataset: "data/processed/yolo_dataset"
+
+# ============================================================
+# PHASE 3 — Generative AI & Dataset Enrichment (Objectif 2)
+# ============================================================
+
+phase3:
+  # --------------------------------------------------------
+  # Sélection des classes minoritaires à enrichir
+  # --------------------------------------------------------
+  minority_selection:
+    # Une classe est jugée minoritaire si son nombre d'images < ce ratio
+    # du nombre d'images de la classe majoritaire (même logique que Phase 2)
+    threshold_ratio: 0.5
+
+  # --------------------------------------------------------
+  # cGAN (Conditional GAN)
+  # --------------------------------------------------------
+  cgan:
+    latent_dim: 128
+    epochs: 3000                  # GANs s'entraînent en "steps"/epochs courts mais nombreux
+    batch_size: 32
+    g_learning_rate: 0.0002
+    d_learning_rate: 0.0002
+    beta_1: 0.5                   # paramètre Adam recommandé pour GANs
+    label_smoothing: 0.1          # stabilise l'entraînement du discriminateur
+    sample_interval: 200          # sauvegarde d'un aperçu d'images tous les N epochs
+    n_samples_per_class: 200      # nombre d'images synthétiques à générer par classe
+
+  # --------------------------------------------------------
+  # VAE (Variational Autoencoder) conditionnel
+  # --------------------------------------------------------
+  vae:
+    latent_dim: 128
+    epochs: 100
+    batch_size: 32
+    learning_rate: 0.001
+    kl_weight: 0.001              # poids du terme KL-divergence dans la loss
+    n_samples_per_class: 200
+
+  # --------------------------------------------------------
+  # Évaluation des images générées
+  # --------------------------------------------------------
+  evaluation:
+    compute_fid: true
+    compute_ssim: true
+    n_eval_samples: 100           # nombre d'images réelles/synthétiques comparées
+
+  paths:
+    outputs: "outputs/phase3_generative"
+    synthetic_data: "data/processed/synthetic"# ============================================================
 # config.yaml — Configuration Centrale
 # Thèse : Deep Learning, CV & IoT for Epidemic Forecasting
 # Auteur : Tarik Ismail | MDSET Lab, Hassan First University

@@ -150,7 +150,8 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
 # Phases futures (stubs)
 # ─────────────────────────────────────────────────────────────
 
-def run_phase2(config: dict) -> dict:
+def run_phase2(config: dict, models: list = None,
+               skip_existing: bool = True) -> dict:
     """
     Phase 2 — Modèles Baseline (Classification).
 
@@ -158,6 +159,14 @@ def run_phase2(config: dict) -> dict:
     avoir à refaire le téléchargement/preprocessing, reconstruit les
     pipelines tf.data, puis entraîne et compare les modèles configurés
     dans phase2.classification.models.
+
+    Args:
+        config        : configuration globale
+        models        : sous-ensemble de modèles à (re)traiter, ex: ["efficientnetb0"]
+                        après une coupure de session. None = tous les modèles
+                        définis dans config.yaml.
+        skip_existing : si True, un modèle déjà entraîné (fichiers présents
+                        sur disque) est rechargé au lieu d'être ré-entraîné.
     """
     import pandas as pd
     from pipelines.preprocessing import build_tf_datasets
@@ -201,13 +210,57 @@ def run_phase2(config: dict) -> dict:
 
     train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
 
-    return run_classification_phase(split_result, train_ds, val_ds, test_ds, config)
+    return run_classification_phase(
+        split_result, train_ds, val_ds, test_ds, config,
+        models=models, skip_existing=skip_existing
+    )
 
 
-def run_phase3(config: dict) -> None:
-    """Phase 3 — Generative AI (GAN, cGAN, VAE) [à venir]"""
-    print("  ⏳ Phase 3 non encore implémentée.")
-    print("     → Implémentation prochaine : GAN, cGAN, VAE")
+def run_phase3(config: dict, classes: list = None) -> dict:
+    """
+    Phase 3 — Generative AI & Dataset Enrichment (cGAN + VAE).
+
+    Recharge les artefacts de la Phase 1 (train.csv + métadonnées) pour
+    identifier les classes minoritaires, puis entraîne un cGAN et un VAE
+    conditionnel pour chacune, génère des échantillons synthétiques et
+    les évalue (FID, SSIM).
+
+    Args:
+        config  : configuration globale
+        classes : sous-ensemble explicite de labels à traiter, ex:
+                  ["Stem_fly", "Black_Rust"]. None = auto-détection des
+                  classes minoritaires via phase3.minority_selection.
+    """
+    import pandas as pd
+    from pipelines.train_generative import run_generative_phase
+
+    processed_dir = Path(config["paths"]["processed"])
+    train_csv = processed_dir / "train.csv"
+    meta_path = Path(config["paths"]["metadata_json"])
+
+    for p in (train_csv, meta_path):
+        if not p.exists():
+            raise FileNotFoundError(
+                f"❌ Fichier manquant : {p}\n"
+                f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
+            )
+
+    with open(meta_path, "r", encoding="utf-8") as f:
+        metadata = json.load(f)
+
+    idx2label = {int(k): v for k, v in metadata["idx2label"].items()}
+    config["classes"]["num_classes"] = metadata["num_classes"]
+
+    split_result = {
+        "train_df" : pd.read_csv(train_csv),
+        "idx2label": idx2label,
+    }
+
+    print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
+    print(f"     Train: {len(split_result['train_df'])} | "
+          f"Classes: {config['classes']['num_classes']}")
+
+    return run_generative_phase(split_result, config, classes=classes)
 
 
 def run_phase4(config: dict) -> None:
@@ -257,6 +310,26 @@ def main():
         help="Ignore le téléchargement Kaggle et utilise les données déjà "
              "présentes dans 'paths.raw_data' (config.yaml)"
     )
+    parser.add_argument(
+        "--models", type=str, default=None,
+        help="Phase 2 uniquement. Liste de modèles séparés par des virgules "
+             "à (re)traiter, ex: --models efficientnetb0 "
+             "ou --models resnet50,efficientnetb0. "
+             "Par défaut : tous les modèles de config.yaml."
+    )
+    parser.add_argument(
+        "--no_skip_existing", action="store_true",
+        help="Phase 2 uniquement. Force le ré-entraînement même si un "
+             "modèle a déjà été entraîné lors d'une session précédente "
+             "(par défaut, les modèles déjà présents sur disque sont "
+             "rechargés sans ré-entraînement)."
+    )
+    parser.add_argument(
+        "--classes", type=str, default=None,
+        help="Phase 3 uniquement. Liste de classes séparées par des virgules "
+             "à traiter explicitement, ex: --classes Stem_fly,Black_Rust. "
+             "Par défaut : auto-détection des classes minoritaires."
+    )
     args = parser.parse_args()
 
     # Chargement de la config
@@ -272,6 +345,16 @@ def main():
 
     if args.phase == 1:
         runner(config, kaggle_json=args.kaggle_json, skip_download=args.skip_download)
+    elif args.phase == 2:
+        models_list = (
+            [m.strip() for m in args.models.split(",")] if args.models else None
+        )
+        runner(config, models=models_list, skip_existing=not args.no_skip_existing)
+    elif args.phase == 3:
+        classes_list = (
+            [c.strip() for c in args.classes.split(",")] if args.classes else None
+        )
+        runner(config, classes=classes_list)
     else:
         runner(config)
 

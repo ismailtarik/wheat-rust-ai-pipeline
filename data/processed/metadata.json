@@ -1,7 +1,7 @@
 {
   "thesis": "Deep Learning, CV & IoT for Epidemic Forecasting in Agriculture",
   "author": "Tarik Ismail",
-  "lab": "MDSET",
+  "lab": "MDSET — Hassan First University, Settat",
   "phase": "Phase 1 — Dataset Acquisition & Preprocessing",
   "dataset": "PlantVillage",
   "target": "Wheat Rust (Yellow / Brown / Stem)",

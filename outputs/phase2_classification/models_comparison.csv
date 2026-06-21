@@ -1,0 +1,2 @@
+model_name,accuracy,precision,recall,f1_score,train_time_min,num_params
+efficientnetb0,0.7574,0.7859,0.7574,0.7634,177.33,4381362
