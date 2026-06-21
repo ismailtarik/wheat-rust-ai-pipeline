@@ -1,0 +1,97 @@
+[
+  {
+    "label": "Stem_fly",
+    "label_idx": 12,
+    "real_count": 164,
+    "cgan_train_time_min": 2.12,
+    "vae_train_time_min": 0.29,
+    "n_synthetic_cgan": 200,
+    "n_synthetic_vae": 200,
+    "metrics": {
+      "cgan": {
+        "ssim": 0.0736,
+        "fid": 423.64
+      },
+      "vae": {
+        "ssim": 0.1829,
+        "fid": 392.98
+      }
+    }
+  },
+  {
+    "label": "Black_Rust",
+    "label_idx": 1,
+    "real_count": 403,
+    "cgan_train_time_min": 2.04,
+    "vae_train_time_min": 0.38,
+    "n_synthetic_cgan": 200,
+    "n_synthetic_vae": 200,
+    "metrics": {
+      "cgan": {
+        "ssim": 0.0386,
+        "fid": 448.24
+      },
+      "vae": {
+        "ssim": 0.0926,
+        "fid": 447.21
+      }
+    }
+  },
+  {
+    "label": "Fusarium_Head_Blight",
+    "label_idx": 5,
+    "real_count": 428,
+    "cgan_train_time_min": 2.04,
+    "vae_train_time_min": 0.39,
+    "n_synthetic_cgan": 200,
+    "n_synthetic_vae": 200,
+    "metrics": {
+      "cgan": {
+        "ssim": 0.063,
+        "fid": 434.4
+      },
+      "vae": {
+        "ssim": 0.1042,
+        "fid": 439.86
+      }
+    }
+  },
+  {
+    "label": "Common_Root_Rot",
+    "label_idx": 4,
+    "real_count": 430,
+    "cgan_train_time_min": 2.06,
+    "vae_train_time_min": 0.39,
+    "n_synthetic_cgan": 200,
+    "n_synthetic_vae": 200,
+    "metrics": {
+      "cgan": {
+        "ssim": 0.0312,
+        "fid": 468.25
+      },
+      "vae": {
+        "ssim": 0.0898,
+        "fid": 413.33
+      }
+    }
+  },
+  {
+    "label": "Blast",
+    "label_idx": 2,
+    "real_count": 453,
+    "cgan_train_time_min": 2.06,
+    "vae_train_time_min": 0.41,
+    "n_synthetic_cgan": 200,
+    "n_synthetic_vae": 200,
+    "metrics": {
+      "cgan": {
+        "ssim": 0.065,
+        "fid": 473.75
+      },
+      "vae": {
+        "ssim": 0.129,
+        "fid": 489.84
+      }
+    }
+  }
+]

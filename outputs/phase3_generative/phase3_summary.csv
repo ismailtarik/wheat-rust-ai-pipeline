@@ -1,0 +1,6 @@
+label,real_count,n_synthetic_cgan,n_synthetic_vae,cgan_ssim,vae_ssim,cgan_fid,vae_fid
+Stem_fly,164,200,200,0.0736,0.1829,423.64,392.98
+Black_Rust,403,200,200,0.0386,0.0926,448.24,447.21
+Fusarium_Head_Blight,428,200,200,0.063,0.1042,434.4,439.86
+Common_Root_Rot,430,200,200,0.0312,0.0898,468.25,413.33
+Blast,453,200,200,0.065,0.129,473.75,489.84

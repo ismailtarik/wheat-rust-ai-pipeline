@@ -1,0 +1,19 @@
+{
+  "label": "Black_Rust",
+  "label_idx": 1,
+  "real_count": 403,
+  "cgan_train_time_min": 2.04,
+  "vae_train_time_min": 0.38,
+  "n_synthetic_cgan": 200,
+  "n_synthetic_vae": 200,
+  "metrics": {
+    "cgan": {
+      "ssim": 0.0386,
+      "fid": 448.24
+    },
+    "vae": {
+      "ssim": 0.0926,
+      "fid": 447.21
+    }
+  }
+}

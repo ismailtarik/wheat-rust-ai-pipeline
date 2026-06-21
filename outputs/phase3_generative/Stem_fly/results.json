@@ -1,0 +1,19 @@
+{
+  "label": "Stem_fly",
+  "label_idx": 12,
+  "real_count": 164,
+  "cgan_train_time_min": 2.12,
+  "vae_train_time_min": 0.29,
+  "n_synthetic_cgan": 200,
+  "n_synthetic_vae": 200,
+  "metrics": {
+    "cgan": {
+      "ssim": 0.0736,
+      "fid": 423.64
+    },
+    "vae": {
+      "ssim": 0.1829,
+      "fid": 392.98
+    }
+  }
+}

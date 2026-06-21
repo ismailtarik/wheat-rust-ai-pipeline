@@ -1,0 +1,19 @@
+{
+  "label": "Blast",
+  "label_idx": 2,
+  "real_count": 453,
+  "cgan_train_time_min": 2.06,
+  "vae_train_time_min": 0.41,
+  "n_synthetic_cgan": 200,
+  "n_synthetic_vae": 200,
+  "metrics": {
+    "cgan": {
+      "ssim": 0.065,
+      "fid": 473.75
+    },
+    "vae": {
+      "ssim": 0.129,
+      "fid": 489.84
+    }
+  }
+}

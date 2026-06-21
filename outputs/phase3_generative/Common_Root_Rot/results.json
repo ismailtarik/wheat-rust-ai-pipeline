@@ -1,0 +1,19 @@
+{
+  "label": "Common_Root_Rot",
+  "label_idx": 4,
+  "real_count": 430,
+  "cgan_train_time_min": 2.06,
+  "vae_train_time_min": 0.39,
+  "n_synthetic_cgan": 200,
+  "n_synthetic_vae": 200,
+  "metrics": {
+    "cgan": {
+      "ssim": 0.0312,
+      "fid": 468.25
+    },
+    "vae": {
+      "ssim": 0.0898,
+      "fid": 413.33
+    }
+  }
+}
