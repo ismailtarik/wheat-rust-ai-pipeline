@@ -151,26 +151,29 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
 # ─────────────────────────────────────────────────────────────
 
 def run_phase2(config: dict, models: list = None,
-               skip_existing: bool = True) -> dict:
+               skip_existing: bool = True, task: str = "both") -> dict:
     """
-    Phase 2 — Modèles Baseline (Classification).
+    Phase 2 — Modèles Baseline (Classification + Détection).
 
     Recharge les artefacts de la Phase 1 (CSV + métadonnées) pour ne pas
-    avoir à refaire le téléchargement/preprocessing, reconstruit les
-    pipelines tf.data, puis entraîne et compare les modèles configurés
-    dans phase2.classification.models.
+    avoir à refaire le téléchargement/preprocessing, puis :
+      - task='classification' : entraîne CNN custom / ResNet50 / EfficientNetB0
+      - task='detection'      : convertit le dataset au format YOLO
+                                 (bbox = full_image, pas d'annotations
+                                 réelles disponibles) et entraîne YOLO
+      - task='both' (défaut)  : exécute les deux à la suite
 
     Args:
         config        : configuration globale
-        models        : sous-ensemble de modèles à (re)traiter, ex: ["efficientnetb0"]
-                        après une coupure de session. None = tous les modèles
-                        définis dans config.yaml.
+        models        : sous-ensemble de modèles de classification à
+                        (re)traiter, ex: ["efficientnetb0"]. Ignoré si
+                        task='detection'.
         skip_existing : si True, un modèle déjà entraîné (fichiers présents
-                        sur disque) est rechargé au lieu d'être ré-entraîné.
+                        sur disque) est rechargé au lieu d'être ré-entraîné
+                        (s'applique aux deux tâches).
+        task          : "classification" | "detection" | "both"
     """
     import pandas as pd
-    from pipelines.preprocessing import build_tf_datasets
-    from pipelines.train_classification import run_classification_phase
 
     processed_dir = Path(config["paths"]["processed"])
     train_csv = processed_dir / "train.csv"
@@ -208,12 +211,26 @@ def run_phase2(config: dict, models: list = None,
           f"Test: {len(split_result['test_df'])} | "
           f"Classes: {config['classes']['num_classes']}")
 
-    train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
+    results = {}
 
-    return run_classification_phase(
-        split_result, train_ds, val_ds, test_ds, config,
-        models=models, skip_existing=skip_existing
-    )
+    if task in ("classification", "both"):
+        from pipelines.preprocessing import build_tf_datasets
+        from pipelines.train_classification import run_classification_phase
+
+        train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
+        results["classification"] = run_classification_phase(
+            split_result, train_ds, val_ds, test_ds, config,
+            models=models, skip_existing=skip_existing
+        )
+
+    if task in ("detection", "both"):
+        from pipelines.train_detection import run_detection_phase
+
+        results["detection"] = run_detection_phase(
+            split_result, config, skip_existing=skip_existing
+        )
+
+    return results
 
 
 def run_phase3(config: dict, classes: list = None) -> dict:
@@ -330,6 +347,12 @@ def main():
              "à traiter explicitement, ex: --classes Stem_fly,Black_Rust. "
              "Par défaut : auto-détection des classes minoritaires."
     )
+    parser.add_argument(
+        "--task", type=str, default="both",
+        choices=["classification", "detection", "both"],
+        help="Phase 2 uniquement. 'classification' (CNN/ResNet/EfficientNet), "
+             "'detection' (YOLO) ou 'both' (les deux, défaut)."
+    )
     args = parser.parse_args()
 
     # Chargement de la config
@@ -349,7 +372,8 @@ def main():
         models_list = (
             [m.strip() for m in args.models.split(",")] if args.models else None
         )
-        runner(config, models=models_list, skip_existing=not args.no_skip_existing)
+        runner(config, models=models_list, skip_existing=not args.no_skip_existing,
+               task=args.task)
     elif args.phase == 3:
         classes_list = (
             [c.strip() for c in args.classes.split(",")] if args.classes else None
