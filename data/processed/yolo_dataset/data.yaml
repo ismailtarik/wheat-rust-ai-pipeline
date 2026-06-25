@@ -1,0 +1,21 @@
+names:
+- Aphid
+- Black_Rust
+- Blast
+- Brown_Rust
+- Common_Root_Rot
+- Fusarium_Head_Blight
+- Healthy
+- Leaf_Blight
+- Mildew
+- Mite
+- Septoria
+- Smut
+- Stem_fly
+- Tan_spot
+- Yellow_Rust
+nc: 15
+path: /content/wheat-rust-ai-pipeline/data/processed/yolo_dataset
+test: images/test
+train: images/train
+val: images/val

@@ -1,0 +1,23 @@
+{
+  "mAP50": 0.8834699080466581,
+  "mAP50_95": 0.8828734547293086,
+  "precision": 0.8285732982409544,
+  "recall": 0.8041789963593049,
+  "per_class_mAP50": {
+    "Aphid": 0.8861,
+    "Black_Rust": 0.7921,
+    "Blast": 0.9456,
+    "Brown_Rust": 0.9481,
+    "Common_Root_Rot": 0.8414,
+    "Fusarium_Head_Blight": 0.9674,
+    "Healthy": 0.9765,
+    "Leaf_Blight": 0.6956,
+    "Mildew": 0.964,
+    "Mite": 0.8287,
+    "Septoria": 0.985,
+    "Smut": 0.9633,
+    "Stem_fly": 0.8527,
+    "Tan_spot": 0.6124,
+    "Yellow_Rust": 0.9932
+  }
+}

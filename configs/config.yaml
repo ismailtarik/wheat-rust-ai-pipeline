@@ -309,7 +309,7 @@ phase2:
   # --------------------------------------------------------
   detection:
     model: "yolo11n.pt"          # yolo11n.pt (stable) ou yolo26n.pt (dernier modèle)
-    epochs: 50
+    epochs: 30
     imgsz: 256
     batch: 16
     # Mode bbox : 'full_image' = bbox couvrant toute l'image (classification
