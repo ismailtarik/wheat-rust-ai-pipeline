@@ -1,14 +1,23 @@
 {
-  "best_model": "efficientnetb0",
+  "best_model": "resnet50",
   "all_results": [
+    {
+      "model_name": "resnet50",
+      "accuracy": 0.8271,
+      "precision": 0.8398,
+      "recall": 0.8271,
+      "f1_score": 0.8305,
+      "train_time_min": 194.0,
+      "num_params": 24116111
+    },
     {
       "model_name": "efficientnetb0",
       "accuracy": 0.7574,
       "precision": 0.7859,
       "recall": 0.7574,
       "f1_score": 0.7634,
-      "train_time_min": 177.33,
-      "num_params": 4381362
+      "train_time_min": null,
+      "num_params": null
     }
   ]
 }
