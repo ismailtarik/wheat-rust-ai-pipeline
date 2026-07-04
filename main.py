@@ -280,6 +280,22 @@ def run_phase3(config: dict, classes: list = None) -> dict:
     return run_generative_phase(split_result, config, classes=classes)
 
 
+
+def run_merge(config: dict, copy_images: bool = False) -> dict:
+    """
+    Merge — Fusion des 5 datasets en un dataset unifié (WheatAI-Merged).
+
+    Collecte, normalise les classes, déduplique, split et sauvegarde
+    train/val/test CSV + metadata.json + sous-dataset YOLO (DS5 Roboflow).
+
+    Args:
+        config      : configuration globale
+        copy_images : si True, copie physique des images (lourd).
+                      Par défaut False = symlinks (recommandé sur Colab).
+    """
+    from pipelines.merge_datasets import build_merged_dataset
+    return build_merged_dataset(config, copy_images=copy_images)
+
 def run_phase4(config: dict) -> None:
     """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) [à venir]"""
     print("  ⏳ Phase 4 non encore implémentée.")
@@ -297,6 +313,7 @@ def run_phase5(config: dict) -> None:
 # ─────────────────────────────────────────────────────────────
 
 PHASE_RUNNERS = {
+    "merge": run_merge,
     1: run_phase1,
     2: run_phase2,
     3: run_phase3,
@@ -310,10 +327,10 @@ def main():
         description="🌾 Wheat Rust AI Pipeline — MDSET Lab",
         formatter_class=argparse.RawTextHelpFormatter
     )
-    parser.add_argument(
-        "--phase", type=int, default=1, choices=[1, 2, 3, 4, 5],
-        help="Phase à exécuter (1=Preprocessing, 2=Baseline, 3=GAN, 4=Unsupervised, 5=Fusion)"
-    )
+    # parser.add_argument(
+    #     "--phase", type=int, default=1, choices=[1, 2, 3, 4, 5],
+    #     help="Phase à exécuter (1=Preprocessing, 2=Baseline, 3=GAN, 4=Unsupervised, 5=Fusion)"
+    # )
     parser.add_argument(
         "--config", type=str, default="configs/config.yaml",
         help="Chemin vers le fichier de configuration YAML"
@@ -348,10 +365,18 @@ def main():
              "Par défaut : auto-détection des classes minoritaires."
     )
     parser.add_argument(
+        "--copy_images", action="store_true",
+        help="Merge uniquement. Copie physique des images au lieu de symlinks."
+    )
+    parser.add_argument(
         "--task", type=str, default="both",
         choices=["classification", "detection", "both"],
         help="Phase 2 uniquement. 'classification' (CNN/ResNet/EfficientNet), "
              "'detection' (YOLO) ou 'both' (les deux, défaut)."
+    )
+    parser.add_argument(
+        "--phase", type=str, default="1", choices=["1", "2", "3", "4", "5", "merge"],
+        help="Phase à exécuter (1 à 5) ou 'merge' pour la fusion des datasets"
     )
     args = parser.parse_args()
 
@@ -374,6 +399,8 @@ def main():
         )
         runner(config, models=models_list, skip_existing=not args.no_skip_existing,
                task=args.task)
+    elif args.phase == "merge":
+        runner(config, copy_images=args.copy_images)
     elif args.phase == 3:
         classes_list = (
             [c.strip() for c in args.classes.split(",")] if args.classes else None

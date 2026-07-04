@@ -9,7 +9,15 @@ project:
 # ------------------------------------------------------------
 kaggle:
   dataset_id: "kushagra3204/wheat-plant-diseases"
-  download_path: "data/raw/WheatPlantDiseases"
+  download_path: "data/raw/raw"
+  dataset_id: "tolgahayit/yellowrust19-yellow-rust-disease-in-wheat"
+  download_path: "data/raw/YellowRust19"
+  dataset_id: "yasserhessein/wheat-disease-dataset-small"
+  download_path: "data/raw/ZenodoWheatSmall"
+  dataset_id: "kushagra3204/wheat-plant-diseases"
+  download_path: "data/raw/MendeleyWheat"
+  dataset_id: "notebooks/RoboflowWheatRust"
+  download_path: "/data/raw/RoboflowWheatRust"
 
 # ------------------------------------------------------------
 # Classes ciblées
@@ -80,6 +88,9 @@ pipeline:
 # ------------------------------------------------------------
 paths:
   raw_data:      "data/raw/WheatPlantDiseases"
+  raw_data:      "data/raw/YellowRust19"
+  raw_data:      "data/raw/ZenodoWheatSmall"
+  raw_data:      "data/raw/MendeleyWheat"
   processed:     "data/processed"
   reports:       "data/reports"
   outputs:       "outputs"
@@ -321,3 +332,30 @@ phase2:
     classification_outputs: "outputs/phase2_classification"
     detection_outputs: "outputs/phase2_detection"
     yolo_dataset: "data/processed/yolo_dataset"
+
+    # ============================================================
+# MERGE — Fusion des 5 datasets (WheatAI-Merged)
+# ============================================================
+ 
+merge:
+  output: "data/merged"
+ 
+  # ----------------------------------------------------------
+  # Chemins vers chaque dataset source
+  # Adapter selon où tu les as placés dans ton Colab/Drive
+  # ----------------------------------------------------------
+  paths:
+    ds1: "data/raw/data"       # Déjà utilisé — Kaggle kushagra3204
+    ds2: "data/raw/MendeleyWheat"      # Dataset 5gc7hwydwg
+    ds3: "data/raw/YellowRust19"             # Kaggle tolgahayit
+    ds4: "data/raw/ZenodoWheatSmall"         # Brown 2023 — 999 images
+    ds5: "data/raw/RoboflowWheatRust"        # Roboflow — bboxes YOLO
+ 
+  # ----------------------------------------------------------
+  # Classes du dataset Roboflow (DS5 — noms exacts des dossiers)
+  # À vérifier après téléchargement via : ls data/raw/RoboflowWheatRust/
+  # ----------------------------------------------------------
+  roboflow_classes:
+    - "Yellow_Rust"
+    - "Brown_Rust"
+    - "healthy"
