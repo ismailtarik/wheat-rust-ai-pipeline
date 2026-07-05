@@ -1,42 +1,16 @@
 """
 pipelines/merge_datasets.py
 -----------------------------
-Phase 1+ — Construction du dataset unifié "WheatAI-Merged".
+Phase Merge — Construction du dataset unifié WheatAI-Merged.
 
-Fusionne 5 datasets de maladies du blé en un seul dataset propre,
-re-splitté et prêt pour la classification ET la détection YOLO.
-
-Datasets sources :
-  DS1 — Wheat Plant Diseases (Kaggle kushagra3204)       : 13 104 img, 15 classes
-  DS2 — Mendeley Bangladesh (5gc7hwydwg)                 : 5 000 img,  5 classes
-  DS3 — Yellow Rust Hayit / YELLOW-RUST-19 (Kaggle)     : ~15 000 img, 2 classes
-  DS4 — Wheat Disease Small — Zenodo/Kaggle (Brown 2023) : 999 img,    5 classes
-  DS5 — Wheat Rust Roboflow (bboxes YOLO format)        : variable,   3 classes
-
-Sortie :
-  data/merged/
-  ├── classification/
-  │   ├── <Classe>/          ← toutes images fusionnées par classe
-  │   └── ...
-  ├── processed/
-  │   ├── merged_train.csv
-  │   ├── merged_val.csv
-  │   ├── merged_test.csv
-  │   └── merged_metadata.json
-  └── yolo/                   ← uniquement DS5 (vraies bboxes)
-      ├── images/train|val|test/
-      ├── labels/train|val|test/
-      └── data.yaml
-
-Stratégie de mapping des classes :
-  Chaque dataset a ses propres noms de dossiers → on les mappe
-  vers les 15 classes canoniques de ton dataset principal.
-  Les classes nouvelles (ex: Black Point, Fusarium Foot Rot)
-  sont ajoutées en tant que nouvelles classes.
-
-Usage :
-    from pipelines.merge_datasets import build_merged_dataset
-    result = build_merged_dataset(config)
+Corrections v2 :
+  - Scanner récursif intelligent : descend dans les sous-dossiers
+    pour trouver les vrais dossiers de classes (contenant des images),
+    quelle que soit la profondeur de l'arborescence.
+  - DS5 Roboflow : scan récursif des images/ et labels/ à n'importe
+    quelle profondeur.
+  - Correction KeyError 'canonical' dans _print_merge_report.
+  - Ratio max/min protégé contre la division par zéro.
 """
 
 import json
@@ -47,137 +21,182 @@ import pandas as pd
 import numpy as np
 
 from pathlib import Path
-from PIL import Image
+
+try:
+    from PIL import Image   # optionnel — utilisé uniquement pour vérifier l'intégrité
+    HAS_PIL = True
+except ImportError:
+    HAS_PIL = False
 
 
 # ─────────────────────────────────────────────────────────────
-# Mapping des classes — noms bruts → classe canonique
+# Mapping canonique
 # ─────────────────────────────────────────────────────────────
-
-# Classe canonique = le nom normalisé utilisé dans TOUT le pipeline.
-# Chaque entrée : "nom_de_dossier_source_en_minuscules" -> "Classe_Canonique"
-# Les noms sont mis en minuscules + underscores avant comparaison.
 
 CANONICAL_CLASS_MAP = {
-    # ── DS1 Wheat Plant Diseases (Kaggle) ─────────────────────
-    "aphid"                : "Aphid",
-    "black rust"           : "Black_Rust",
-    "black_rust"           : "Black_Rust",
-    "blast"                : "Blast",
-    "brown rust"           : "Brown_Rust",
-    "brown_rust"           : "Brown_Rust",
-    "common root rot"      : "Common_Root_Rot",
-    "common_root_rot"      : "Common_Root_Rot",
-    "fusarium head blight" : "Fusarium_Head_Blight",
-    "fusarium_head_blight" : "Fusarium_Head_Blight",
-    "healthy"              : "Healthy",
-    "leaf blight"          : "Leaf_Blight",
-    "leaf_blight"          : "Leaf_Blight",
-    "mildew"               : "Mildew",
-    "mite"                 : "Mite",
-    "septoria"             : "Septoria",
-    "smut"                 : "Smut",
-    "stem fly"             : "Stem_fly",
-    "stem_fly"             : "Stem_fly",
-    "tan spot"             : "Tan_spot",
-    "tan_spot"             : "Tan_spot",
-    "yellow rust"          : "Yellow_Rust",
-    "yellow_rust"          : "Yellow_Rust",
+    # DS1 — Wheat Plant Diseases
+    "aphid"                   : "Aphid",
+    "black rust"              : "Black_Rust",
+    "black_rust"              : "Black_Rust",
+    "blast"                   : "Blast",
+    "brown rust"              : "Brown_Rust",
+    "brown_rust"              : "Brown_Rust",
+    "common root rot"         : "Common_Root_Rot",
+    "common_root_rot"         : "Common_Root_Rot",
+    "fusarium head blight"    : "Fusarium_Head_Blight",
+    "fusarium_head_blight"    : "Fusarium_Head_Blight",
+    "healthy"                 : "Healthy",
+    "leaf blight"             : "Leaf_Blight",
+    "leaf_blight"             : "Leaf_Blight",
+    "mildew"                  : "Mildew",
+    "mite"                    : "Mite",
+    "septoria"                : "Septoria",
+    "smut"                    : "Smut",
+    "stem fly"                : "Stem_fly",
+    "stem_fly"                : "Stem_fly",
+    "tan spot"                : "Tan_spot",
+    "tan_spot"                : "Tan_spot",
+    "yellow rust"             : "Yellow_Rust",
+    "yellow_rust"             : "Yellow_Rust",
+    # DS2 — Mendeley Bangladesh
+    "black point"             : "Black_Point",
+    "black_point"             : "Black_Point",
+    "fusarium foot rot"       : "Fusarium_Foot_Rot",
+    "fusarium_foot_rot"       : "Fusarium_Foot_Rot",
+    "healthy leaf"            : "Healthy",
+    "healthy_leaf"            : "Healthy",
+    "wheat blast"             : "Blast",
+    "wheat_blast"             : "Blast",
+    # DS3 — Yellow Rust Hayit (sévérités)
+    "yellow rust healthy"     : "Healthy",
+    "yellowrust_healthy"      : "Healthy",
+    "yellowrust"              : "Yellow_Rust",
+    "rust"                    : "Yellow_Rust",
+    "stripe rust"             : "Yellow_Rust",
+    "stripe_rust"             : "Yellow_Rust",
+    # noms numériques de sévérité
+    "0"                       : "Healthy",
+    "1"                       : "Yellow_Rust",
+    "2"                       : "Yellow_Rust",
+    "3"                       : "Yellow_Rust",
+    "4"                       : "Yellow_Rust",
+    "5"                       : "Yellow_Rust",
+    # DS4 — Zenodo Brown 2023
+    "powdery mildew"          : "Mildew",
+    "powdery_mildew"          : "Mildew",
+    "leaf rust"               : "Brown_Rust",
+    "leaf_rust"               : "Brown_Rust",
+    "stem rust"               : "Black_Rust",
+    "stem_rust"               : "Black_Rust",
+    "septoria leaf blotch"    : "Septoria",
+    "septoria_leaf_blotch"    : "Septoria",
+    # variations communes
+    "brown_rust_disease"      : "Brown_Rust",
+    "yellow_rust_disease"     : "Yellow_Rust",
+    "stem_rust_disease"       : "Black_Rust",
 
-    # ── DS2 Mendeley Bangladesh ───────────────────────────────
-    "black point"          : "Black_Point",     # nouvelle classe
-    "black_point"          : "Black_Point",
-    "fusarium foot rot"    : "Fusarium_Foot_Rot",  # nouvelle classe
-    "fusarium_foot_rot"    : "Fusarium_Foot_Rot",
-    "healthy leaf"         : "Healthy",
-    "healthy_leaf"         : "Healthy",
-    "leaf blight"          : "Leaf_Blight",
-    "wheat blast"          : "Blast",
-    "wheat_blast"          : "Blast",
+    "r"    : "Yellow_Rust",
+    "mr"   : "Yellow_Rust",
+    "mrms" : "Yellow_Rust",
+    "ms"   : "Yellow_Rust",
+    "s"    : "Yellow_Rust",
+}
 
-    # ── DS3 Yellow Rust Hayit (YELLOW-RUST-19) ────────────────
-    # Contient 2 catégories : healthy + yellow rust
-    # Les sous-dossiers de sévérité sont fusionnés dans Yellow_Rust
-    "yellow rust healthy"  : "Healthy",
-    "yellowrust_healthy"   : "Healthy",
-    "0"                    : "Healthy",       # certaines versions numérotent
-    "1"                    : "Yellow_Rust",   # sévérité 1
-    "2"                    : "Yellow_Rust",
-    "3"                    : "Yellow_Rust",
-    "4"                    : "Yellow_Rust",
-    "5"                    : "Yellow_Rust",
-    "yellow_rust_1"        : "Yellow_Rust",
-    "yellow_rust_2"        : "Yellow_Rust",
-    "yellow_rust_3"        : "Yellow_Rust",
-    "yellow_rust_4"        : "Yellow_Rust",
-    "yellow_rust_5"        : "Yellow_Rust",
-    "yellowrust"           : "Yellow_Rust",
-    "yellowrust_1"         : "Yellow_Rust",
-    "yellowrust_2"         : "Yellow_Rust",
-    "yellowrust_3"         : "Yellow_Rust",
-    "yellowrust_4"         : "Yellow_Rust",
-    "yellowrust_5"         : "Yellow_Rust",
-    "rust"                 : "Yellow_Rust",
-    "stripe rust"          : "Yellow_Rust",
-    "stripe_rust"          : "Yellow_Rust",
-
-    # ── DS4 Wheat Disease Small (Zenodo / Brown 2023) ─────────
-    # Classes : yellow_rust, brown_rust, septoria, mildew, healthy
-    # (noms déjà proches des classes canoniques)
-    "powdery mildew"       : "Mildew",
-    "powdery_mildew"       : "Mildew",
-    "leaf rust"            : "Brown_Rust",
-    "leaf_rust"            : "Brown_Rust",
-    "stem rust"            : "Black_Rust",
-    "stem_rust"            : "Black_Rust",
-    "septoria leaf blotch" : "Septoria",
-    "septoria_leaf_blotch" : "Septoria",
-
-    # ── DS5 Roboflow (classes de détection) ──────────────────
-    # Géré séparément dans la section YOLO (bboxes conservées)
-    "yellow_rust_roboflow" : "Yellow_Rust",
-    "brown_rust_roboflow"  : "Brown_Rust",
-    "stem_rust_roboflow"   : "Black_Rust",
+# Dossiers à ignorer (splits, wrappers, système)
+SKIP_DIRS = {
+    "train", "test", "valid", "validation", "val",
+    "images", "labels", "annotations",
+    "__macosx", ".ds_store", "raw", "augmented", "balanced",
 }
 
 
-def _normalize_class_name(raw_name: str) -> str:
-    """Normalise un nom de dossier → clé de lookup dans CANONICAL_CLASS_MAP."""
-    return raw_name.lower().strip().replace("-", "_").replace(" ", "_")
+def _normalize(name: str) -> str:
+    return name.lower().strip().replace("-", "_").replace(" ", "_")
 
 
 def _resolve_canonical(raw_name: str) -> str:
     """
-    Retourne la classe canonique correspondant à un nom de dossier brut.
-    Si aucun mapping n'est trouvé, nettoie et retourne le nom tel quel
-    (préfixé d'un avertissement dans les logs).
+    Convertit un nom de classe provenant d'un dataset
+    vers une classe canonique.
     """
-    key = _normalize_class_name(raw_name)
+
+    key = _normalize(raw_name)
+
+    # -------------------------------------------------
+    # Supprimer les suffixes parasites
+    # -------------------------------------------------
+
+    for suffix in [
+        "_train",
+        "_test",
+        "_valid",
+        "_val"
+    ]:
+        if key.endswith(suffix):
+            key = key[:-len(suffix)]
+
+    # -------------------------------------------------
+    # Quelques corrections fréquentes
+    # -------------------------------------------------
+
+    aliases = {
+
+        "blackpoint": "black_point",
+
+        "fusariumfootrot": "fusarium_foot_rot",
+
+        "healthyleaf": "healthy_leaf",
+
+        "leafblight": "leaf_blight",
+
+        "wheatblast": "wheat_blast",
+
+        "stemfly": "stem_fly",
+
+        "tanspot": "tan_spot",
+
+        "yellowrust": "yellow_rust",
+
+        "brownrust": "brown_rust",
+
+        "blackrust": "black_rust",
+
+        "commonrootrot": "common_root_rot",
+
+        "fusariumheadblight": "fusarium_head_blight",
+
+        "powderymildew": "powdery_mildew",
+
+        "leafrust": "leaf_rust",
+
+        "stemrust": "stem_rust",
+
+        "septorialeafblotch": "septoria_leaf_blotch",
+    }
+
+    key = aliases.get(key, key)
+
+    # -------------------------------------------------
+
     if key in CANONICAL_CLASS_MAP:
         return CANONICAL_CLASS_MAP[key]
-    # Essai sans underscores
+
     key2 = key.replace("_", " ")
+
     if key2 in CANONICAL_CLASS_MAP:
         return CANONICAL_CLASS_MAP[key2]
-    # Fallback : retourner nettoyé avec avertissement
-    canonical = raw_name.replace(" ", "_").replace("-", "_")
-    print(f"    Classe non mappée : '{raw_name}' → conservée comme '{canonical}'")
-    return canonical
+
+    return raw_name.strip().replace(" ", "_").replace("-", "_")
 
 
-# ─────────────────────────────────────────────────────────────
-# Utilitaires
-# ─────────────────────────────────────────────────────────────
-
-IMG_EXTENSIONS = {".jpg", ".jpeg", ".png", ".JPG", ".PNG", ".JPEG", ".bmp", ".BMP"}
+IMG_EXT = {".jpg", ".jpeg", ".png", ".JPG", ".PNG", ".JPEG", ".bmp"}
 
 
-def _is_image(path: Path) -> bool:
-    return path.is_file() and path.suffix in IMG_EXTENSIONS
+def _is_image(p: Path) -> bool:
+    return p.is_file() and p.suffix in IMG_EXT
 
 
 def _image_hash(path: Path) -> str:
-    """MD5 des premiers 8KB de l'image — détection de doublons rapide."""
     try:
         with open(path, "rb") as f:
             return hashlib.md5(f.read(8192)).hexdigest()
@@ -185,164 +204,158 @@ def _image_hash(path: Path) -> str:
         return ""
 
 
-def _scan_flat_dataset(root: Path, source_name: str) -> list:
+# ─────────────────────────────────────────────────────────────
+# Scanner récursif intelligent
+# ─────────────────────────────────────────────────────────────
+
+def _find_class_dirs(root: Path) -> list:
     """
-    Scanne un dataset organisé en dossiers de classes (structure flat) :
-      root/
-        ClassName1/img1.jpg ...
-        ClassName2/img2.jpg ...
+    Descend récursivement dans root pour trouver les dossiers qui
+    contiennent DIRECTEMENT des images (= dossiers de classes).
+    Ignore les dossiers wrapper (train/test/valid/...) et vides.
 
     Returns:
-        List of dicts {filepath, class_raw, canonical, source}
+        Liste de (class_dir: Path) contenant au moins une image directe.
     """
+    class_dirs = []
+
+    def _recurse(d: Path, depth: int = 0):
+        if depth > 6:
+            return
+        # Images directes dans ce dossier ?
+        direct_images = [f for f in d.iterdir() if _is_image(f)]
+        if direct_images:
+            class_dirs.append(d)
+            return
+        # Sinon on descend dans les sous-dossiers non ignorés
+        for sub in sorted(d.iterdir()):
+            if sub.is_dir() and sub.name.lower() not in {".ds_store", "__macosx"}:
+                _recurse(sub, depth + 1)
+
+    if root.exists():
+        _recurse(root)
+
+    return class_dirs
+
+
+def _scan_dataset_smart(root: Path, source_name: str,
+                          skip_dirs: set = None) -> list:
+    """
+    Scanner universel : trouve tous les dossiers de classes quelle que soit
+    la profondeur de l'arborescence, et mappe leurs noms vers les classes
+    canoniques. Les dossiers dans skip_dirs ne sont pas utilisés comme
+    labels (mais on descend quand même dedans pour trouver les sous-classes).
+    """
+    if skip_dirs is None:
+        skip_dirs = SKIP_DIRS
+
     records = []
     if not root.exists():
-        print(f"    Dossier introuvable : {root}")
+        print(f"    ⚠️  Dossier introuvable : {root}")
         return records
 
-    for cls_dir in sorted(root.iterdir()):
-        if not cls_dir.is_dir():
+    class_dirs = _find_class_dirs(root)
+
+    for cls_dir in class_dirs:
+        raw_name = cls_dir.name
+        # Si le dossier est un wrapper connu (train/test/...) on passe
+        if _normalize(raw_name) in skip_dirs:
             continue
-        canonical = _resolve_canonical(cls_dir.name)
-        for img in cls_dir.rglob("*"):
-            if _is_image(img):
-                records.append({
-                    "filepath" : str(img),
-                    "class_raw": cls_dir.name,
-                    "canonical": canonical,
-                    "source"   : source_name,
-                })
-    return records
 
+        canonical = _resolve_canonical(raw_name)
+        images = [f for f in cls_dir.iterdir() if _is_image(f)]
+        for img in images:
+            records.append({
+                "filepath" : str(img),
+                "class_raw": raw_name,
+                "canonical": canonical,
+                "source"   : source_name,
+            })
 
-def _scan_split_dataset(root: Path, source_name: str,
-                         split_dirs: dict = None) -> list:
-    """
-    Scanne un dataset déjà splitté en train/val/test :
-      root/
-        train/ClassName1/...
-        val/ClassName1/...
-        test/ClassName1/...
-
-    split_dirs : ex. {"train": "train", "val": "valid", "test": "test"}
-    """
-    if split_dirs is None:
-        split_dirs = {"train": "train", "val": "val", "test": "test"}
-
-    records = []
-    for split_name, split_folder in split_dirs.items():
-        split_path = root / split_folder
-        if not split_path.exists():
-            continue
-        for cls_dir in sorted(split_path.iterdir()):
-            if not cls_dir.is_dir():
-                continue
-            canonical = _resolve_canonical(cls_dir.name)
-            for img in cls_dir.rglob("*"):
-                if _is_image(img):
-                    records.append({
-                        "filepath" : str(img),
-                        "class_raw": cls_dir.name,
-                        "canonical": canonical,
-                        "source"   : source_name,
-                        "orig_split": split_name,
-                    })
     return records
 
 
 # ─────────────────────────────────────────────────────────────
-# Collecte de chaque dataset source
+# Collecte par dataset
 # ─────────────────────────────────────────────────────────────
 
-def _collect_ds1_wheat_plant_diseases(paths_cfg: dict) -> list:
-    """DS1 — Wheat Plant Diseases (Kaggle kushagra3204) — structure flat."""
-    root = Path(paths_cfg.get("ds1", "data/raw/WheatPlantDiseases"))
+def _collect_ds1(paths_cfg: dict) -> list:
+    root = Path(paths_cfg.get("ds1", "data/raw/raw"))
     print(f"\n  DS1 — Wheat Plant Diseases : {root}")
-    records = _scan_flat_dataset(root, "DS1_WheatPlantDiseases")
-    print(f"    → {len(records)} images trouvées")
+    records = _scan_dataset_smart(root, "DS1_WheatPlantDiseases")
+    print(f"    → {len(records)} images | "
+          f"{len(set(r['canonical'] for r in records))} classes")
     return records
 
 
-def _collect_ds2_mendeley(paths_cfg: dict) -> list:
-    """DS2 — Mendeley Bangladesh — structure splitté train/test/val."""
-    root = Path(paths_cfg.get("ds2", "data/raw/Mendeley_Bangladesh"))
+def _collect_ds2(paths_cfg: dict) -> list:
+    root = Path(paths_cfg.get("ds2", "data/raw/MendeleyWheat"))
     print(f"\n  DS2 — Mendeley Bangladesh : {root}")
-    # Ce dataset a train/test/validation comme splits
-    records = _scan_split_dataset(
-        root, "DS2_Mendeley",
-        split_dirs={"train": "train", "val": "validation", "test": "test"}
-    )
-    if not records:
-        # Essai structure flat
-        records = _scan_flat_dataset(root, "DS2_Mendeley")
-    print(f"    → {len(records)} images trouvées")
+    records = _scan_dataset_smart(root, "DS2_Mendeley")
+    print(f"    → {len(records)} images | "
+          f"{len(set(r['canonical'] for r in records))} classes")
     return records
 
 
-def _collect_ds3_yellow_rust_hayit(paths_cfg: dict) -> list:
-    """DS3 — Yellow Rust Hayit (YELLOW-RUST-19) — structure avec sous-dossiers de sévérité."""
+def _collect_ds3(paths_cfg: dict) -> list:
     root = Path(paths_cfg.get("ds3", "data/raw/YellowRust19"))
     print(f"\n  DS3 — Yellow Rust Hayit : {root}")
-    records = []
-
-    if not root.exists():
-        print(f"      Dossier introuvable : {root}")
-        return records
-
-    # Ce dataset peut avoir :
-    # Structure A : root/healthy/*.jpg  root/yellow_rust_1/*.jpg  ...
-    # Structure B : root/train/healthy/  root/train/yellowrust/  ...
-    # On essaie les deux
-    records = _scan_flat_dataset(root, "DS3_YellowRust19")
-    if not records:
-        records = _scan_split_dataset(root, "DS3_YellowRust19")
-
-    # Correction du mapping sévérité → Yellow_Rust déjà géré dans CANONICAL_CLASS_MAP
-    print(f"    → {len(records)} images trouvées")
+    # Ce dataset a souvent une structure : YELLOW-RUST-19/RAW/<severity>/<images>
+    # Le scanner récursif descend jusqu'aux dossiers de sévérité
+    records = _scan_dataset_smart(root, "DS3_YellowRust19",
+                                   skip_dirs=SKIP_DIRS | {"raw", "yellow-rust-19",
+                                                           "yellow_rust_19"})
+    print(f"    → {len(records)} images | "
+          f"{len(set(r['canonical'] for r in records))} classes")
     return records
 
 
-def _collect_ds4_zenodo_brown(paths_cfg: dict) -> list:
-    """DS4 — Wheat Disease Small (Zenodo / Brown 2023) — structure flat."""
+def _collect_ds4(paths_cfg: dict) -> list:
     root = Path(paths_cfg.get("ds4", "data/raw/ZenodoWheatSmall"))
     print(f"\n  DS4 — Zenodo Wheat Disease Small : {root}")
-    records = _scan_flat_dataset(root, "DS4_Zenodo")
-    if not records:
-        records = _scan_split_dataset(root, "DS4_Zenodo")
-    print(f"    → {len(records)} images trouvées")
+    records = _scan_dataset_smart(root, "DS4_Zenodo",
+                                   skip_dirs=SKIP_DIRS | {
+                                       "wheat disease dataset",
+                                       "wheat_disease_dataset"
+                                   })
+    print(f"    → {len(records)} images | "
+          f"{len(set(r['canonical'] for r in records))} classes")
     return records
 
 
-def _collect_ds5_roboflow_yolo(paths_cfg: dict) -> dict:
-    """
-    DS5 — Wheat Rust Roboflow (format YOLO avec bboxes).
-    Ce dataset est traité SÉPARÉMENT des autres :
-    - Les images sont copiées dans data/merged/yolo/
-    - Les fichiers .txt de labels (bboxes) sont conservés
-    - On retourne les infos pour la construction du data.yaml YOLO fusionné
-    """
+def _collect_ds5_yolo(paths_cfg: dict) -> dict:
+    """DS5 Roboflow — format YOLO. Scan récursif de images/ et labels/."""
     root = Path(paths_cfg.get("ds5", "data/raw/RoboflowWheatRust"))
     print(f"\n  DS5 — Roboflow Wheat Rust (YOLO bboxes) : {root}")
 
     result = {"images": [], "labels": [], "root": str(root)}
-
     if not root.exists():
-        print(f"      Dossier introuvable : {root}")
+        print(f"    ⚠️  Dossier introuvable")
         return result
 
-    # Structure YOLO standard : images/train|val|test + labels/train|val|test
-    for split in ["train", "valid", "val", "test"]:
-        img_dir = root / "images" / split
-        lbl_dir = root / "labels" / split
-        if not img_dir.exists():
-            continue
-        for img_path in sorted(img_dir.rglob("*")):
-            if _is_image(img_path):
-                label_path = lbl_dir / (img_path.stem + ".txt")
-                result["images"].append(str(img_path))
-                result["labels"].append(str(label_path) if label_path.exists() else None)
+    # Chercher récursivement toutes les images
+    all_imgs = [p for p in root.rglob("*") if _is_image(p)]
 
-    print(f"    → {len(result['images'])} images avec bboxes trouvées")
+    for img_path in sorted(all_imgs):
+        # Chercher le label correspondant dans labels/ au même niveau
+        # Structure possible : images/train/x.jpg → labels/train/x.txt
+        try:
+            rel = img_path.relative_to(root)
+            parts = list(rel.parts)
+            if "images" in parts:
+                idx = parts.index("images")
+                parts[idx] = "labels"
+                label_path = root / Path(*parts).with_suffix(".txt")
+            else:
+                label_path = img_path.with_suffix(".txt")
+        except Exception:
+            label_path = img_path.with_suffix(".txt")
+
+        result["images"].append(str(img_path))
+        result["labels"].append(str(label_path) if label_path.exists() else None)
+
+    annotated = sum(1 for l in result["labels"] if l is not None)
+    print(f"    → {len(result['images'])} images | {annotated} annotées (bboxes)")
     return result
 
 
@@ -350,55 +363,38 @@ def _collect_ds5_roboflow_yolo(paths_cfg: dict) -> dict:
 # Déduplication
 # ─────────────────────────────────────────────────────────────
 
-def _deduplicate(records: list, verbose: bool = True) -> list:
-    """
-    Supprime les doublons par hash MD5 des 8 premiers KB de chaque image.
-    Garde la première occurrence trouvée (DS1 en priorité).
-    """
-    seen_hashes = {}
+def _deduplicate(records: list) -> list:
+    seen = {}
     unique = []
     n_dupes = 0
-
     for rec in records:
         h = _image_hash(Path(rec["filepath"]))
-        if h and h in seen_hashes:
+        if h and h in seen:
             n_dupes += 1
         else:
             if h:
-                seen_hashes[h] = rec["filepath"]
+                seen[h] = rec["filepath"]
             unique.append(rec)
-
-    if verbose and n_dupes > 0:
-        print(f"   Déduplication : {n_dupes} doublons supprimés → {len(unique)} images uniques")
-
+    if n_dupes:
+        print(f"    {n_dupes} doublons supprimés → {len(unique)} images uniques")
     return unique
 
 
 # ─────────────────────────────────────────────────────────────
-# Organisation et split
+# Organisation classification
 # ─────────────────────────────────────────────────────────────
 
 def _build_classification_structure(records: list, output_dir: Path,
                                      copy_images: bool = False) -> pd.DataFrame:
-    """
-    Organise toutes les images dans output_dir/classification/<Classe>/.
-    Par défaut crée des symlinks (économie d'espace), sinon copie.
-
-    Returns:
-        DataFrame avec colonnes filepath (source), canonical, source
-    """
     cls_root = output_dir / "classification"
     cls_root.mkdir(parents=True, exist_ok=True)
-
     for cls_name in set(r["canonical"] for r in records):
         (cls_root / cls_name).mkdir(exist_ok=True)
 
-    final_records = []
+    rows = []
     for rec in records:
         src = Path(rec["filepath"])
-        dst_dir = cls_root / rec["canonical"]
-        dst = dst_dir / f"{rec['source']}_{src.name}"
-
+        dst = cls_root / rec["canonical"] / f"{rec['source']}_{src.name}"
         if not dst.exists():
             try:
                 if copy_images:
@@ -410,29 +406,28 @@ def _build_classification_structure(records: list, output_dir: Path,
                     shutil.copy2(src, dst)
                 except Exception:
                     continue
-
-        final_records.append({
+        rows.append({
             "filepath" : str(dst),
-            "canonical": rec["canonical"],
+            "label"    : rec["canonical"],
             "source"   : rec["source"],
         })
+    return pd.DataFrame(rows)
 
-    return pd.DataFrame(final_records)
 
+# ─────────────────────────────────────────────────────────────
+# Split stratifié
+# ─────────────────────────────────────────────────────────────
 
-def _stratified_split_df(df: pd.DataFrame, train_ratio: float,
-                          val_ratio: float, seed: int) -> tuple:
-    """Split stratifié sur la colonne 'canonical'."""
+def _stratified_split(df: pd.DataFrame, train_ratio: float,
+                       val_ratio: float, seed: int) -> tuple:
     from sklearn.model_selection import train_test_split
-
-    label_col = "canonical"
     train_df, temp_df = train_test_split(
         df, test_size=1.0 - train_ratio,
-        stratify=df[label_col], random_state=seed
+        stratify=df["label"], random_state=seed
     )
     val_df, test_df = train_test_split(
         temp_df, test_size=0.5,
-        stratify=temp_df[label_col], random_state=seed
+        stratify=temp_df["label"], random_state=seed
     )
     return (train_df.reset_index(drop=True),
             val_df.reset_index(drop=True),
@@ -440,47 +435,41 @@ def _stratified_split_df(df: pd.DataFrame, train_ratio: float,
 
 
 # ─────────────────────────────────────────────────────────────
-# Construction du sous-dataset YOLO (DS5 uniquement)
+# YOLO subset (DS5)
 # ─────────────────────────────────────────────────────────────
 
 def _build_yolo_subset(ds5_result: dict, output_dir: Path,
                         roboflow_classes: list) -> str:
-    """
-    Copie les images + labels du dataset Roboflow dans data/merged/yolo/
-    et génère le data.yaml correspondant.
-
-    Returns:
-        Chemin vers le data.yaml généré
-    """
     yolo_root = output_dir / "yolo"
+    src_root  = Path(ds5_result["root"])
+
     for split in ["train", "val", "test"]:
         (yolo_root / "images" / split).mkdir(parents=True, exist_ok=True)
         (yolo_root / "labels" / split).mkdir(parents=True, exist_ok=True)
 
-    src_root = Path(ds5_result["root"])
+    for img_str, lbl_str in zip(ds5_result["images"], ds5_result["labels"]):
+        img_path = Path(img_str)
+        # Déterminer le split d'origine
+        parts_lower = [p.lower() for p in img_path.parts]
+        if "test" in parts_lower:
+            out_split = "test"
+        elif "valid" in parts_lower or "val" in parts_lower:
+            out_split = "val"
+        else:
+            out_split = "train"
 
-    for split in ["train", "valid", "val", "test"]:
-        out_split = "val" if split == "valid" else split
-        img_src = src_root / "images" / split
-        lbl_src = src_root / "labels" / split
-        if not img_src.exists():
-            continue
+        dst_img = yolo_root / "images" / out_split / img_path.name
+        if not dst_img.exists():
+            try:
+                dst_img.symlink_to(img_path.resolve())
+            except Exception:
+                shutil.copy2(img_path, dst_img)
 
-        for img_path in sorted(img_src.rglob("*")):
-            if not _is_image(img_path):
-                continue
-            dst_img = yolo_root / "images" / out_split / img_path.name
-            dst_lbl = yolo_root / "labels" / out_split / (img_path.stem + ".txt")
-
-            if not dst_img.exists():
-                try:
-                    dst_img.symlink_to(img_path.resolve())
-                except Exception:
-                    shutil.copy2(img_path, dst_img)
-
-            lbl_src_path = lbl_src / (img_path.stem + ".txt")
-            if lbl_src_path.exists() and not dst_lbl.exists():
-                shutil.copy2(lbl_src_path, dst_lbl)
+        if lbl_str:
+            lbl_path = Path(lbl_str)
+            dst_lbl = yolo_root / "labels" / out_split / lbl_path.name
+            if lbl_path.exists() and not dst_lbl.exists():
+                shutil.copy2(lbl_path, dst_lbl)
 
     data_yaml = {
         "path"  : str(yolo_root.resolve()),
@@ -493,140 +482,126 @@ def _build_yolo_subset(ds5_result: dict, output_dir: Path,
     yaml_path = yolo_root / "data.yaml"
     with open(yaml_path, "w") as f:
         yaml_lib.dump(data_yaml, f, default_flow_style=False, allow_unicode=True)
-
     return str(yaml_path)
 
 
 # ─────────────────────────────────────────────────────────────
-# Rapport de fusion
+# Rapport
 # ─────────────────────────────────────────────────────────────
 
-def _print_merge_report(df: pd.DataFrame,
-                        train_df: pd.DataFrame,
-                        val_df: pd.DataFrame,
-                        test_df: pd.DataFrame) -> None:
-
-    counts = df["label"].value_counts().sort_index()
-    sources = df["source"].value_counts()
+def _print_merge_report(merged_df: pd.DataFrame, train_df: pd.DataFrame,
+                         val_df: pd.DataFrame, test_df: pd.DataFrame) -> None:
+    # Utilise la colonne 'label' (nom unifié après _build_classification_structure)
+    label_col = "label"
+    source_col = "source"
 
     print("\n" + "=" * 60)
     print("  RAPPORT DE FUSION — WheatAI-Merged Dataset")
     print("=" * 60)
+    print(f"\n  Total images (après déduplication) : {len(merged_df)}")
+    print(f"  Classes canoniques                  : {merged_df[label_col].nunique()}")
+    print(f"  Split : {len(train_df)} train / {len(val_df)} val / {len(test_df)} test")
 
-    print(f"\n  Total images (après déduplication) : {len(df)}")
-    print(f"  Nombre de classes canoniques       : {df['label'].nunique()}")
+    print(f"\n  {'Classe':<28} {'Total':>7}  {'Train':>7}  {'Val':>6}  {'Test':>6}")
+    print(f"  {'-'*60}")
+    for cls in sorted(merged_df[label_col].unique()):
+        n  = (merged_df[label_col] == cls).sum()
+        t  = (train_df[label_col]  == cls).sum()
+        v  = (val_df[label_col]    == cls).sum()
+        te = (test_df[label_col]   == cls).sum()
+        print(f"  {cls:<28} {n:>7}  {t:>7}  {v:>6}  {te:>6}")
 
-    print(f"\n  Split : {len(train_df)} train / {len(val_df)} val / {len(test_df)} test")
+    print(f"\n  Contribution par source :")
+    for src, n in merged_df[source_col].value_counts().items():
+        pct = n / len(merged_df) * 100
+        print(f"    {src:<38} {n:>6} images ({pct:.1f}%)")
 
-    print(f"\n  {'Classe':<28} {'Images':>8} {'Train':>7} {'Val':>6} {'Test':>6}")
-    print("-" * 65)
-
-    for cls in sorted(df["label"].unique()):
-        n = (df["label"] == cls).sum()
-        t = (train_df["label"] == cls).sum()
-        v = (val_df["label"] == cls).sum()
-        te = (test_df["label"] == cls).sum()
-
-        print(f"{cls:<28} {n:>8} {t:>7} {v:>6} {te:>6}")
-
-    print("\nContribution par source :")
-
-    for src, n in sources.items():
-        print(f"  {src:<35} {n:>6} images ({100*n/len(df):.1f}%)")
 
 # ─────────────────────────────────────────────────────────────
 # Orchestrateur principal
 # ─────────────────────────────────────────────────────────────
 
-def build_merged_dataset(config: dict,
-                          copy_images: bool = False) -> dict:
+def build_merged_dataset(config: dict, copy_images: bool = False) -> dict:
     """
-    Pipeline complet de fusion des 5 datasets.
+    Pipeline complet de fusion des 5 datasets vers WheatAI-Merged.
 
     Args:
-        config      : configuration globale (config.yaml)
-        copy_images : si True, copie physique des images (consomme
-                      beaucoup d'espace) ; si False (défaut), crée
-                      des symlinks (léger, recommandé sur Colab/Drive)
+        config      : configuration globale
+        copy_images : True = copie physique / False = symlinks (recommandé)
 
     Returns:
-        dict avec :
-            - merged_df       : DataFrame complet fusionné
-            - train_df / val_df / test_df
-            - label2idx       : mapping classe → index
-            - class_weights   : poids par classe (pour l'entraînement)
-            - yolo_data_yaml  : chemin vers le data.yaml YOLO (DS5)
-            - output_dir      : chemin racine du dataset fusionné
+        dict avec merged_df, train_df, val_df, test_df, label2idx,
+              idx2label, class_weights, yolo_data_yaml, output_dir
     """
     print("\n" + "=" * 60)
-    print("  FUSION DES DATASETS — WheatAI-Merged")
+    print("  FUSION DES DATASETS — WheatAI-Merged v2")
     print("=" * 60)
 
-    # Configuration
-    merge_cfg   = config.get("merge", {})
-    paths_cfg   = merge_cfg.get("paths", {})
-    seed        = config["project"]["seed"]
-    train_ratio = config["split"]["train_ratio"]
-    val_ratio   = config["split"]["val_ratio"]
-    output_dir  = Path(merge_cfg.get("output", "data/merged"))
-    output_dir.mkdir(parents=True, exist_ok=True)
-
+    merge_cfg        = config.get("merge", {})
+    paths_cfg        = merge_cfg.get("paths", {})
+    seed             = config["project"]["seed"]
+    train_ratio      = config["split"]["train_ratio"]
+    val_ratio        = config["split"]["val_ratio"]
+    output_dir       = Path(merge_cfg.get("output", "data/merged"))
     roboflow_classes = merge_cfg.get(
         "roboflow_classes", ["Yellow_Rust", "Brown_Rust", "Stem_Rust"]
     )
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── 1. Collecte de chaque dataset ──
+    # ── 1. Collecte ──
     print("\n[1/6] Collecte des images de chaque source...")
     all_records = []
-
-    all_records.extend(_collect_ds1_wheat_plant_diseases(paths_cfg))
-    all_records.extend(_collect_ds2_mendeley(paths_cfg))
-    all_records.extend(_collect_ds3_yellow_rust_hayit(paths_cfg))
-    all_records.extend(_collect_ds4_zenodo_brown(paths_cfg))
-    ds5_result  = _collect_ds5_roboflow_yolo(paths_cfg)
-
-    print(f"\n  Total brut : {len(all_records)} images (avant déduplication)")
+    all_records.extend(_collect_ds1(paths_cfg))
+    all_records.extend(_collect_ds2(paths_cfg))
+    all_records.extend(_collect_ds3(paths_cfg))
+    all_records.extend(_collect_ds4(paths_cfg))
+    ds5_result = _collect_ds5_yolo(paths_cfg)
+    print(f"\n  Total brut : {len(all_records)} images")
 
     # ── 2. Déduplication ──
     print("\n[2/6] Déduplication...")
     all_records = _deduplicate(all_records)
 
-    # ── 3. Structure de classification ──
+    # ── 3. Structure classification ──
     print("\n[3/6] Organisation par classe...")
     merged_df = _build_classification_structure(all_records, output_dir, copy_images)
-    merged_df.rename(columns={"canonical": "label"}, inplace=True)
-
-    # Encodage numérique
     label_names = sorted(merged_df["label"].unique().tolist())
     label2idx   = {name: i for i, name in enumerate(label_names)}
     idx2label   = {i: name for name, i in label2idx.items()}
     merged_df["label_idx"] = merged_df["label"].map(label2idx)
+    print(f"  {len(merged_df)} images, {len(label_names)} classes canoniques")
 
-    # ── 4. Split stratifié ──
+    # Afficher les classes non mappées restantes
+    unknowns = [c for c in label_names
+                if c not in CANONICAL_CLASS_MAP.values()
+                and c not in {"Black_Point", "Fusarium_Foot_Rot"}]
+    if unknowns:
+        print(f"\n  ⚠️  Classes non reconnues dans le mapping (à vérifier) :")
+        for c in unknowns:
+            n = (merged_df["label"] == c).sum()
+            print(f"    {c} → {n} images")
+
+    # ── 4. Split ──
     print("\n[4/6] Split stratifié (70/15/15)...")
-    merged_df_renamed = merged_df.rename(columns={"label": "canonical"})
-    train_df, val_df, test_df = _stratified_split_df(
-        merged_df_renamed, train_ratio, val_ratio, seed
+    train_df, val_df, test_df = _stratified_split(
+        merged_df, train_ratio, val_ratio, seed
     )
-    train_df = train_df.rename(columns={"canonical": "label"})
-    val_df   = val_df.rename(columns={"canonical": "label"})
-    test_df  = test_df.rename(columns={"canonical": "label"})
     train_df["label_idx"] = train_df["label"].map(label2idx)
     val_df["label_idx"]   = val_df["label"].map(label2idx)
     test_df["label_idx"]  = test_df["label"].map(label2idx)
 
-    # ── 5. Poids de classe ──
+    # ── 5. Class weights ──
     print("\n[5/6] Calcul des poids de classe...")
     from sklearn.utils.class_weight import compute_class_weight
-
     cw_array = compute_class_weight(
         class_weight="balanced",
         classes=np.arange(len(label_names)),
         y=train_df["label_idx"].values
     )
     class_weights = {i: float(w) for i, w in enumerate(cw_array)}
-    print(f"  Ratio max/min : "
-          f"{max(class_weights.values())/min(class_weights.values()):.2f}x")
+    cw_vals = list(class_weights.values())
+    ratio = max(cw_vals) / min(cw_vals) if min(cw_vals) > 0 else float("inf")
+    print(f"  Ratio max/min : {ratio:.2f}x")
 
     # ── 6. Sauvegarde ──
     print("\n[6/6] Sauvegarde...")
@@ -638,18 +613,11 @@ def build_merged_dataset(config: dict,
     test_df.to_csv(proc_dir  / "merged_test.csv",  index=False)
 
     metadata = {
-        "dataset_name"  : "WheatAI-Merged",
-        "sources"       : [
-            "DS1_WheatPlantDiseases (Kaggle kushagra3204)",
-            "DS2_Mendeley_Bangladesh (5gc7hwydwg)",
-            "DS3_YellowRust19 (Kaggle tolgahayit)",
-            "DS4_ZenodoWheatSmall (Brown 2023)",
-            "DS5_RoboflowWheatRust (bboxes YOLO)",
-        ],
-        "num_classes"   : len(label_names),
-        "label2idx"     : label2idx,
-        "idx2label"     : {str(k): v for k, v in idx2label.items()},
-        "class_weights" : {str(k): v for k, v in class_weights.items()},
+        "dataset_name" : "WheatAI-Merged",
+        "num_classes"  : len(label_names),
+        "label2idx"    : label2idx,
+        "idx2label"    : {str(k): v for k, v in idx2label.items()},
+        "class_weights": {str(k): v for k, v in class_weights.items()},
         "splits": {
             "train": len(train_df),
             "val"  : len(val_df),
@@ -661,33 +629,33 @@ def build_merged_dataset(config: dict,
     with open(proc_dir / "merged_metadata.json", "w", encoding="utf-8") as f:
         json.dump(metadata, f, indent=2, ensure_ascii=False)
 
-    print(f"  train.csv   ({len(train_df)} lignes)")
-    print(f"  val.csv     ({len(val_df)} lignes)")
-    print(f"  test.csv    ({len(test_df)} lignes)")
-    print(f"  metadata.json")
+    print(f"  ✅ merged_train.csv   ({len(train_df)} lignes)")
+    print(f"  ✅ merged_val.csv     ({len(val_df)} lignes)")
+    print(f"  ✅ merged_test.csv    ({len(test_df)} lignes)")
+    print(f"  ✅ merged_metadata.json")
 
-    # YOLO subset (DS5)
+    # YOLO subset
     yolo_yaml = ""
     if ds5_result["images"]:
-        print(f"\n  Construction du sous-dataset YOLO (DS5 Roboflow)...")
+        print(f"\n  Construction du sous-dataset YOLO (DS5)...")
         yolo_yaml = _build_yolo_subset(ds5_result, output_dir, roboflow_classes)
-        print(f"  YOLO data.yaml : {yolo_yaml}")
+        print(f"  ✅ YOLO data.yaml : {yolo_yaml}")
     else:
-        print(f"\n    DS5 Roboflow introuvable → sous-dataset YOLO ignoré")
+        print(f"\n  ℹ️  DS5 Roboflow absent — sous-dataset YOLO ignoré")
 
     _print_merge_report(merged_df, train_df, val_df, test_df)
 
-    print(f"\n   Dataset fusionné : {output_dir}")
-    print("  Fusion terminée\n")
+    print(f"\n  📁 Dataset fusionné : {output_dir}")
+    print("  ✅ Fusion terminée\n")
 
     return {
-        "merged_df"    : merged_df,
-        "train_df"     : train_df,
-        "val_df"       : val_df,
-        "test_df"      : test_df,
-        "label2idx"    : label2idx,
-        "idx2label"    : idx2label,
-        "class_weights": class_weights,
+        "merged_df"     : merged_df,
+        "train_df"      : train_df,
+        "val_df"        : val_df,
+        "test_df"       : test_df,
+        "label2idx"     : label2idx,
+        "idx2label"     : idx2label,
+        "class_weights" : class_weights,
         "yolo_data_yaml": yolo_yaml,
-        "output_dir"   : str(output_dir),
+        "output_dir"    : str(output_dir),
     }

@@ -80,7 +80,7 @@ def run_phase1(config: dict, kaggle_json: str = None,
         Étape 3 → split_dataset    : Split stratifié + exports
         Étape 4 → preprocessing    : Pipelines tf.data
     """
-    from pipelines.data_collection import collect_data
+    from pipelines.preprocessing.data_collection import collect_data
     from pipelines.validation      import validate_dataset
     from pipelines.split_dataset   import split_dataset
     from pipelines.preprocessing   import build_tf_datasets
