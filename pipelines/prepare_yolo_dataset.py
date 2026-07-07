@@ -119,7 +119,7 @@ def _convert_split(df, split_name: str, yolo_root: Path, bbox_margin: float,
         n_converted += 1
 
     if n_skipped:
-        print(f"    ⚠️  {n_skipped} image(s) introuvable(s), ignorée(s)")
+        print(f"   {n_skipped} image(s) introuvable(s), ignorée(s)")
 
     return n_converted
 
@@ -149,7 +149,7 @@ def build_yolo_dataset(split_result: dict, config: dict) -> str:
 
     if bbox_mode != "full_image":
         raise NotImplementedError(
-            f"❌ bbox_mode='{bbox_mode}' non supporté. Seul 'full_image' "
+            f" bbox_mode='{bbox_mode}' non supporté. Seul 'full_image' "
             f"est implémenté (pas de bounding boxes réelles disponibles). "
             f"Pour utiliser de vraies annotations, fournis un dataset déjà "
             f"au format YOLO et passe directement son data.yaml à "
@@ -163,31 +163,31 @@ def build_yolo_dataset(split_result: dict, config: dict) -> str:
 
     label_names = [idx2label[i] for i in range(len(idx2label))]
 
-    print(f"\n  ⚠️  Mode bbox : 'full_image' (marge {bbox_margin*100:.0f}%)")
+    print(f"\n   Mode bbox : 'full_image' (marge {bbox_margin*100:.0f}%)")
     print(f"     Pas de bounding boxes réelles disponibles dans ce dataset.")
     print(f"     YOLO apprendra donc classification + localisation grossière")
     print(f"     (bbox = quasi-totalité de l'image). À remplacer par de")
     print(f"     vraies annotations dès qu'un dataset annoté est disponible.\n")
 
-    print(f"  📁 Destination : {yolo_root}")
-    print(f"  🗂️  Classes ({len(label_names)}) : {label_names}\n")
+    print(f" Destination : {yolo_root}")
+    print(f"   Classes ({len(label_names)}) : {label_names}\n")
 
     # Nettoyage d'une éventuelle conversion précédente
     if yolo_root.exists():
-        print(f"  ℹ️  Dataset YOLO existant détecté — reconstruction...")
+        print(f"    Dataset YOLO existant détecté — reconstruction...")
         shutil.rmtree(yolo_root)
 
     print("\n[1/4] Conversion du split train...")
     n_train = _convert_split(train_df, "train", yolo_root, bbox_margin)
-    print(f"  ✅ {n_train} images converties")
+    print(f"  {n_train} images converties")
 
     print("\n[2/4] Conversion du split val...")
     n_val = _convert_split(val_df, "val", yolo_root, bbox_margin)
-    print(f"  ✅ {n_val} images converties")
+    print(f"   {n_val} images converties")
 
     print("\n[3/4] Conversion du split test...")
     n_test = _convert_split(test_df, "test", yolo_root, bbox_margin)
-    print(f"  ✅ {n_test} images converties")
+    print(f"  {n_test} images converties")
 
     # Génération du data.yaml (format attendu par Ultralytics)
     print("\n[4/4] Génération de data.yaml...")
@@ -203,8 +203,8 @@ def build_yolo_dataset(split_result: dict, config: dict) -> str:
     with open(data_yaml_path, "w", encoding="utf-8") as f:
         yaml_lib.dump(data_yaml, f, default_flow_style=False, allow_unicode=True)
 
-    print(f"  ✅ data.yaml généré : {data_yaml_path}")
-    print(f"\n  📊 Résumé : {n_train} train / {n_val} val / {n_test} test images")
-    print("  ✅ Dataset YOLO prêt\n")
+    print(f"   data.yaml généré : {data_yaml_path}")
+    print(f"\n  Résumé : {n_train} train / {n_val} val / {n_test} test images")
+    print("   Dataset YOLO prêt\n")
 
     return str(data_yaml_path)

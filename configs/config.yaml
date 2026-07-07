@@ -339,7 +339,9 @@ phase2:
  
 merge:
   output: "data/merged"
- 
+  
+  max_images_per_class: 3000
+  
   # ----------------------------------------------------------
   # Chemins vers chaque dataset source
   # Adapter selon où tu les as placés dans ton Colab/Drive

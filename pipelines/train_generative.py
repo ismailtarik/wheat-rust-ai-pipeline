@@ -371,7 +371,7 @@ def _process_one_minority_class(cls_info: dict, train_df: pd.DataFrame,
     count = cls_info["count"]
 
     print(f"\n{'='*55}")
-    print(f"  🧬 Classe minoritaire : {label} ({count} images réelles)")
+    print(f"  Classe minoritaire : {label} ({count} images réelles)")
     print(f"{'='*55}")
 
     img_size = tuple(config["preprocessing"]["img_size"])
@@ -381,10 +381,10 @@ def _process_one_minority_class(cls_info: dict, train_df: pd.DataFrame,
     # 1. Chargement des images réelles de cette classe
     print(f"\n  [1/4] Chargement des images réelles...")
     real_images = _load_class_images(train_df, label_idx, img_size)
-    print(f"  ✅ {len(real_images)} images chargées")
+    print(f"  {len(real_images)} images chargées")
 
     if len(real_images) < 10:
-        print(f"  ⚠️  Trop peu d'images ({len(real_images)}) — classe ignorée.")
+        print(f"  Trop peu d'images ({len(real_images)}) — classe ignorée.")
         return None
 
     result = {"label": label, "label_idx": label_idx, "real_count": len(real_images)}
@@ -395,7 +395,7 @@ def _process_one_minority_class(cls_info: dict, train_df: pd.DataFrame,
     cgan_result = _train_cgan_one_class(real_images, label_idx, num_classes,
                                          config, class_dir)
     cgan_time = time.time() - t0
-    print(f"  ⏱️  cGAN entraîné en {cgan_time/60:.1f} min")
+    print(f"  cGAN entraîné en {cgan_time/60:.1f} min")
 
     cgan_cfg = config["phase3"]["cgan"]
     cgan_samples = _generate_cgan_samples(
@@ -412,7 +412,7 @@ def _process_one_minority_class(cls_info: dict, train_df: pd.DataFrame,
     t0 = time.time()
     vae_result = _train_vae_one_class(real_images, label_idx, num_classes, config)
     vae_time = time.time() - t0
-    print(f"  ⏱️  VAE entraîné en {vae_time/60:.1f} min")
+    print(f"   VAE entraîné en {vae_time/60:.1f} min")
 
     vae_cfg = config["phase3"]["vae"]
     vae_samples = _generate_vae_samples(
@@ -443,7 +443,7 @@ def _process_one_minority_class(cls_info: dict, train_df: pd.DataFrame,
             metrics["vae"]["fid"]  = round(_compute_fid(real_eval, vae_samples[:n_eval]), 2)
             print(f"  FID   — cGAN: {metrics['cgan']['fid']}  VAE: {metrics['vae']['fid']}")
         except Exception as e:
-            print(f"  ⚠️  FID non calculé ({e})")
+            print(f"  FID non calculé ({e})")
 
     result.update({
         "cgan_train_time_min": round(cgan_time / 60, 2),
@@ -502,7 +502,7 @@ def run_generative_phase(split_result: dict, config: dict,
         minority_classes = _identify_minority_classes(train_df, idx2label, threshold_ratio)
 
     if not minority_classes:
-        print("\n  ℹ️  Aucune classe minoritaire détectée avec le seuil actuel.")
+        print("\n   Aucune classe minoritaire détectée avec le seuil actuel.")
         return {"processed_classes": [], "output_dir": str(output_dir)}
 
     print(f"\n  Classes minoritaires détectées ({len(minority_classes)}) "
@@ -520,7 +520,7 @@ def run_generative_phase(split_result: dict, config: dict,
 
     # Résumé global
     print("\n" + "=" * 55)
-    print("  ✅ RÉSUMÉ — PHASE 3 GÉNÉRATIVE")
+    print("  RÉSUMÉ — PHASE 3 GÉNÉRATIVE")
     print("=" * 55)
 
     summary_rows = []
@@ -543,8 +543,8 @@ def run_generative_phase(split_result: dict, config: dict,
     with open(output_dir / "phase3_summary.json", "w") as f:
         json.dump(all_results, f, indent=2)
 
-    print(f"\n  📁 Résultats sauvegardés dans : {output_dir}")
-    print("  ✅ Phase 3 (Génératif) terminée\n")
+    print(f"\n Résultats sauvegardés dans : {output_dir}")
+    print("  Phase 3 (Génératif) terminée\n")
 
     return {
         "processed_classes": [r["label"] for r in all_results],

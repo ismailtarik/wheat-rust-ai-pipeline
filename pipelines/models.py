@@ -146,7 +146,7 @@ def build_model(model_name: str, input_shape: tuple, num_classes: int,
     """
     if model_name not in MODEL_BUILDERS:
         raise ValueError(
-            f"❌ Modèle inconnu : '{model_name}'. "
+            f" Modèle inconnu : '{model_name}'. "
             f"Choix possibles : {list(MODEL_BUILDERS.keys())}"
         )
 
@@ -168,7 +168,7 @@ def unfreeze_for_finetuning(model: keras.Model, num_layers_to_unfreeze: int = 30
         num_layers_to_unfreeze  : nombre de couches à dégeler depuis la fin du backbone
     """
     if not hasattr(model, "base_model"):
-        print(f"  ⚠️  Le modèle '{model.name}' n'a pas de backbone à dégeler (CNN custom).")
+        print(f"    Le modèle '{model.name}' n'a pas de backbone à dégeler (CNN custom).")
         return
 
     base_model = model.base_model
@@ -179,5 +179,5 @@ def unfreeze_for_finetuning(model: keras.Model, num_layers_to_unfreeze: int = 30
         layer.trainable = False
 
     n_trainable = sum(1 for l in base_model.layers if l.trainable)
-    print(f"  🔓 Fine-tuning activé : {n_trainable}/{len(base_model.layers)} "
+    print(f"   Fine-tuning activé : {n_trainable}/{len(base_model.layers)} "
           f"couches du backbone dégelées.")

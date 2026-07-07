@@ -38,10 +38,10 @@ def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Charge le fichier de configuration YAML."""
     path = Path(config_path)
     if not path.exists():
-        raise FileNotFoundError(f"❌ Fichier config introuvable : {config_path}")
+        raise FileNotFoundError(f" Fichier config introuvable : {config_path}")
     with open(path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
-    print(f"  ✅ Config chargée : {config_path}")
+    print(f"  Config chargée : {config_path}")
     return config
 
 
@@ -59,11 +59,11 @@ def set_seeds(seed: int) -> None:
 
 def print_banner(phase: int) -> None:
     print("\n" + "=" * 60)
-    print("  🌾 WHEAT RUST AI PIPELINE")
+    print("   WHEAT RUST AI PIPELINE")
     print("  Deep Learning & Computer Vision for Agriculture")
     print("  MDSET Lab — Hassan First University, Settat")
     print("=" * 60)
-    print(f"  ▶  Exécution : Phase {phase}")
+    print(f"    Exécution : Phase {phase}")
     print("=" * 60 + "\n")
 
 
@@ -118,7 +118,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     total    = len(train_df) + len(val_df) + len(test_df)
 
     print("\n" + "=" * 60)
-    print("  ✅  PHASE 1 — RÉSUMÉ")
+    print("   PHASE 1 — RÉSUMÉ")
     print("=" * 60)
     print(f"  Dataset        : PlantVillage")
     print(f"  Cible          : Wheat Rust (Yellow / Brown / Stem + Healthy)")
@@ -128,9 +128,9 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"  Image size     : {config['preprocessing']['img_size']}")
     print(f"  Normalisation  : [0, 1]")
     print(f"  Split          : {len(train_df)} train / {len(val_df)} val / {len(test_df)} test")
-    print(f"  Augmentation   : ✅ (8 transformations)")
+    print(f"  Augmentation   : (8 transformations)")
     print()
-    print(f"  📁 Fichiers générés :")
+    print(f"  Fichiers générés :")
     print(f"     data/processed/train.csv")
     print(f"     data/processed/val.csv")
     print(f"     data/processed/test.csv")
@@ -141,7 +141,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"     data/reports/04_augmentation_preview.png")
     print(f"     data/reports/05_split_distribution.png")
     print()
-    print(f"  ➡️   PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
+    print(f"   PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
     print(f"       (ResNet50 / EfficientNetB0 / YOLOv8)")
     print("=" * 60 + "\n")
 
@@ -184,7 +184,7 @@ def run_phase2(config: dict, models: list = None,
     for p in (train_csv, val_csv, test_csv, meta_path):
         if not p.exists():
             raise FileNotFoundError(
-                f"❌ Fichier manquant : {p}\n"
+                f" Fichier manquant : {p}\n"
                 f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
             )
 
@@ -205,7 +205,7 @@ def run_phase2(config: dict, models: list = None,
         "class_weights": class_weights,
     }
 
-    print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
+    print(f"  Artefacts Phase 1 rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Val: {len(split_result['val_df'])} | "
           f"Test: {len(split_result['test_df'])} | "
@@ -258,7 +258,7 @@ def run_phase3(config: dict, classes: list = None) -> dict:
     for p in (train_csv, meta_path):
         if not p.exists():
             raise FileNotFoundError(
-                f"❌ Fichier manquant : {p}\n"
+                f" Fichier manquant : {p}\n"
                 f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
             )
 
@@ -273,7 +273,7 @@ def run_phase3(config: dict, classes: list = None) -> dict:
         "idx2label": idx2label,
     }
 
-    print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
+    print(f"  Artefacts Phase 1 rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Classes: {config['classes']['num_classes']}")
 
@@ -298,13 +298,13 @@ def run_merge(config: dict, copy_images: bool = False) -> dict:
 
 def run_phase4(config: dict) -> None:
     """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) [à venir]"""
-    print("  ⏳ Phase 4 non encore implémentée.")
+    print("   Phase 4 non encore implémentée.")
     print("     → Implémentation prochaine : SOM, DBN, RBM")
 
 
 def run_phase5(config: dict) -> None:
     """Phase 5 — Multimodal Fusion [à venir]"""
-    print("  ⏳ Phase 5 non encore implémentée.")
+    print("   Phase 5 non encore implémentée.")
     print("     → Implémentation prochaine : CNN+LSTM, Attention, Transformers")
 
 
@@ -324,7 +324,7 @@ PHASE_RUNNERS = {
 
 def main():
     parser = argparse.ArgumentParser(
-        description="🌾 Wheat Rust AI Pipeline — MDSET Lab",
+        description=" Wheat Rust AI Pipeline — MDSET Lab",
         formatter_class=argparse.RawTextHelpFormatter
     )
     # parser.add_argument(
@@ -388,7 +388,7 @@ def main():
     # Dispatch vers la phase sélectionnée
     runner = PHASE_RUNNERS.get(args.phase)
     if runner is None:
-        print(f"❌ Phase {args.phase} inconnue.")
+        print(f" Phase {args.phase} inconnue.")
         sys.exit(1)
 
     if args.phase == 1:

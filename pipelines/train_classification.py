@@ -92,14 +92,14 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
     model_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n{'='*55}")
-    print(f"  🧠 Modèle : {model_name.upper()}")
+    print(f"  Modèle : {model_name.upper()}")
     print(f"{'='*55}")
 
     # ── 1. Construction ──
     is_transfer = model_name != "cnn_custom"
     model = build_model(model_name, input_shape, num_classes,
                          freeze_base=True)
-    print(f"  ✅ Architecture construite — {model.count_params():,} paramètres")
+    print(f"   Architecture construite — {model.count_params():,} paramètres")
 
     class_weights_arg = class_weights if cfg.get("use_class_weights", True) else None
 
@@ -157,10 +157,10 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
         )
 
     train_time = time.time() - t_start
-    print(f"\n  ⏱️  Temps d'entraînement total : {train_time/60:.1f} min")
+    print(f"\n    Temps d'entraînement total : {train_time/60:.1f} min")
 
     # ── 4. Évaluation sur le test set ──
-    print(f"\n  📊 Évaluation sur le test set...")
+    print(f"\n  Évaluation sur le test set...")
     metrics = _evaluate_model(model, test_ds, num_classes, idx2label,
                                model_dir, model_name)
     metrics["train_time_min"] = round(train_time / 60, 2)
@@ -169,7 +169,7 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
     # ── 5. Sauvegarde modèle final + historique ──
     final_path = model_dir / f"{model_name}_final.keras"
     model.save(final_path)
-    print(f"  💾 Modèle sauvegardé : {final_path}")
+    print(f"  Modèle sauvegardé : {final_path}")
 
     _plot_training_history(history_stage1, history_stage2, model_name, model_dir)
 
@@ -409,7 +409,7 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
 
         if existing is not None:
             print(f"\n{'='*55}")
-            print(f"  ⏭️  Modèle déjà entraîné — rechargé depuis le disque : {model_name.upper()}")
+            print(f"  Modèle déjà entraîné — rechargé depuis le disque : {model_name.upper()}")
             print(f"{'='*55}")
             print(f"  Accuracy: {existing['accuracy']}  Precision: {existing['precision']}  "
                   f"Recall: {existing['recall']}  F1: {existing['f1_score']}")
@@ -434,14 +434,14 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
 
     # Comparaison finale
     print("\n" + "=" * 55)
-    print("  ✅ RÉSUMÉ COMPARATIF — PHASE 2 CLASSIFICATION")
+    print("   RÉSUMÉ COMPARATIF — PHASE 2 CLASSIFICATION")
     print("=" * 55)
 
     comparison_df = pd.DataFrame(all_metrics)
     print("\n" + comparison_df.to_string(index=False))
 
     best_model = comparison_df.loc[comparison_df["f1_score"].idxmax(), "model_name"]
-    print(f"\n  🏆 Meilleur modèle (F1-score) : {best_model}")
+    print(f"\n  Meilleur modèle (F1-score) : {best_model}")
 
     comparison_df.to_csv(output_dir / "models_comparison.csv", index=False)
     _plot_model_comparison(all_metrics, output_dir)
@@ -452,8 +452,8 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
             "all_results": all_metrics
         }, f, indent=2)
 
-    print(f"\n  📁 Résultats sauvegardés dans : {output_dir}")
-    print("  ✅ Phase 2 (Classification) terminée\n")
+    print(f"\n  Résultats sauvegardés dans : {output_dir}")
+    print("   Phase 2 (Classification) terminée\n")
 
     return {
         "all_metrics": all_metrics,
