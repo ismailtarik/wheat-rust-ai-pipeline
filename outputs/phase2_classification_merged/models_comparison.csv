@@ -1,0 +1,4 @@
+model_name,accuracy,precision,recall,f1_score,train_time_min,num_params
+cnn_custom,0.7638,0.8083,0.7638,0.7556,12.11,490185
+resnet50,0.9168,0.929,0.9168,0.9203,19.92,24114569
+efficientnetb0,0.8862,0.9223,0.8862,0.895,40.26,4379820
