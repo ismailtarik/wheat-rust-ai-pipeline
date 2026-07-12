@@ -2,11 +2,11 @@ task: detect
 mode: train
 model: yolo11n.pt
 data: data/merged/yolo/data.yaml
-epochs: 30
+epochs: 50
 time: null
 patience: 100
-batch: 16
-imgsz: 256
+batch: 32
+imgsz: 512
 save: true
 save_period: -1
 cache: false
@@ -16,6 +16,7 @@ project: outputs/phase2_detection_merged
 name: yolo_train
 exist_ok: true
 pretrained: true
+cls_remap: true
 optimizer: auto
 verbose: true
 seed: 0

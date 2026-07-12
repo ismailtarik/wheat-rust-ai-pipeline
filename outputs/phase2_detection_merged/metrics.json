@@ -1,0 +1,12 @@
+{
+  "mAP50": 0.1298089269404101,
+  "mAP50_95": 0.04823163111801601,
+  "precision": 0.4721095234829277,
+  "recall": 0.18893767936799089,
+  "per_class_mAP50": {
+    "Brown_Rust": 0.1303,
+    "Healthy": 0.1647,
+    "Yellow_Rust": 0.003,
+    "healthy_yellow_rust_brown_rust": 0.2211
+  }
+}

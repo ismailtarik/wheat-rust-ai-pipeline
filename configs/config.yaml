@@ -320,13 +320,13 @@ phase2:
   # --------------------------------------------------------
   detection:
     model: "yolo11n.pt"          # yolo11n.pt (stable) ou yolo26n.pt (dernier modèle)
-    epochs: 30
-    imgsz: 256
-    batch: 16
+    epochs: 50
+    imgsz: 512
+    batch: 32
     # Mode bbox : 'full_image' = bbox couvrant toute l'image (classification
     # déguisée en détection, en l'absence d'annotations réelles).
     bbox_mode: "full_image"
-    bbox_margin: 0.05             # marge (%) retirée des bords de l'image
+    bbox_margin: 0.05            
 
   paths:
     classification_outputs: "outputs/phase2_classification"
@@ -361,3 +361,5 @@ merge:
     - "Yellow_Rust"
     - "Brown_Rust"
     - "healthy"
+  
+  yolo_min_instances_per_class: 300

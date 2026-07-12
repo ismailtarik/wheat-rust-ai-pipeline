@@ -4,15 +4,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('Agg')   # Backend non-interactif (Colab safe)
+matplotlib.use('Agg')  
 
 from pathlib import Path
 from collections import Counter
 
 
-# Palette de couleurs pour les classes connues (Wheat Rust historique).
-# Pour toute classe non listée ici (mode auto avec noms différents),
-# une couleur est générée automatiquement — voir _get_class_colors().
 CLASS_COLORS = {
     "Yellow_Rust": "#F4C542",
     "Brown_Rust":  "#8B4513",

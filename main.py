@@ -1,22 +1,12 @@
 """
 main.py — Orchestrateur Principal
-===================================
-Thèse : Deep Learning, Computer Vision, and IoT for
-        Real-Time Monitoring and Epidemic Forecasting in Agriculture
-
-Auteur : Tarik Ismail
-Lab    : MDSET — Hassan First University, Settat
-
-Exécution dans Google Colab :
-    !python main.py --phase 1
-    !python main.py --phase 1 --kaggle_json /content/kaggle.json
 
 Structure des phases :
     Phase 1 → Acquisition, Validation, Split, Preprocessing
-    Phase 2 → Modèles Baseline (ResNet50, EfficientNetB0, YOLOv8)   [à venir]
-    Phase 3 → Generative AI (GAN, cGAN, VAE)                         [à venir]
-    Phase 4 → Unsupervised Learning (SOM, DBN, RBM)                  [à venir]
-    Phase 5 → Multimodal Fusion (CNN + LSTM, Transformers)            [à venir]
+    Phase 2 → Modèles Baseline (ResNet50, EfficientNetB0, YOLOv8)   
+    Phase 3 → Generative AI (GAN, cGAN, VAE)                         
+    Phase 4 → Unsupervised Learning (SOM, DBN, RBM)                  
+    Phase 5 → Multimodal Fusion (CNN + LSTM, Transformers)            
 """
 
 import argparse
@@ -38,10 +28,10 @@ def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Charge le fichier de configuration YAML."""
     path = Path(config_path)
     if not path.exists():
-        raise FileNotFoundError(f"❌ Fichier config introuvable : {config_path}")
+        raise FileNotFoundError(f" Fichier config introuvable : {config_path}")
     with open(path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
-    print(f"  ✅ Config chargée : {config_path}")
+    print(f"  Config chargée : {config_path}")
     return config
 
 
@@ -59,11 +49,11 @@ def set_seeds(seed: int) -> None:
 
 def print_banner(phase: int) -> None:
     print("\n" + "=" * 60)
-    print("  🌾 WHEAT RUST AI PIPELINE")
+    print("  WHEAT RUST AI PIPELINE")
     print("  Deep Learning & Computer Vision for Agriculture")
     print("  MDSET Lab — Hassan First University, Settat")
     print("=" * 60)
-    print(f"  ▶  Exécution : Phase {phase}")
+    print(f"  Exécution : Phase {phase}")
     print("=" * 60 + "\n")
 
 
@@ -118,7 +108,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     total    = len(train_df) + len(val_df) + len(test_df)
 
     print("\n" + "=" * 60)
-    print("  ✅  PHASE 1 — RÉSUMÉ")
+    print("   PHASE 1 — RÉSUMÉ")
     print("=" * 60)
     print(f"  Dataset        : PlantVillage")
     print(f"  Cible          : Wheat Rust (Yellow / Brown / Stem + Healthy)")
@@ -128,9 +118,9 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"  Image size     : {config['preprocessing']['img_size']}")
     print(f"  Normalisation  : [0, 1]")
     print(f"  Split          : {len(train_df)} train / {len(val_df)} val / {len(test_df)} test")
-    print(f"  Augmentation   : ✅ (8 transformations)")
+    print(f"  Augmentation   : (8 transformations)")
     print()
-    print(f"  📁 Fichiers générés :")
+    print(f"  Fichiers générés :")
     print(f"     data/processed/train.csv")
     print(f"     data/processed/val.csv")
     print(f"     data/processed/test.csv")
@@ -141,7 +131,7 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"     data/reports/04_augmentation_preview.png")
     print(f"     data/reports/05_split_distribution.png")
     print()
-    print(f"  ➡️   PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
+    print(f"  PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
     print(f"       (ResNet50 / EfficientNetB0 / YOLOv8)")
     print("=" * 60 + "\n")
 
@@ -204,7 +194,7 @@ def run_phase2(config: dict, models: list = None,
             hint = ("Lance d'abord la fusion : python main.py --phase merge"
                      if data_source == "merged"
                      else "Lance d'abord la Phase 1 : python main.py --phase 1")
-            raise FileNotFoundError(f"❌ Fichier manquant : {p}\n   → {hint}")
+            raise FileNotFoundError(f" Fichier manquant : {p}\n   → {hint}")
 
     with open(meta_path, "r", encoding="utf-8") as f:
         metadata = json.load(f)
@@ -227,7 +217,7 @@ def run_phase2(config: dict, models: list = None,
         "class_weights": class_weights,
     }
 
-    print(f"  ✅ Dataset source : {data_source} — artefacts rechargés depuis {processed_dir}")
+    print(f"  Dataset source : {data_source} — artefacts rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Val: {len(split_result['val_df'])} | "
           f"Test: {len(split_result['test_df'])} | "
@@ -251,14 +241,14 @@ def run_phase2(config: dict, models: list = None,
         from pipelines.train_detection import run_detection_phase
 
         if data_source == "merged" and merged_yolo_yaml and merged_yolo_yaml.exists():
-            print(f"\n  ℹ️  Détection avec VRAIES bboxes (Roboflow) : {merged_yolo_yaml}")
+            print(f"\n  Détection avec VRAIES bboxes (Roboflow) : {merged_yolo_yaml}")
             results["detection"] = run_detection_phase(
                 split_result, config, skip_existing=skip_existing,
                 data_yaml_override=str(merged_yolo_yaml)
             )
         else:
             if data_source == "merged":
-                print(f"\n  ⚠️  data.yaml fusionné introuvable ({merged_yolo_yaml}) "
+                print(f"\n   data.yaml fusionné introuvable ({merged_yolo_yaml}) "
                       f"— fallback bbox=full_image")
             results["detection"] = run_detection_phase(
                 split_result, config, skip_existing=skip_existing
@@ -292,7 +282,7 @@ def run_phase3(config: dict, classes: list = None) -> dict:
     for p in (train_csv, meta_path):
         if not p.exists():
             raise FileNotFoundError(
-                f"❌ Fichier manquant : {p}\n"
+                f" Fichier manquant : {p}\n"
                 f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
             )
 
@@ -307,7 +297,7 @@ def run_phase3(config: dict, classes: list = None) -> dict:
         "idx2label": idx2label,
     }
 
-    print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
+    print(f"  Artefacts Phase 1 rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Classes: {config['classes']['num_classes']}")
 
@@ -331,14 +321,14 @@ def run_merge(config: dict, copy_images: bool = False) -> dict:
     return build_merged_dataset(config, copy_images=copy_images)
 
 def run_phase4(config: dict) -> None:
-    """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) [à venir]"""
-    print("  ⏳ Phase 4 non encore implémentée.")
+    """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) """
+    print(" Phase 4 non encore implémentée.")
     print("     → Implémentation prochaine : SOM, DBN, RBM")
 
 
 def run_phase5(config: dict) -> None:
-    """Phase 5 — Multimodal Fusion [à venir]"""
-    print("  ⏳ Phase 5 non encore implémentée.")
+    """Phase 5 — Multimodal Fusion """
+    print(" Phase 5 non encore implémentée.")
     print("     → Implémentation prochaine : CNN+LSTM, Attention, Transformers")
 
 
@@ -347,23 +337,22 @@ def run_phase5(config: dict) -> None:
 # ─────────────────────────────────────────────────────────────
 
 PHASE_RUNNERS = {
-    "merge": run_merge,
     1: run_phase1,
     2: run_phase2,
     3: run_phase3,
     4: run_phase4,
     5: run_phase5,
+    6: run_merge,
 }
-
 
 def main():
     parser = argparse.ArgumentParser(
-        description="🌾 Wheat Rust AI Pipeline — MDSET Lab",
+        description=" Wheat Rust AI Pipeline",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument(
-        "--phase", type=int, default=1, choices=[1, 2, 3, 4, 5],
-        help="Phase à exécuter (1=Preprocessing, 2=Baseline, 3=GAN, 4=Unsupervised, 5=Fusion)"
+        "--phase", type=int, default=1, choices=[1, 2, 3, 4, 5, 6],
+        help="Phase à exécuter (1=Preprocessing, 2=Baseline, 3=GAN, 4=Unsupervised, 5=Fusion, 6=merge)"
     )
     parser.add_argument(
         "--config", type=str, default="configs/config.yaml",
@@ -421,12 +410,12 @@ def main():
     # Chargement de la config
     print_banner(args.phase)
     config = load_config(args.config)
-    set_seeds(config["project"]["seed"])
+    # set_seeds(config["project"]["seed"])
 
     # Dispatch vers la phase sélectionnée
     runner = PHASE_RUNNERS.get(args.phase)
     if runner is None:
-        print(f"❌ Phase {args.phase} inconnue.")
+        print(f" Phase {args.phase} inconnue.")
         sys.exit(1)
 
     if args.phase == 1:
