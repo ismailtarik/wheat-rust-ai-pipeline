@@ -22,6 +22,9 @@ scipy>=1.10.0
 ultralytics>=8.3.0
 tqdm>=4.65.0
 
+# Validation dataset (Phase 3 EDA) — détection de doublons perceptuels
+imagehash>=4.3.1
+
 # Visualisation
 matplotlib>=3.7.0
 seaborn>=0.12.0
