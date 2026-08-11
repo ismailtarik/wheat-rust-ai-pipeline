@@ -3,14 +3,14 @@ main.py — Orchestrateur Principal
 ===================================
 Thèse : Deep Learning, Computer Vision, and IoT for
         Real-Time Monitoring and Epidemic Forecasting in Agriculture
-
+ 
 Auteur : Tarik Ismail
 Lab    : MDSET — Hassan First University, Settat
-
+ 
 Exécution dans Google Colab :
     !python main.py --phase 1
     !python main.py --phase 1 --kaggle_json /content/kaggle.json
-
+ 
 Structure des phases :
     Phase 1 → Acquisition, Validation, Split, Preprocessing
     Phase 2 → Modèles Baseline (ResNet50, EfficientNetB0, YOLOv8)   [à venir]
@@ -18,7 +18,7 @@ Structure des phases :
     Phase 4 → Unsupervised Learning (SOM, DBN, RBM)                  [à venir]
     Phase 5 → Multimodal Fusion (CNN + LSTM, Transformers)            [à venir]
 """
-
+ 
 import argparse
 import json
 import os
@@ -26,14 +26,14 @@ import sys
 import yaml
 import random
 import numpy as np
-
+ 
 from pathlib import Path
-
-
+ 
+ 
 # ─────────────────────────────────────────────────────────────
 # Helpers
 # ─────────────────────────────────────────────────────────────
-
+ 
 def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Charge le fichier de configuration YAML."""
     path = Path(config_path)
@@ -43,8 +43,8 @@ def load_config(config_path: str = "configs/config.yaml") -> dict:
         config = yaml.safe_load(f)
     print(f"  ✅ Config chargée : {config_path}")
     return config
-
-
+ 
+ 
 def set_seeds(seed: int) -> None:
     """Fixe toutes les graines pour la reproductibilité."""
     random.seed(seed)
@@ -55,8 +55,8 @@ def set_seeds(seed: int) -> None:
         tf.random.set_seed(seed)
     except ImportError:
         pass
-
-
+ 
+ 
 def print_banner(phase: int) -> None:
     print("\n" + "=" * 60)
     print("  🌾 WHEAT RUST AI PIPELINE")
@@ -65,12 +65,12 @@ def print_banner(phase: int) -> None:
     print("=" * 60)
     print(f"  ▶  Exécution : Phase {phase}")
     print("=" * 60 + "\n")
-
-
+ 
+ 
 # ─────────────────────────────────────────────────────────────
 # Phase 1 — Acquisition & Preprocessing
 # ─────────────────────────────────────────────────────────────
-
+ 
 def run_phase1(config: dict, kaggle_json: str = None,
                skip_download: bool = False) -> dict:
     """
@@ -84,39 +84,39 @@ def run_phase1(config: dict, kaggle_json: str = None,
     from pipelines.validation      import validate_dataset
     from pipelines.split_dataset   import split_dataset
     from pipelines.preprocessing   import build_tf_datasets
-
+ 
     # ── Étape 1 : Collecte ──
     collection_result = collect_data(
         config, kaggle_json_path=kaggle_json, skip_download=skip_download
     )
-
+ 
     # ── Étape 2 : Validation & EDA ──
     validation_result = validate_dataset(collection_result, config)
-
+ 
     # ── Étape 3 : Split ──
     split_result = split_dataset(validation_result, config)
-
+ 
     # ── Étape 4 : Pipelines tf.data ──
     train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
-
+ 
     # ── Résumé final ──
     _print_phase1_summary(split_result, config)
-
+ 
     return {
         "collection"  : collection_result,
         "validation"  : validation_result,
         "split"       : split_result,
         "datasets"    : (train_ds, val_ds, test_ds),
     }
-
-
+ 
+ 
 def _print_phase1_summary(split_result: dict, config: dict) -> None:
     """Affiche le résumé de la Phase 1."""
     train_df = split_result["train_df"]
     val_df   = split_result["val_df"]
     test_df  = split_result["test_df"]
     total    = len(train_df) + len(val_df) + len(test_df)
-
+ 
     print("\n" + "=" * 60)
     print("  ✅  PHASE 1 — RÉSUMÉ")
     print("=" * 60)
@@ -144,18 +144,18 @@ def _print_phase1_summary(split_result: dict, config: dict) -> None:
     print(f"  ➡️   PROCHAINE ÉTAPE : Phase 2 — Modèles Baseline")
     print(f"       (ResNet50 / EfficientNetB0 / YOLOv8)")
     print("=" * 60 + "\n")
-
-
+ 
+ 
 # ─────────────────────────────────────────────────────────────
 # Phases futures (stubs)
 # ─────────────────────────────────────────────────────────────
-
+ 
 def run_phase2(config: dict, models: list = None,
                skip_existing: bool = True, task: str = "both",
                data_source: str = "original") -> dict:
     """
     Phase 2 — Modèles Baseline (Classification + Détection).
-
+ 
     Recharge les artefacts déjà préparés (CSV + métadonnées) pour ne pas
     avoir à refaire le téléchargement/preprocessing, puis :
       - task='classification' : entraîne CNN custom / ResNet50 / EfficientNetB0
@@ -164,7 +164,7 @@ def run_phase2(config: dict, models: list = None,
                                  réelles), ou vraies bboxes Roboflow si
                                  data_source='merged'
       - task='both' (défaut)  : exécute les deux à la suite
-
+ 
     Args:
         config        : configuration globale
         models        : sous-ensemble de modèles de classification à
@@ -179,7 +179,7 @@ def run_phase2(config: dict, models: list = None,
                         pour ne pas écraser les résultats de l'autre source.
     """
     import pandas as pd
-
+ 
     if data_source == "merged":
         processed_dir = Path(config["merge"]["output"]) / "processed"
         train_csv = processed_dir / "merged_train.csv"
@@ -198,26 +198,26 @@ def run_phase2(config: dict, models: list = None,
         cls_output_dir = config["phase2"]["paths"]["classification_outputs"]
         det_output_dir = config["phase2"]["paths"]["detection_outputs"]
         merged_yolo_yaml = None
-
+ 
     for p in (train_csv, val_csv, test_csv, meta_path):
         if not p.exists():
             hint = ("Lance d'abord la fusion : python main.py --phase merge"
                      if data_source == "merged"
                      else "Lance d'abord la Phase 1 : python main.py --phase 1")
             raise FileNotFoundError(f"❌ Fichier manquant : {p}\n   → {hint}")
-
+ 
     with open(meta_path, "r", encoding="utf-8") as f:
         metadata = json.load(f)
-
+ 
     label2idx = metadata["label2idx"]
     idx2label = {int(k): v for k, v in metadata["idx2label"].items()}
     class_weights = {int(k): v for k, v in metadata["class_weights"].items()}
     config["classes"]["num_classes"] = metadata["num_classes"]
-
+ 
     # Redirige les dossiers de sortie sans modifier le fichier config.yaml
     config["phase2"]["paths"]["classification_outputs"] = cls_output_dir
     config["phase2"]["paths"]["detection_outputs"] = det_output_dir
-
+ 
     split_result = {
         "train_df"     : pd.read_csv(train_csv),
         "val_df"       : pd.read_csv(val_csv),
@@ -226,7 +226,7 @@ def run_phase2(config: dict, models: list = None,
         "idx2label"    : idx2label,
         "class_weights": class_weights,
     }
-
+ 
     print(f"  ✅ Dataset source : {data_source} — artefacts rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Val: {len(split_result['val_df'])} | "
@@ -234,22 +234,22 @@ def run_phase2(config: dict, models: list = None,
           f"Classes: {config['classes']['num_classes']}")
     print(f"     Sorties classification : {cls_output_dir}")
     print(f"     Sorties détection      : {det_output_dir}")
-
+ 
     results = {}
-
+ 
     if task in ("classification", "both"):
         from pipelines.preprocessing import build_tf_datasets
         from pipelines.train_classification import run_classification_phase
-
+ 
         train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
         results["classification"] = run_classification_phase(
             split_result, train_ds, val_ds, test_ds, config,
             models=models, skip_existing=skip_existing
         )
-
+ 
     if task in ("detection", "both"):
         from pipelines.train_detection import run_detection_phase
-
+ 
         if data_source == "merged" and merged_yolo_yaml and merged_yolo_yaml.exists():
             print(f"\n  ℹ️  Détection avec VRAIES bboxes (Roboflow) : {merged_yolo_yaml}")
             results["detection"] = run_detection_phase(
@@ -263,19 +263,19 @@ def run_phase2(config: dict, models: list = None,
             results["detection"] = run_detection_phase(
                 split_result, config, skip_existing=skip_existing
             )
-
+ 
     return results
-
-
+ 
+ 
 def run_phase3(config: dict, classes: list = None) -> dict:
     """
     Phase 3 — Generative AI & Dataset Enrichment (cGAN + VAE).
-
+ 
     Recharge les artefacts de la Phase 1 (train.csv + métadonnées) pour
     identifier les classes minoritaires, puis entraîne un cGAN et un VAE
     conditionnel pour chacune, génère des échantillons synthétiques et
     les évalue (FID, SSIM).
-
+ 
     Args:
         config  : configuration globale
         classes : sous-ensemble explicite de labels à traiter, ex:
@@ -284,44 +284,44 @@ def run_phase3(config: dict, classes: list = None) -> dict:
     """
     import pandas as pd
     from pipelines.train_generative import run_generative_phase
-
+ 
     processed_dir = Path(config["paths"]["processed"])
     train_csv = processed_dir / "train.csv"
     meta_path = Path(config["paths"]["metadata_json"])
-
+ 
     for p in (train_csv, meta_path):
         if not p.exists():
             raise FileNotFoundError(
                 f"❌ Fichier manquant : {p}\n"
                 f"   → Lance d'abord la Phase 1 : python main.py --phase 1"
             )
-
+ 
     with open(meta_path, "r", encoding="utf-8") as f:
         metadata = json.load(f)
-
+ 
     idx2label = {int(k): v for k, v in metadata["idx2label"].items()}
     config["classes"]["num_classes"] = metadata["num_classes"]
-
+ 
     split_result = {
         "train_df" : pd.read_csv(train_csv),
         "idx2label": idx2label,
     }
-
+ 
     print(f"  ✅ Artefacts Phase 1 rechargés depuis {processed_dir}")
     print(f"     Train: {len(split_result['train_df'])} | "
           f"Classes: {config['classes']['num_classes']}")
-
+ 
     return run_generative_phase(split_result, config, classes=classes)
-
-
-
+ 
+ 
+ 
 def run_merge(config: dict, copy_images: bool = False) -> dict:
     """
     Merge — Fusion des 5 datasets en un dataset unifié (WheatAI-Merged).
-
+ 
     Collecte, normalise les classes, déduplique, split et sauvegarde
     train/val/test CSV + metadata.json + sous-dataset YOLO (DS5 Roboflow).
-
+ 
     Args:
         config      : configuration globale
         copy_images : si True, copie physique des images (lourd).
@@ -329,42 +329,42 @@ def run_merge(config: dict, copy_images: bool = False) -> dict:
     """
     from pipelines.merge_datasets import build_merged_dataset
     return build_merged_dataset(config, copy_images=copy_images)
-
+ 
 def run_phase4(config: dict) -> None:
     """Phase 4 — Unsupervised Learning (SOM, DBN, RBM) [à venir]"""
     print("  ⏳ Phase 4 non encore implémentée.")
     print("     → Implémentation prochaine : SOM, DBN, RBM")
-
-
+ 
+ 
 def run_phase5(config: dict) -> None:
     """Phase 5 — Multimodal Fusion [à venir]"""
     print("  ⏳ Phase 5 non encore implémentée.")
     print("     → Implémentation prochaine : CNN+LSTM, Attention, Transformers")
-
-
+ 
+ 
 def run_phase1_report(config: dict) -> "object":
     """
     Report — Résumé des datasets collectés (Phase 1).
-
+ 
     Produit un tableau récapitulatif (CSV + JSON) des 5 datasets sources :
     nom, source, nombre d'images, tâche, type d'annotation, date estimée.
     """
     from pipelines.phase1_report import build_phase1_report
     return build_phase1_report(config)
-
-
+ 
+ 
 def run_dataset_validation_phase(config: dict, data_source: str = "merged",
                                   sample_size: int = 3000,
                                   remove_duplicates: bool = False) -> dict:
     """
     Validate — Validation complète du dataset (Phase 3 EDA approfondie).
-
+ 
     Génère automatiquement : distribution des classes, résolutions,
     formats, aspect ratios, modes couleur, images corrompues, doublons
     (perceptual hash), statistiques d'annotation YOLO/OBB, heatmap des
     bounding boxes, visualisations aléatoires, exemples d'annotations,
     et un rapport PDF final assemblant toutes ces figures.
-
+ 
     Args:
         config            : configuration globale
         data_source       : "merged" ou "original"
@@ -379,17 +379,117 @@ def run_dataset_validation_phase(config: dict, data_source: str = "merged",
         config, data_source=data_source, sample_size=sample_size,
         remove_duplicates=remove_duplicates
     )
-
-
+ 
+ 
+def run_obb_phase(config: dict, data_source: str = "merged",
+                   skip_generation: bool = False, skip_existing: bool = True) -> dict:
+    """
+    OBB — Génération automatique d'annotations OBB + entraînement YOLO-OBB
+    (Contribution 2).
+ 
+    Étapes :
+        1. Génère des annotations OBB à partir des bboxes axis-aligned
+           existantes (segmentation colorimétrique + rectangle orienté
+           minimal), sauf si skip_generation=True (réutilise un dataset
+           OBB déjà généré)
+        2. Entraîne un modèle YOLO-OBB (yolo11n-obb.pt) sur ce dataset
+        3. Évalue et compare implicitement avec le YOLO standard déjà
+           entraîné (mêmes métriques : mAP50, mAP50-95, precision, recall)
+ 
+    Args:
+        config          : configuration globale
+        data_source     : "merged" (dataset fusionné, source des vraies
+                          bboxes Roboflow) — seule option pertinente ici
+        skip_generation : si True, saute la génération OBB et utilise
+                          directement un dataset déjà présent
+        skip_existing   : si True, recharge un modèle YOLO-OBB déjà
+                          entraîné au lieu de le ré-entraîner
+    """
+    from pipelines.obb_generation import build_obb_dataset
+ 
+    if data_source == "merged":
+        yolo_root = Path(config["merge"]["output"]) / "yolo"
+        obb_root  = Path(config["merge"]["output"]) / "yolo_obb"
+    else:
+        yolo_root = Path(config["phase2"]["paths"]["yolo_dataset"])
+        obb_root  = yolo_root.parent / "yolo_obb"
+ 
+    if not yolo_root.exists():
+        raise FileNotFoundError(
+            f"❌ Dataset YOLO source introuvable : {yolo_root}\n"
+            f"   → Lance d'abord la fusion : python main.py --phase merge"
+        )
+ 
+    obb_data_yaml = obb_root / "data.yaml"
+ 
+    if skip_generation and obb_data_yaml.exists():
+        print(f"  ⏭️  Génération OBB ignorée — dataset existant : {obb_data_yaml}")
+    else:
+        build_obb_dataset(str(yolo_root), str(obb_root))
+ 
+    # Entraînement YOLO-OBB
+    output_dir = Path(config["phase2"]["paths"]["detection_outputs"]).parent / "phase2_detection_obb"
+    output_dir.mkdir(parents=True, exist_ok=True)
+ 
+    metrics_path = output_dir / "metrics.json"
+    best_weights_path = output_dir / "yolo_obb_train" / "weights" / "best.pt"
+ 
+    if skip_existing and metrics_path.exists() and best_weights_path.exists():
+        print(f"\n  ⏭️  Modèle YOLO-OBB déjà entraîné — rechargement")
+        with open(metrics_path) as f:
+            metrics = json.load(f)
+        print(f"  mAP50: {metrics.get('mAP50', 'N/A')}")
+        return {"metrics": metrics, "weights_path": str(best_weights_path)}
+ 
+    from ultralytics import YOLO
+ 
+    det_cfg = config["phase2"]["detection"]
+    obb_model_name = det_cfg["model"].replace(".pt", "-obb.pt")
+    if "-obb" not in obb_model_name:
+        obb_model_name = "yolo11n-obb.pt"
+ 
+    print(f"\n  Entraînement YOLO-OBB ({obb_model_name})...")
+    model = YOLO(obb_model_name)
+    model.train(
+        data=str(obb_data_yaml),
+        epochs=det_cfg["epochs"],
+        imgsz=det_cfg["imgsz"],
+        batch=det_cfg["batch"],
+        project=str(output_dir),
+        name="yolo_obb_train",
+        exist_ok=True,
+    )
+ 
+    val_results = model.val(
+        data=str(obb_data_yaml), split="test",
+        project=str(output_dir), name="yolo_obb_eval", exist_ok=True,
+    )
+ 
+    metrics = {
+        "mAP50"    : float(val_results.box.map50),
+        "mAP50_95" : float(val_results.box.map),
+        "precision": float(val_results.box.mp),
+        "recall"   : float(val_results.box.mr),
+    }
+    with open(metrics_path, "w") as f:
+        json.dump(metrics, f, indent=2)
+ 
+    print(f"\n  mAP50: {metrics['mAP50']:.4f}  mAP50-95: {metrics['mAP50_95']:.4f}")
+    print(f"  ✅ YOLO-OBB entraîné — comparer avec outputs/phase2_detection*/metrics.json "
+          f"(YOLO standard) pour l'analyse comparative de l'article")
+ 
+    return {"metrics": metrics, "weights_path": str(best_weights_path)}
+ 
+ 
 # ─────────────────────────────────────────────────────────────
 # Entrée principale
 # ─────────────────────────────────────────────────────────────
-
+ 
 def phase_type(value: str):
     """
     Convertit l'argument --phase : accepte soit un entier (1-5), soit un
-    mot-clé ("merge", "report", "validate"). Évite toute ambiguïté avec
-    argparse type=int qui rejetterait les mots-clés.
+    mot-clé ("merge", "report", "validate", "obb"). Évite toute ambiguïté
+    avec argparse type=int qui rejetterait les mots-clés.
     """
     if value.isdigit():
         return int(value)
@@ -405,6 +505,7 @@ PHASE_RUNNERS = {
     6: run_merge,
     7: run_phase1_report,
     8: run_dataset_validation_phase,
+    9: run_obb_phase,
 }
 
 
@@ -416,9 +517,9 @@ def main():
     )
     parser.add_argument(
         "--phase", type=phase_type, default=1,
-        choices=[1, 2, 3, 4, 5, 6, 7, 8],
+        choices=[1, 2, 3, 4, 5, 6, 7, 8, 9],
         help="Phase à exécuter : 1=Preprocessing, 2=Baseline, 3=GAN, "
-             "4=Unsupervised, 5=Fusion, 6=merge, 7=report, 8=validate"
+             "4=Unsupervised, 5=Fusion, 6=merge, 7=report, 8=validate, 9=obb"
     )
     parser.add_argument(
         "--config", type=str, default="configs/config.yaml",

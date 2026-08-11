@@ -1,4 +1,5 @@
 """
+pipelines/models.py
 ---------------------
 Phase 2 — Étape 1 : Architectures de classification.
 
@@ -129,6 +130,19 @@ MODEL_BUILDERS = {
     "efficientnetb0": build_efficientnetb0,
 }
 
+# Architectures avec Texture Attention Module (TAM) — contribution
+# principale de la thèse. Import différé (lazy) pour ne pas casser
+# l'import de ce module si texture_attention.py a un souci d'environnement.
+def _register_tam_models():
+    try:
+        from pipelines.texture_attention import build_resnet50_tam, build_efficientnetb0_tam
+        MODEL_BUILDERS["resnet50_tam"] = build_resnet50_tam
+        MODEL_BUILDERS["efficientnetb0_tam"] = build_efficientnetb0_tam
+    except ImportError as e:
+        print(f"  ⚠️  Modèles TAM non disponibles ({e})")
+
+_register_tam_models()
+
 
 def build_model(model_name: str, input_shape: tuple, num_classes: int,
                  freeze_base: bool = True) -> keras.Model:
@@ -136,7 +150,8 @@ def build_model(model_name: str, input_shape: tuple, num_classes: int,
     Factory function — construit le modèle demandé par son nom.
 
     Args:
-        model_name  : "cnn_custom" | "resnet50" | "efficientnetb0"
+        model_name  : "cnn_custom" | "resnet50" | "efficientnetb0" |
+                      "resnet50_tam" | "efficientnetb0_tam"
         input_shape : (H, W, C)
         num_classes : nombre de classes en sortie
         freeze_base : pour les modèles de transfer learning, gèle le backbone
@@ -146,7 +161,7 @@ def build_model(model_name: str, input_shape: tuple, num_classes: int,
     """
     if model_name not in MODEL_BUILDERS:
         raise ValueError(
-            f" Modèle inconnu : '{model_name}'. "
+            f"❌ Modèle inconnu : '{model_name}'. "
             f"Choix possibles : {list(MODEL_BUILDERS.keys())}"
         )
 
@@ -168,7 +183,7 @@ def unfreeze_for_finetuning(model: keras.Model, num_layers_to_unfreeze: int = 30
         num_layers_to_unfreeze  : nombre de couches à dégeler depuis la fin du backbone
     """
     if not hasattr(model, "base_model"):
-        print(f"    Le modèle '{model.name}' n'a pas de backbone à dégeler (CNN custom).")
+        print(f"  ⚠️  Le modèle '{model.name}' n'a pas de backbone à dégeler (CNN custom).")
         return
 
     base_model = model.base_model
@@ -179,5 +194,5 @@ def unfreeze_for_finetuning(model: keras.Model, num_layers_to_unfreeze: int = 30
         layer.trainable = False
 
     n_trainable = sum(1 for l in base_model.layers if l.trainable)
-    print(f"   Fine-tuning activé : {n_trainable}/{len(base_model.layers)} "
+    print(f"  🔓 Fine-tuning activé : {n_trainable}/{len(base_model.layers)} "
           f"couches du backbone dégelées.")
