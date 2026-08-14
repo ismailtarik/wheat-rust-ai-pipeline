@@ -89,6 +89,7 @@ def _build_gabor_bank(ksize: int = 7, n_orientations: int = 8) -> np.ndarray:
     return bank
 
 
+@keras.saving.register_keras_serializable(package="WheatAI_TAM")
 class TextureAttentionModule(layers.Layer):
     """
     Module d'attention texturale (TAM) — couche Keras personnalisée,
@@ -179,22 +180,27 @@ class TextureAttentionModule(layers.Layer):
 
 def build_resnet50_tam(input_shape: tuple, num_classes: int,
                         freeze_base: bool = True,
-                        tam_stages: tuple = ("conv3_block4_out", "conv4_block6_out"),
                         n_orientations: int = 8) -> keras.Model:
     """
-    ResNet50 augmenté de modules TAM insérés après des blocs résiduels
-    intermédiaires (par défaut : fin des stages conv3 et conv4 — résolution
-    intermédiaire, où les motifs texturaux locaux sont les plus discriminants
-    avant l'abstraction sémantique des couches profondes).
+    ResNet50 augmenté d'un module TAM inséré à UN SEUL point du flux
+    principal : juste avant le pooling global, sur la feature map finale
+    (déjà sémantiquement riche, issue de toute la hiérarchie du backbone).
+
+    Design (v2 — corrige une v1 défaillante) : la première version insérait
+    TAM sur des features INTERMÉDIAIRES en branches latérales poolées puis
+    concaténées à la tête de classification. Cela diluait le signal des
+    features finales (déjà fortement discriminantes) avec des features
+    intermédiaires bruitées n'ayant jamais traversé les couches profondes
+    d'abstraction — résultat : F1 -8 à -11 points vs baseline en ablation.
+    Cette v2 modifie directement la feature map finale (insertion unique,
+    dans le flux principal, comme SE-block/CBAM), préservant la voie de
+    classification originale qui fonctionnait déjà bien.
 
     Args:
         input_shape    : (H, W, C)
         num_classes    : nombre de classes de sortie
         freeze_base    : gèle le backbone ResNet50 (transfer learning, stage 1)
-        tam_stages     : noms des couches de sortie de ResNet50 après
-                         lesquelles insérer un TAM (voir keras.applications
-                         .ResNet50(...).summary() pour les noms exacts)
-        n_orientations : nombre d'orientations de Gabor dans chaque TAM
+        n_orientations : nombre d'orientations de Gabor dans le TAM
 
     Returns:
         Modèle Keras non compilé, avec model.base_model pour le fine-tuning
@@ -207,35 +213,13 @@ def build_resnet50_tam(input_shape: tuple, num_classes: int,
     inputs = keras.Input(shape=input_shape, name="input_image")
     x = layers.Rescaling(255.0)(inputs)
     x = keras.applications.resnet50.preprocess_input(x)
+    features = base_model(x, training=False)   # (H/32, W/32, 2048)
 
-    # Construction d'un modèle intermédiaire exposant les sorties des
-    # stages ciblés, pour pouvoir insérer TAM après chacune d'elles.
-    stage_outputs = {name: base_model.get_layer(name).output for name in tam_stages}
-    feature_extractor = keras.Model(
-        inputs=base_model.input,
-        outputs=[base_model.output] + list(stage_outputs.values()),
-        name="resnet50_multi_stage"
-    )
+    # Insertion unique de TAM sur la feature map finale, dans le flux
+    # principal (pas de branche latérale, pas de concaténation).
+    features = TextureAttentionModule(n_orientations=n_orientations, name="tam")(features)
 
-    outputs_list = feature_extractor(x)
-    final_features = outputs_list[0]
-    intermediate_features = outputs_list[1:]
-
-    # Applique un TAM sur chaque feature intermédiaire, puis les réinjecte
-    # via une branche auxiliaire globale (GAP) concaténée aux features
-    # finales — permet au TAM d'influencer la décision même si son
-    # emplacement est en milieu de réseau.
-    tam_branches = []
-    for i, feat in enumerate(intermediate_features):
-        tam_out = TextureAttentionModule(
-            n_orientations=n_orientations, name=f"tam_stage_{i}"
-        )(feat)
-        pooled = layers.GlobalAveragePooling2D(name=f"tam_gap_{i}")(tam_out)
-        tam_branches.append(pooled)
-
-    final_pooled = layers.GlobalAveragePooling2D(name="final_gap")(final_features)
-
-    x = layers.Concatenate(name="tam_fusion")([final_pooled] + tam_branches)
+    x = layers.GlobalAveragePooling2D()(features)
     x = layers.Dense(256, activation="relu")(x)
     x = layers.Dropout(0.4)(x)
     outputs = layers.Dense(num_classes, activation="softmax", name="predictions")(x)
@@ -247,12 +231,10 @@ def build_resnet50_tam(input_shape: tuple, num_classes: int,
 
 def build_efficientnetb0_tam(input_shape: tuple, num_classes: int,
                               freeze_base: bool = True,
-                              tam_stages: tuple = ("block4a_expand_activation",
-                                                     "block6a_expand_activation"),
                               n_orientations: int = 8) -> keras.Model:
     """
-    EfficientNetB0 augmenté de modules TAM — même principe que
-    build_resnet50_tam, adapté aux noms de couches d'EfficientNetB0.
+    EfficientNetB0 + TAM — même principe corrigé que build_resnet50_tam :
+    insertion unique sur la feature map finale, dans le flux principal.
     """
     base_model = keras.applications.EfficientNetB0(
         weights="imagenet", include_top=False, input_shape=input_shape
@@ -261,29 +243,11 @@ def build_efficientnetb0_tam(input_shape: tuple, num_classes: int,
 
     inputs = keras.Input(shape=input_shape, name="input_image")
     x = layers.Rescaling(255.0)(inputs)
+    features = base_model(x, training=False)
 
-    stage_outputs = {name: base_model.get_layer(name).output for name in tam_stages}
-    feature_extractor = keras.Model(
-        inputs=base_model.input,
-        outputs=[base_model.output] + list(stage_outputs.values()),
-        name="efficientnetb0_multi_stage"
-    )
+    features = TextureAttentionModule(n_orientations=n_orientations, name="tam")(features)
 
-    outputs_list = feature_extractor(x)
-    final_features = outputs_list[0]
-    intermediate_features = outputs_list[1:]
-
-    tam_branches = []
-    for i, feat in enumerate(intermediate_features):
-        tam_out = TextureAttentionModule(
-            n_orientations=n_orientations, name=f"tam_stage_{i}"
-        )(feat)
-        pooled = layers.GlobalAveragePooling2D(name=f"tam_gap_{i}")(tam_out)
-        tam_branches.append(pooled)
-
-    final_pooled = layers.GlobalAveragePooling2D(name="final_gap")(final_features)
-
-    x = layers.Concatenate(name="tam_fusion")([final_pooled] + tam_branches)
+    x = layers.GlobalAveragePooling2D()(features)
     x = layers.Dense(256, activation="relu")(x)
     x = layers.Dropout(0.4)(x)
     outputs = layers.Dense(num_classes, activation="softmax", name="predictions")(x)
