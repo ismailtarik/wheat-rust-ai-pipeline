@@ -2,6 +2,24 @@
   "best_model": "resnet50",
   "all_results": [
     {
+      "model_name": "resnet50_tam",
+      "accuracy": 0.8323,
+      "precision": 0.8427,
+      "recall": 0.8323,
+      "f1_score": 0.835,
+      "train_time_min": 179.16,
+      "num_params": 24919443
+    },
+    {
+      "model_name": "cnn_custom",
+      "accuracy": 0.7638,
+      "precision": 0.8083,
+      "recall": 0.7638,
+      "f1_score": 0.7556,
+      "train_time_min": null,
+      "num_params": null
+    },
+    {
       "model_name": "resnet50",
       "accuracy": 0.9168,
       "precision": 0.929,
@@ -11,38 +29,11 @@
       "num_params": null
     },
     {
-      "model_name": "resnet50_tam",
-      "accuracy": 0.8379,
-      "precision": 0.8459,
-      "recall": 0.8379,
-      "f1_score": 0.8399,
-      "train_time_min": 171.29,
-      "num_params": 25111957
-    },
-    {
       "model_name": "efficientnetb0",
       "accuracy": 0.8862,
       "precision": 0.9223,
       "recall": 0.8862,
       "f1_score": 0.895,
-      "train_time_min": null,
-      "num_params": null
-    },
-    {
-      "model_name": "efficientnetb0_tam",
-      "accuracy": 0.7817,
-      "precision": 0.8159,
-      "recall": 0.7817,
-      "f1_score": 0.7881,
-      "train_time_min": 156.63,
-      "num_params": 4972856
-    },
-    {
-      "model_name": "cnn_custom",
-      "accuracy": 0.7638,
-      "precision": 0.8083,
-      "recall": 0.7638,
-      "f1_score": 0.7556,
       "train_time_min": null,
       "num_params": null
     }

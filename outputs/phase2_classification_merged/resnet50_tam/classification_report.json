@@ -1,0 +1,117 @@
+{
+  "Aphid": {
+    "precision": 0.8761904761904762,
+    "recall": 0.7022900763358778,
+    "f1-score": 0.7796610169491526,
+    "support": 131.0
+  },
+  "Black_Point": {
+    "precision": 1.0,
+    "recall": 0.9555555555555556,
+    "f1-score": 0.9772727272727273,
+    "support": 45.0
+  },
+  "Black_Rust": {
+    "precision": 0.6909090909090909,
+    "recall": 0.5846153846153846,
+    "f1-score": 0.6333333333333333,
+    "support": 65.0
+  },
+  "Blast": {
+    "precision": 0.8623188405797102,
+    "recall": 0.875,
+    "f1-score": 0.8686131386861314,
+    "support": 136.0
+  },
+  "Brown_Rust": {
+    "precision": 0.8789808917197452,
+    "recall": 0.7540983606557377,
+    "f1-score": 0.8117647058823529,
+    "support": 183.0
+  },
+  "Common_Root_Rot": {
+    "precision": 0.782608695652174,
+    "recall": 0.8275862068965517,
+    "f1-score": 0.8044692737430168,
+    "support": 87.0
+  },
+  "Fusarium_Foot_Rot": {
+    "precision": 0.8809523809523809,
+    "recall": 1.0,
+    "f1-score": 0.9367088607594937,
+    "support": 37.0
+  },
+  "Fusarium_Head_Blight": {
+    "precision": 0.9191919191919192,
+    "recall": 0.9381443298969072,
+    "f1-score": 0.9285714285714286,
+    "support": 97.0
+  },
+  "Healthy": {
+    "precision": 0.8516949152542372,
+    "recall": 0.8973214285714286,
+    "f1-score": 0.8739130434782608,
+    "support": 224.0
+  },
+  "Leaf_Blight": {
+    "precision": 0.7159090909090909,
+    "recall": 0.7636363636363637,
+    "f1-score": 0.7390029325513197,
+    "support": 165.0
+  },
+  "Mildew": {
+    "precision": 0.8895348837209303,
+    "recall": 0.9,
+    "f1-score": 0.8947368421052632,
+    "support": 170.0
+  },
+  "Mite": {
+    "precision": 0.7652173913043478,
+    "recall": 0.7586206896551724,
+    "f1-score": 0.7619047619047619,
+    "support": 116.0
+  },
+  "Septoria": {
+    "precision": 0.8461538461538461,
+    "recall": 0.8301886792452831,
+    "f1-score": 0.8380952380952381,
+    "support": 53.0
+  },
+  "Smut": {
+    "precision": 0.6666666666666666,
+    "recall": 0.8607594936708861,
+    "f1-score": 0.7513812154696132,
+    "support": 79.0
+  },
+  "Stem_fly": {
+    "precision": 0.875,
+    "recall": 0.8076923076923077,
+    "f1-score": 0.84,
+    "support": 26.0
+  },
+  "Tan_spot": {
+    "precision": 0.46099290780141844,
+    "recall": 0.6074766355140186,
+    "f1-score": 0.5241935483870968,
+    "support": 107.0
+  },
+  "Yellow_Rust": {
+    "precision": 0.9739336492890995,
+    "recall": 0.9133333333333333,
+    "f1-score": 0.9426605504587156,
+    "support": 450.0
+  },
+  "accuracy": 0.8323353293413174,
+  "macro avg": {
+    "precision": 0.8197797438997138,
+    "recall": 0.8221364026632241,
+    "f1-score": 0.8180166245675239,
+    "support": 2171.0
+  },
+  "weighted avg": {
+    "precision": 0.8426590198252738,
+    "recall": 0.8323353293413174,
+    "f1-score": 0.8349906430498243,
+    "support": 2171.0
+  }
+}

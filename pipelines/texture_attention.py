@@ -89,7 +89,7 @@ def _build_gabor_bank(ksize: int = 7, n_orientations: int = 8) -> np.ndarray:
     return bank
 
 
-@keras.saving.register_keras_serializable(package="WheatAI_TAM")
+@keras.utils.register_keras_serializable(package="WheatAI_TAM")
 class TextureAttentionModule(layers.Layer):
     """
     Module d'attention texturale (TAM) — couche Keras personnalisée,
