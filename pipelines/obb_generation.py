@@ -216,6 +216,14 @@ def _generate_obb_for_box(image_bgr: np.ndarray, box: tuple) -> tuple:
 # ─────────────────────────────────────────────────────────────
 
 def _process_split(yolo_root: Path, output_root: Path, split: str) -> dict:
+    """
+    Traite un split (train/val/test) avec REPRISE : un cache de progression
+    (obb_progress_<split>.json) trace les images déjà traitées avec succès
+    (label OBB déjà écrit) et leurs statistiques. Au redémarrage après une
+    coupure (ex: session Colab expirée), les images déjà présentes dans le
+    cache sont sautées sans refaire la segmentation coûteuse — seules les
+    images manquantes sont traitées.
+    """
     img_dir = yolo_root / "images" / split
     lbl_dir = yolo_root / "labels" / split
     out_img_dir = output_root / "images" / split
@@ -223,15 +231,32 @@ def _process_split(yolo_root: Path, output_root: Path, split: str) -> dict:
     out_img_dir.mkdir(parents=True, exist_ok=True)
     out_lbl_dir.mkdir(parents=True, exist_ok=True)
 
-    n_total_boxes = 0
-    n_fallback = 0
-    n_images_processed = 0
+    progress_path = output_root / f"obb_progress_{split}.json"
+    progress = {}
+    if progress_path.exists():
+        try:
+            with open(progress_path) as f:
+                progress = json.load(f)
+        except Exception:
+            progress = {}
 
     if not img_dir.exists():
         return {"total_boxes": 0, "fallback_boxes": 0, "images_processed": 0}
 
-    for img_path in sorted(img_dir.iterdir()):
-        lbl_path = lbl_dir / (img_path.stem + ".txt")
+    all_images = sorted(img_dir.iterdir())
+    n_already_done = 0
+
+    for i, img_path in enumerate(all_images):
+        stem = img_path.stem
+        dst_lbl = out_lbl_dir / (stem + ".txt")
+
+        # Reprise : image déjà traitée dans une exécution précédente
+        # (label présent sur disque ET trace dans le cache de progression)
+        if stem in progress and dst_lbl.exists():
+            n_already_done += 1
+            continue
+
+        lbl_path = lbl_dir / (stem + ".txt")
         if not lbl_path.exists():
             continue
 
@@ -252,17 +277,18 @@ def _process_split(yolo_root: Path, output_root: Path, split: str) -> dict:
             continue
 
         obb_lines = []
+        n_boxes_here = 0
+        n_fallback_here = 0
         for box in boxes:
             points_norm, is_fallback = _generate_obb_for_box(image_bgr, box)
             points_norm = [max(0.0, min(1.0, p)) for p in points_norm]
             line = f"{box[0]} " + " ".join(f"{p:.6f}" for p in points_norm)
             obb_lines.append(line)
-            n_total_boxes += 1
+            n_boxes_here += 1
             if is_fallback:
-                n_fallback += 1
+                n_fallback_here += 1
 
         # Écriture du label OBB + lien vers l'image (pas de copie physique)
-        dst_lbl = out_lbl_dir / lbl_path.name
         dst_lbl.write_text("\n".join(obb_lines) + "\n")
 
         dst_img = out_img_dir / img_path.name
@@ -272,7 +298,27 @@ def _process_split(yolo_root: Path, output_root: Path, split: str) -> dict:
             except Exception:
                 shutil.copy2(img_path, dst_img)
 
-        n_images_processed += 1
+        # Mise à jour du cache de progression — flush immédiat pour ne
+        # perdre au maximum que l'image en cours si le processus est
+        # interrompu brutalement (coupure de session)
+        progress[stem] = {"boxes": n_boxes_here, "fallback": n_fallback_here}
+        if (i + 1) % 25 == 0 or (i + 1) == len(all_images):
+            with open(progress_path, "w") as f:
+                json.dump(progress, f)
+            print(f"    ... {i + 1}/{len(all_images)} images "
+                  f"({n_already_done} déjà faites, reprises du cache)", end="\r")
+
+    # Flush final (au cas où le dernier lot n'ait pas été multiple de 25)
+    with open(progress_path, "w") as f:
+        json.dump(progress, f)
+
+    n_total_boxes = sum(v["boxes"] for v in progress.values())
+    n_fallback = sum(v["fallback"] for v in progress.values())
+    n_images_processed = len(progress)
+
+    if n_already_done:
+        print(f"\n    ℹ️  {n_already_done} images reprises depuis le cache "
+              f"(non retraitées)")
 
     return {
         "total_boxes": n_total_boxes,
