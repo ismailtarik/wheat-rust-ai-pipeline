@@ -89,7 +89,42 @@ def _build_gabor_bank(ksize: int = 7, n_orientations: int = 8) -> np.ndarray:
     return bank
 
 
-@keras.utils.register_keras_serializable(package="WheatAI_TAM")
+def _get_register_serializable():
+    """
+    Localise register_keras_serializable de façon robuste selon la version
+    TF/Keras installée — certains environnements exposent keras.saving,
+    d'autres non (ex: 'keras._tf_keras.keras' n'a pas toujours .saving).
+    Retourne un décorateur no-op en dernier recours plutôt que de faire
+    planter tout le module (l'enregistrement améliore la ré-utilisabilité
+    du modèle sauvegardé mais n'est pas requis pour l'entraînement).
+    """
+    try:
+        from tensorflow.keras.saving import register_keras_serializable
+        return register_keras_serializable
+    except ImportError:
+        pass
+    try:
+        from tensorflow.keras.utils import register_keras_serializable
+        return register_keras_serializable
+    except ImportError:
+        pass
+    try:
+        import keras as _keras_standalone
+        return _keras_standalone.saving.register_keras_serializable
+    except Exception:
+        pass
+
+    def _noop_register(*args, **kwargs):
+        def _wrap(cls):
+            return cls
+        return _wrap
+    return _noop_register
+
+
+register_keras_serializable = _get_register_serializable()
+
+
+@register_keras_serializable(package="WheatAI_TAM")
 class TextureAttentionModule(layers.Layer):
     """
     Module d'attention texturale (TAM) — couche Keras personnalisée,
@@ -101,14 +136,20 @@ class TextureAttentionModule(layers.Layer):
         trainable_gate : si True, la couche de gating (conv 1x1 + sigmoid)
                          est entraînable (recommandé) ; les filtres de
                          Gabor eux-mêmes restent toujours fixes.
+        bypass         : DIAGNOSTIC uniquement — si True, la couche retourne
+                         x inchangé (identité pure, aucun calcul de texture).
+                         Sert à isoler si une dégradation de performance vient
+                         de la simple insertion d'une couche supplémentaire
+                         dans le graphe, ou du calcul de texture lui-même.
     """
 
     def __init__(self, n_orientations: int = 8, ksize: int = 7,
-                 trainable_gate: bool = True, **kwargs):
+                 trainable_gate: bool = True, bypass: bool = False, **kwargs):
         super().__init__(**kwargs)
         self.n_orientations = n_orientations
         self.ksize = ksize
         self.trainable_gate = trainable_gate
+        self.bypass = bypass
 
     def build(self, input_shape):
         self.n_channels = input_shape[-1]
@@ -135,6 +176,10 @@ class TextureAttentionModule(layers.Layer):
         super().build(input_shape)
 
     def call(self, x):
+        if self.bypass:
+            # Mode diagnostic : identité pure, aucun calcul de texture.
+            return x
+
         # Réponse de chaque orientation, pour chaque canal, via depthwise
         # conv généralisée : on traite chaque (canal x orientation) comme
         # un filtre depthwise séparé, puis on regroupe.
@@ -170,6 +215,7 @@ class TextureAttentionModule(layers.Layer):
             "n_orientations": self.n_orientations,
             "ksize": self.ksize,
             "trainable_gate": self.trainable_gate,
+            "bypass": self.bypass,
         })
         return config
 
@@ -180,11 +226,19 @@ class TextureAttentionModule(layers.Layer):
 
 def build_resnet50_tam(input_shape: tuple, num_classes: int,
                         freeze_base: bool = True,
-                        n_orientations: int = 8) -> keras.Model:
+                        n_orientations: int = 8,
+                        bypass_tam: bool = False) -> keras.Model:
     """
     ResNet50 augmenté d'un module TAM inséré à UN SEUL point du flux
     principal : juste avant le pooling global, sur la feature map finale
     (déjà sémantiquement riche, issue de toute la hiérarchie du backbone).
+
+    Args (ajout) :
+        bypass_tam : DIAGNOSTIC — si True, TAM est inséré dans le graphe
+                     mais agit comme une identité pure (aucun calcul de
+                     texture). Permet de vérifier si une dégradation de
+                     performance vient de la structure du graphe elle-même
+                     ou du calcul de texture.
 
     Design (v2 — corrige une v1 défaillante) : la première version insérait
     TAM sur des features INTERMÉDIAIRES en branches latérales poolées puis
@@ -217,7 +271,9 @@ def build_resnet50_tam(input_shape: tuple, num_classes: int,
 
     # Insertion unique de TAM sur la feature map finale, dans le flux
     # principal (pas de branche latérale, pas de concaténation).
-    features = TextureAttentionModule(n_orientations=n_orientations, name="tam")(features)
+    features = TextureAttentionModule(
+        n_orientations=n_orientations, bypass=bypass_tam, name="tam"
+    )(features)
 
     x = layers.GlobalAveragePooling2D()(features)
     x = layers.Dense(256, activation="relu")(x)
@@ -231,10 +287,12 @@ def build_resnet50_tam(input_shape: tuple, num_classes: int,
 
 def build_efficientnetb0_tam(input_shape: tuple, num_classes: int,
                               freeze_base: bool = True,
-                              n_orientations: int = 8) -> keras.Model:
+                              n_orientations: int = 8,
+                              bypass_tam: bool = False) -> keras.Model:
     """
     EfficientNetB0 + TAM — même principe corrigé que build_resnet50_tam :
     insertion unique sur la feature map finale, dans le flux principal.
+    bypass_tam : voir build_resnet50_tam (mode diagnostic identité pure).
     """
     base_model = keras.applications.EfficientNetB0(
         weights="imagenet", include_top=False, input_shape=input_shape
@@ -245,7 +303,9 @@ def build_efficientnetb0_tam(input_shape: tuple, num_classes: int,
     x = layers.Rescaling(255.0)(inputs)
     features = base_model(x, training=False)
 
-    features = TextureAttentionModule(n_orientations=n_orientations, name="tam")(features)
+    features = TextureAttentionModule(
+        n_orientations=n_orientations, bypass=bypass_tam, name="tam"
+    )(features)
 
     x = layers.GlobalAveragePooling2D()(features)
     x = layers.Dense(256, activation="relu")(x)

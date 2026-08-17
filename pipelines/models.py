@@ -135,9 +135,21 @@ MODEL_BUILDERS = {
 # l'import de ce module si texture_attention.py a un souci d'environnement.
 def _register_tam_models():
     try:
+        import functools
         from pipelines.texture_attention import build_resnet50_tam, build_efficientnetb0_tam
         MODEL_BUILDERS["resnet50_tam"] = build_resnet50_tam
         MODEL_BUILDERS["efficientnetb0_tam"] = build_efficientnetb0_tam
+
+        # Variantes DIAGNOSTIC — TAM inséré dans le graphe mais neutralisé
+        # (identité pure). Sert à isoler si une dégradation de performance
+        # observée avec TAM vient de la structure du graphe (insertion
+        # d'une couche de plus) ou du calcul de texture lui-même.
+        MODEL_BUILDERS["resnet50_tam_bypass"] = functools.partial(
+            build_resnet50_tam, bypass_tam=True
+        )
+        MODEL_BUILDERS["efficientnetb0_tam_bypass"] = functools.partial(
+            build_efficientnetb0_tam, bypass_tam=True
+        )
     except ImportError as e:
         print(f"  ⚠️  Modèles TAM non disponibles ({e})")
 
@@ -151,7 +163,9 @@ def build_model(model_name: str, input_shape: tuple, num_classes: int,
 
     Args:
         model_name  : "cnn_custom" | "resnet50" | "efficientnetb0" |
-                      "resnet50_tam" | "efficientnetb0_tam"
+                      "resnet50_tam" | "efficientnetb0_tam" |
+                      "resnet50_tam_bypass" | "efficientnetb0_tam_bypass"
+                      (variantes _bypass = diagnostic, TAM neutralisé)
         input_shape : (H, W, C)
         num_classes : nombre de classes en sortie
         freeze_base : pour les modèles de transfer learning, gèle le backbone
