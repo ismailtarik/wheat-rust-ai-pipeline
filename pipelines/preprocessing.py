@@ -1,3 +1,20 @@
+"""
+pipelines/preprocessing.py
+----------------------------
+Phase 1 — Étape 3 : Preprocessing des images avec TensorFlow.
+
+Transformations appliquées :
+  - Resize bilinéaire → IMG_SIZE (config)
+  - Normalisation [0, 1]
+  - Augmentation aléatoire (train uniquement) :
+      flip H/V, brightness, contrast, saturation, hue, zoom crop, bruit gaussien
+  - Construction des pipelines tf.data optimisés (AUTOTUNE + prefetch)
+
+Usage :
+    from pipelines.preprocessing import build_tf_datasets
+    train_ds, val_ds, test_ds = build_tf_datasets(split_result, config)
+"""
+
 import json
 import numpy as np
 import matplotlib
@@ -100,6 +117,20 @@ def _augment(image: tf.Tensor, label: tf.Tensor, config: dict) -> tuple:
     return image, label
 
 
+def _dataset_fingerprint(df) -> str:
+    """
+    Empreinte courte du contenu réel d'un DataFrame (liste des chemins
+    d'images), utilisée pour invalider automatiquement le cache disque
+    si le dataset change (ex: passage de data_source='original' à
+    'merged', ou nouvelle fusion avec des images différentes). Sans
+    cette empreinte, un cache figé au nom générique 'train'/'val'/'test'
+    pourrait silencieusement servir des données d'un AUTRE dataset.
+    """
+    import hashlib
+    content = f"{len(df)}::" + "|".join(sorted(df["filepath"].astype(str).tolist()))
+    return hashlib.md5(content.encode()).hexdigest()[:10]
+
+
 def build_tf_datasets(split_result: dict, config: dict) -> tuple:
     """
     Construit les 3 pipelines tf.data (train / val / test).
@@ -123,6 +154,18 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
     reports_dir = Path(config["paths"]["reports"])
     reports_dir.mkdir(parents=True, exist_ok=True)
 
+    # Cache disque des images décodées/redimensionnées (avant augmentation).
+    # Sans cache, CHAQUE epoch de CHAQUE modèle entraîné avec ces mêmes
+    # datasets redécode et redimensionne toutes les images depuis zéro —
+    # un coût énorme et totalement répétitif, responsable d'une grande
+    # partie des ~700-800ms/step observés (au lieu de ~150-250ms/step
+    # attendus en pur calcul GPU sur T4). Le cache disque (pas en mémoire,
+    # pour éviter tout risque d'OOM sur de gros datasets) rend ce coût
+    # non-récurrent : décodage une seule fois, réutilisé pour tous les
+    # epochs ET pour tous les modèles d'un même run --models a,b,c,d.
+    cache_dir = Path(config["paths"].get("outputs", "outputs")) / "tfdata_cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
     train_df   = split_result["train_df"]
     val_df     = split_result["val_df"]
     test_df    = split_result["test_df"]
@@ -143,20 +186,37 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
         return _augment(img, lbl, config)
 
     # --- Construction d'un pipeline générique ---
-    def _build_pipeline(df, augment_data: bool, shuffle: bool) -> tf.data.Dataset:
+    def _build_pipeline(df, augment_data: bool, shuffle: bool,
+                         cache_name: str) -> tf.data.Dataset:
         filepaths = df["filepath"].values
         labels    = df["label_idx"].values
 
         ds = tf.data.Dataset.from_tensor_slices((filepaths, labels))
 
+        # Décodage/redimensionnement AVANT le cache (coût coûteux, à ne
+        # faire qu'une fois).
+        ds = ds.map(preprocess_fn, num_parallel_calls=tf.data.AUTOTUNE)
+
+        # Cache disque juste après décodage/redimensionnement. Le nom de
+        # fichier inclut une empreinte du contenu réel du DataFrame pour
+        # invalider automatiquement le cache si le dataset change.
+        fingerprint = _dataset_fingerprint(df)
+        cache_path = cache_dir / f"{cache_name}_{fingerprint}"
+        ds = ds.cache(str(cache_path))
+
+        # IMPORTANT : shuffle() doit venir APRÈS cache(), jamais avant.
+        # Si shuffle précède cache, l'ordre mélangé du tout premier epoch
+        # est figé dans le cache et REJOUÉ À L'IDENTIQUE à chaque epoch
+        # suivant — reshuffle_each_iteration=True devient alors sans effet,
+        # le modèle voit toujours la même séquence d'exemples. Placé après
+        # cache, le mélange est recalculé à chaque epoch comme prévu, tout
+        # en bénéficiant du cache pour éviter de redécoder les images.
         if shuffle:
             ds = ds.shuffle(
                 buffer_size=len(df),
                 seed=seed,
                 reshuffle_each_iteration=True
             )
-
-        ds = ds.map(preprocess_fn, num_parallel_calls=tf.data.AUTOTUNE)
 
         if augment_data and config["augmentation"]["enabled"]:
             ds = ds.map(augment_fn, num_parallel_calls=tf.data.AUTOTUNE)
@@ -167,22 +227,26 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
 
     # --- 3 pipelines ---
     print("\n[1/3] Création du pipeline d'entraînement (avec augmentation)...")
-    train_ds = _build_pipeline(train_df, augment_data=True, shuffle=True)
-    print(f"  train_ds : {len(train_df)} images → {len(train_ds)} batches")
+    train_ds = _build_pipeline(train_df, augment_data=True, shuffle=True, cache_name="train")
+    print(f"  ✅ train_ds : {len(train_df)} images → {len(train_ds)} batches")
 
     print("[2/3] Création du pipeline de validation...")
-    val_ds = _build_pipeline(val_df, augment_data=False, shuffle=False)
-    print(f"  val_ds   : {len(val_df)} images → {len(val_ds)} batches")
+    val_ds = _build_pipeline(val_df, augment_data=False, shuffle=False, cache_name="val")
+    print(f"  ✅ val_ds   : {len(val_df)} images → {len(val_ds)} batches")
 
     print("[3/3] Création du pipeline de test...")
-    test_ds = _build_pipeline(test_df, augment_data=False, shuffle=False)
-    print(f"  test_ds  : {len(test_df)} images → {len(test_ds)} batches")
+    test_ds = _build_pipeline(test_df, augment_data=False, shuffle=False, cache_name="test")
+    print(f"  ✅ test_ds  : {len(test_df)} images → {len(test_ds)} batches")
+
+    print(f"\n  💾 Cache disque activé : {cache_dir}/ "
+          f"(décodage effectué une seule fois, réutilisé pour tous les "
+          f"epochs et tous les modèles de ce run)")
 
     # --- Vérification d'un batch ---
     sample_imgs, sample_lbls = next(iter(train_ds))
-    print(f"\n   Forme d'un batch — images : {sample_imgs.shape}  "
+    print(f"\n  📐 Forme d'un batch — images : {sample_imgs.shape}  "
           f"labels : {sample_lbls.shape}")
-    print(f"  Valeurs pixels — min : {sample_imgs.numpy().min():.3f}  "
+    print(f"  🎨 Valeurs pixels — min : {sample_imgs.numpy().min():.3f}  "
           f"max : {sample_imgs.numpy().max():.3f}")
 
     # --- Visualisation : Original vs Augmenté ---
@@ -192,9 +256,9 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
         save_path=reports_dir / "04_augmentation_preview.png",
         seed=seed, n_show=6
     )
-    print(f"  04_augmentation_preview.png")
+    print(f"  ✅ 04_augmentation_preview.png")
 
-    print("\n  Preprocessing terminé — prêt pour le split & Phase 2\n")
+    print("\n  ✅ Preprocessing terminé — prêt pour le split & Phase 2\n")
 
     return train_ds, val_ds, test_ds
 

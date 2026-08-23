@@ -45,9 +45,55 @@ from pipelines.models import build_model, unfreeze_for_finetuning
 # Callbacks
 # ─────────────────────────────────────────────────────────────
 
-def _build_callbacks(checkpoint_path: Path, patience_es: int,
-                      patience_rlr: int) -> list:
-    """Construit les callbacks Keras standards pour l'entraînement."""
+class _EpochProgressTracker(keras.callbacks.Callback):
+    """
+    Callback qui trace la progression (numéro d'epoch complétée) dans un
+    petit fichier JSON après chaque epoch. Contrairement à YOLO/Ultralytics,
+    Keras model.fit() ne reprend pas nativement un entraînement interrompu
+    (pas de resume=True) — ce callback fournit le mécanisme manquant :
+    on sait exactement où l'entraînement s'est arrêté si Colab coupe.
+    """
+
+    def __init__(self, progress_path: Path):
+        super().__init__()
+        self.progress_path = progress_path
+
+    def on_epoch_end(self, epoch, logs=None):
+        with open(self.progress_path, "w") as f:
+            json.dump({"last_completed_epoch": epoch + 1}, f)
+
+
+def _get_resume_state(progress_path: Path, checkpoint_path: Path) -> tuple:
+    """
+    Vérifie si un entraînement précédent (interrompu) peut être repris.
+
+    Returns:
+        (initial_epoch, checkpoint_path_or_None) — initial_epoch=0 si
+        aucune reprise possible (pas de checkpoint, ou pas de trace de
+        progression).
+    """
+    if not progress_path.exists() or not checkpoint_path.exists():
+        return 0, None
+    try:
+        with open(progress_path) as f:
+            state = json.load(f)
+        return state.get("last_completed_epoch", 0), checkpoint_path
+    except Exception:
+        return 0, None
+
+
+def _build_callbacks(checkpoint_path: Path, progress_path: Path,
+                      patience_es: int, patience_rlr: int) -> list:
+    """
+    Construit les callbacks Keras standards pour l'entraînement, y compris
+    le tracker de progression pour la reprise après coupure.
+
+    Note : EarlyStopping et ReduceLROnPlateau redémarrent leur compteur de
+    patience à zéro en cas de reprise (Keras ne sauvegarde pas leur état
+    interne nativement) — comportement légèrement différent d'un run
+    ininterrompu, mais très largement préférable à perdre toute la
+    progression et repartir de epoch 0.
+    """
     return [
         keras.callbacks.ModelCheckpoint(
             filepath=str(checkpoint_path),
@@ -69,6 +115,7 @@ def _build_callbacks(checkpoint_path: Path, patience_es: int,
             min_lr=1e-7,
             verbose=1
         ),
+        _EpochProgressTracker(progress_path),
     ]
 
 
@@ -92,14 +139,14 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
     model_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"\n{'='*55}")
-    print(f"  Modèle : {model_name.upper()}")
+    print(f"  🧠 Modèle : {model_name.upper()}")
     print(f"{'='*55}")
 
     # ── 1. Construction ──
     is_transfer = model_name != "cnn_custom"
     model = build_model(model_name, input_shape, num_classes,
                          freeze_base=True)
-    print(f"   Architecture construite — {model.count_params():,} paramètres")
+    print(f"  ✅ Architecture construite — {model.count_params():,} paramètres")
 
     class_weights_arg = class_weights if cfg.get("use_class_weights", True) else None
 
@@ -115,8 +162,17 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
         metrics=["accuracy"]
     )
 
+    stage1_ckpt = model_dir / f"{model_name}_stage1_best.keras"
+    stage1_progress = model_dir / f"{model_name}_stage1_progress.json"
+    initial_epoch_1, resume_ckpt_1 = _get_resume_state(stage1_progress, stage1_ckpt)
+
+    if resume_ckpt_1:
+        print(f"  ⏯️  Reprise détectée — epoch {initial_epoch_1}/{cfg['epochs']} "
+              f"déjà complétée, chargement de {resume_ckpt_1.name}")
+        model.load_weights(str(resume_ckpt_1))
+
     callbacks = _build_callbacks(
-        model_dir / f"{model_name}_stage1_best.keras",
+        stage1_ckpt, stage1_progress,
         cfg["early_stopping_patience"],
         cfg["reduce_lr_patience"]
     )
@@ -125,14 +181,32 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
         train_ds,
         validation_data=val_ds,
         epochs=cfg["epochs"],
+        initial_epoch=initial_epoch_1,
         class_weight=class_weights_arg,
         callbacks=callbacks,
         verbose=1
     )
 
+    # Recharge explicitement les MEILLEURS poids sauvegardés par
+    # ModelCheckpoint (monitor='val_accuracy'). Nécessaire car
+    # EarlyStopping.restore_best_weights ne s'applique QUE si l'arrêt est
+    # effectivement déclenché par le callback — si l'entraînement va au
+    # bout du nombre d'epochs demandé sans jamais déclencher l'arrêt
+    # précoce (cas fréquent), le modèle en mémoire reste à l'état du
+    # DERNIER epoch, potentiellement déjà en sur-apprentissage, et non au
+    # meilleur epoch réellement sauvegardé sur disque.
+    if stage1_ckpt.exists():
+        model.load_weights(str(stage1_ckpt))
+        print(f"  ✅ Meilleurs poids stage 1 rechargés depuis {stage1_ckpt.name}")
+
     # ── 3. Stage 2 : fine-tuning (transfer learning uniquement) ──
     if is_transfer and cfg.get("fine_tune_epochs", 0) > 0:
         print(f"\n  [Stage 2] Fine-tuning (dégel partiel du backbone)...")
+
+        stage2_ckpt = model_dir / f"{model_name}_stage2_best.keras"
+        stage2_progress = model_dir / f"{model_name}_stage2_progress.json"
+        initial_epoch_2, resume_ckpt_2 = _get_resume_state(stage2_progress, stage2_ckpt)
+
         unfreeze_for_finetuning(model, num_layers_to_unfreeze=30)
 
         model.compile(
@@ -141,9 +215,24 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
             metrics=["accuracy"]
         )
 
+        if resume_ckpt_2:
+            print(f"  ⏯️  Reprise détectée — epoch {initial_epoch_2}/"
+                  f"{cfg['fine_tune_epochs']} déjà complétée, "
+                  f"chargement de {resume_ckpt_2.name}")
+            model.load_weights(str(resume_ckpt_2))
+
+        # Patience distincte pour le fine-tuning : le stage 1 tolère
+        # patience=5 sur 30 epochs (1/6 du budget), mais la même valeur
+        # sur seulement fine_tune_epochs (souvent 10) laisse trop peu de
+        # marge à l'arrêt précoce pour agir avant la fin forcée — la
+        # dégradation observée sur TAM (F1 0.928→0.835 entre 5 et 10
+        # epochs de fine-tuning) confirme qu'il faut réagir plus vite ici.
+        ft_patience = cfg.get("fine_tune_early_stopping_patience",
+                              max(2, cfg["early_stopping_patience"] // 2))
+
         callbacks_ft = _build_callbacks(
-            model_dir / f"{model_name}_stage2_best.keras",
-            cfg["early_stopping_patience"],
+            stage2_ckpt, stage2_progress,
+            ft_patience,
             cfg["reduce_lr_patience"]
         )
 
@@ -151,16 +240,24 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
             train_ds,
             validation_data=val_ds,
             epochs=cfg["fine_tune_epochs"],
+            initial_epoch=initial_epoch_2,
             class_weight=class_weights_arg,
             callbacks=callbacks_ft,
             verbose=1
         )
 
+        # Même raisonnement qu'après le stage 1 : recharge explicitement
+        # le meilleur checkpoint du fine-tuning, indépendamment du
+        # déclenchement ou non d'EarlyStopping.
+        if stage2_ckpt.exists():
+            model.load_weights(str(stage2_ckpt))
+            print(f"  ✅ Meilleurs poids stage 2 rechargés depuis {stage2_ckpt.name}")
+
     train_time = time.time() - t_start
-    print(f"\n    Temps d'entraînement total : {train_time/60:.1f} min")
+    print(f"\n  ⏱️  Temps d'entraînement total : {train_time/60:.1f} min")
 
     # ── 4. Évaluation sur le test set ──
-    print(f"\n  Évaluation sur le test set...")
+    print(f"\n  📊 Évaluation sur le test set...")
     metrics = _evaluate_model(model, test_ds, num_classes, idx2label,
                                model_dir, model_name)
     metrics["train_time_min"] = round(train_time / 60, 2)
@@ -169,7 +266,7 @@ def _train_single_model(model_name: str, train_ds, val_ds, test_ds,
     # ── 5. Sauvegarde modèle final + historique ──
     final_path = model_dir / f"{model_name}_final.keras"
     model.save(final_path)
-    print(f"  Modèle sauvegardé : {final_path}")
+    print(f"  💾 Modèle sauvegardé : {final_path}")
 
     _plot_training_history(history_stage1, history_stage2, model_name, model_dir)
 
@@ -409,7 +506,7 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
 
         if existing is not None:
             print(f"\n{'='*55}")
-            print(f"  Modèle déjà entraîné — rechargé depuis le disque : {model_name.upper()}")
+            print(f"  ⏭️  Modèle déjà entraîné — rechargé depuis le disque : {model_name.upper()}")
             print(f"{'='*55}")
             print(f"  Accuracy: {existing['accuracy']}  Precision: {existing['precision']}  "
                   f"Recall: {existing['recall']}  F1: {existing['f1_score']}")
@@ -434,14 +531,14 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
 
     # Comparaison finale
     print("\n" + "=" * 55)
-    print("   RÉSUMÉ COMPARATIF — PHASE 2 CLASSIFICATION")
+    print("  ✅ RÉSUMÉ COMPARATIF — PHASE 2 CLASSIFICATION")
     print("=" * 55)
 
     comparison_df = pd.DataFrame(all_metrics)
     print("\n" + comparison_df.to_string(index=False))
 
     best_model = comparison_df.loc[comparison_df["f1_score"].idxmax(), "model_name"]
-    print(f"\n  Meilleur modèle (F1-score) : {best_model}")
+    print(f"\n  🏆 Meilleur modèle (F1-score) : {best_model}")
 
     comparison_df.to_csv(output_dir / "models_comparison.csv", index=False)
     _plot_model_comparison(all_metrics, output_dir)
@@ -452,8 +549,8 @@ def run_classification_phase(split_result: dict, train_ds, val_ds, test_ds,
             "all_results": all_metrics
         }, f, indent=2)
 
-    print(f"\n  Résultats sauvegardés dans : {output_dir}")
-    print("   Phase 2 (Classification) terminée\n")
+    print(f"\n  📁 Résultats sauvegardés dans : {output_dir}")
+    print("  ✅ Phase 2 (Classification) terminée\n")
 
     return {
         "all_metrics": all_metrics,
