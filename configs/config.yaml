@@ -53,7 +53,7 @@ preprocessing:
   channels: 3
   normalization: "minmax"       # minmax → [0,1]
   noise_std: 0.02               # bruit gaussien terrain
-
+ 
 # ------------------------------------------------------------
 # Augmentation (train seulement)
 # ------------------------------------------------------------
@@ -66,7 +66,7 @@ augmentation:
   saturation_range: [0.8, 1.2]
   hue_delta: 0.05
   zoom_factor: 1.1              # crop depuis 110% de la taille
-
+ 
 # ------------------------------------------------------------
 # Split dataset
 # ------------------------------------------------------------
@@ -75,22 +75,27 @@ split:
   val_ratio:   0.15
   test_ratio:  0.15
   stratify: true
-
+ 
 # ------------------------------------------------------------
 # Pipeline tf.data
 # ------------------------------------------------------------
 pipeline:
   batch_size: 32
   prefetch: true                # tf.data.AUTOTUNE
-
+  # Taille du buffer de mélange APPLIQUÉ APRÈS décodage des images (donc
+  # sur des images déjà en mémoire, ~768KB chacune en 256x256x3 float32,
+  # pas de simples chemins de fichiers). Une valeur trop élevée (ex: la
+  # taille du dataset entier) peut faire planter Colab par saturation RAM
+  # ("session crashed after using all available RAM"). 2000 est un bon
+  # compromis : largement suffisant pour un mélange de qualité (ratio
+  # >60x le batch_size), tout en restant sûr en mémoire (~1.5GB max).
+  shuffle_buffer_size: 2000
+ 
 # ------------------------------------------------------------
 # Chemins de sortie — Phase 1
 # ------------------------------------------------------------
 paths:
   raw_data:      "data/raw/WheatPlantDiseases"
-  raw_data:      "data/raw/YellowRust19"
-  raw_data:      "data/raw/ZenodoWheatSmall"
-  raw_data:      "data/raw/MendeleyWheat"
   processed:     "data/processed"
   reports:       "data/reports"
   outputs:       "outputs"
@@ -99,11 +104,11 @@ paths:
   val_csv:       "data/processed/val.csv"
   test_csv:      "data/processed/test.csv"
   metadata_json: "data/processed/metadata.json"
-
+ 
 # ============================================================
 # PHASE 2 — Modèles Baseline (Classification + Détection)
 # ============================================================
-
+ 
 phase2:
   # --------------------------------------------------------
   # Classification (CNN custom / ResNet50 / EfficientNetB0)
@@ -115,6 +120,13 @@ phase2:
     fine_tune_epochs: 10        # epochs supplémentaires en fine-tuning (transfer learning)
     fine_tune_lr: 0.00001
     early_stopping_patience: 5
+    # Patience distincte (plus stricte) pour la surveillance pendant le
+    # fine-tuning — un budget de 10 epochs laisse trop peu de marge à une
+    # patience de 5 (calibrée pour les 30 epochs du stage 1) pour réagir
+    # avant la fin forcée. Une dégradation progressive pendant le fine-
+    # tuning (observée notamment sur les modèles TAM) doit être détectée
+    # plus tôt.
+    fine_tune_early_stopping_patience: 3
     reduce_lr_patience: 3
     use_class_weights: true
  

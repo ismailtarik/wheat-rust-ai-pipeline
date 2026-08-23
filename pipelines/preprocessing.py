@@ -150,6 +150,11 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
     seed        = config["project"]["seed"]
     img_size    = tuple(config["preprocessing"]["img_size"])
     batch_size  = config["pipeline"]["batch_size"]
+    # Taille du buffer de mélange APRÈS décodage (images en mémoire, pas
+    # de simples chemins) — plafonnée par défaut pour rester sûre en RAM.
+    # Ajustable si besoin selon la RAM disponible (config.yaml pipeline.
+    # shuffle_buffer_size).
+    shuffle_buffer_size = config["pipeline"].get("shuffle_buffer_size", 2000)
     num_classes = config["classes"]["num_classes"]
     reports_dir = Path(config["paths"]["reports"])
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -204,16 +209,21 @@ def build_tf_datasets(split_result: dict, config: dict) -> tuple:
         cache_path = cache_dir / f"{cache_name}_{fingerprint}"
         ds = ds.cache(str(cache_path))
 
-        # IMPORTANT : shuffle() doit venir APRÈS cache(), jamais avant.
-        # Si shuffle précède cache, l'ordre mélangé du tout premier epoch
-        # est figé dans le cache et REJOUÉ À L'IDENTIQUE à chaque epoch
-        # suivant — reshuffle_each_iteration=True devient alors sans effet,
-        # le modèle voit toujours la même séquence d'exemples. Placé après
-        # cache, le mélange est recalculé à chaque epoch comme prévu, tout
-        # en bénéficiant du cache pour éviter de redécoder les images.
+        # IMPORTANT : shuffle() doit venir APRÈS cache(), jamais avant
+        # (voir note plus haut). MAIS attention : à cet endroit du pipeline,
+        # le buffer de shuffle contient des IMAGES DÉJÀ DÉCODÉES (~768 KB
+        # chacune en 256×256×3 float32), pas de simples chemins de fichiers.
+        # Un buffer_size=len(df) (taille du dataset entier, ex: 10 127)
+        # demanderait donc ~7.7 GB de RAM rien que pour ce buffer — cause
+        # directe d'un crash "session crashed after using all available RAM"
+        # sur Colab. On plafonne donc le buffer à une taille raisonnable et
+        # sûre en mémoire (très largement suffisante pour un bon mélange
+        # relativement à batch_size — un ratio buffer/batch de quelques
+        # dizaines est déjà largement reconnu comme suffisant en pratique).
         if shuffle:
+            safe_buffer_size = min(len(df), shuffle_buffer_size)
             ds = ds.shuffle(
-                buffer_size=len(df),
+                buffer_size=safe_buffer_size,
                 seed=seed,
                 reshuffle_each_iteration=True
             )
