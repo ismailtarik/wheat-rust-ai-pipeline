@@ -43,6 +43,20 @@ def load_config(config_path: str = "configs/config.yaml") -> dict:
         config = yaml.safe_load(f)
     print(f"  ✅ Config chargée : {config_path}")
     return config
+
+
+def print_full_config(config: dict) -> None:
+    """
+    Affiche l'integralite de la configuration au debut de chaque
+    experience -- exigence de reproductibilite (E0/E1/E2/E3 doivent
+    utiliser exactement la meme config, hormis le nom du modele).
+    """
+    import json
+    print("\n" + "=" * 60)
+    print("  CONFIGURATION COMPLETE (reproductibilite)")
+    print("=" * 60)
+    print(json.dumps(config, indent=2, ensure_ascii=False, default=str))
+    print("=" * 60 + "\n")
  
  
 def set_seeds(seed: int) -> None:
@@ -590,6 +604,7 @@ def main():
     # Chargement de la config
     print_banner(args.phase)
     config = load_config(args.config)
+    print_full_config(config)
     set_seeds(config["project"]["seed"])
 
     # Dispatch vers la phase sélectionnée

@@ -156,6 +156,27 @@ def _register_tam_models():
 _register_tam_models()
 
 
+# Architectures avec mecanismes d'attention EXISTANTS (SE, CBAM, Triplet
+# Attention) -- controles experimentaux, PAS des contributions de la these.
+# Objectif : determiner si des mecanismes d'attention generiques deja
+# publies apportent un gain comparable a TAM sur le meme benchmark.
+# Import differe (lazy) pour la meme raison que les modeles TAM : ne pas
+# casser l'import de ce module si attention_modules.py a un souci
+# d'environnement.
+def _register_attention_baseline_models():
+    try:
+        from pipelines.attention_modules import (
+            build_resnet50_se, build_resnet50_cbam, build_resnet50_triplet,
+        )
+        MODEL_BUILDERS["resnet50_se"] = build_resnet50_se
+        MODEL_BUILDERS["resnet50_cbam"] = build_resnet50_cbam
+        MODEL_BUILDERS["resnet50_triplet"] = build_resnet50_triplet
+    except ImportError as e:
+        print(f"  ⚠️  Modeles d'attention (SE/CBAM/Triplet) non disponibles ({e})")
+
+_register_attention_baseline_models()
+
+
 def build_model(model_name: str, input_shape: tuple, num_classes: int,
                  freeze_base: bool = True) -> keras.Model:
     """

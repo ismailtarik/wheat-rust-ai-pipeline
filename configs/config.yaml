@@ -109,12 +109,16 @@ paths:
 # PHASE 2 — Modèles Baseline (Classification + Détection)
 # ============================================================
  
+# ============================================================
+# PHASE 2 — Modèles Baseline (Classification + Détection)
+# ============================================================
+ 
 phase2:
   # --------------------------------------------------------
   # Classification (CNN custom / ResNet50 / EfficientNetB0)
   # --------------------------------------------------------
   classification:
-    models: ["cnn_custom", "resnet50", "efficientnetb0", "resnet50_tam", "efficientnetb0_tam"]
+    models: ["cnn_custom", "resnet50", "efficientnetb0", "resnet50_tam", "efficientnetb0_tam", "resnet50_se", "resnet50_cbam", "resnet50_triplet"]
     epochs: 30
     learning_rate: 0.0001
     fine_tune_epochs: 10        # epochs supplémentaires en fine-tuning (transfer learning)
