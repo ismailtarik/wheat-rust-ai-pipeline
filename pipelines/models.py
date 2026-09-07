@@ -177,6 +177,32 @@ def _register_attention_baseline_models():
 _register_attention_baseline_models()
 
 
+# Ablation de POSITION du TAM (pas seulement du mécanisme) : insère
+# TAM à 4 profondeurs différentes du ResNet50 au lieu du seul point
+# final (E4). Voir pipelines/tam_position_ablation.py.
+def _register_tam_position_ablation_models():
+    try:
+        from pipelines.tam_position_ablation import register_position_ablation_models
+        register_position_ablation_models(MODEL_BUILDERS)
+    except ImportError as e:
+        print(f"  \u26a0\ufe0f  Ablation de position TAM non disponible ({e})")
+
+_register_tam_position_ablation_models()
+
+
+# Ablation de POSITION pour SE/CBAM/Triplet -- meme technique que TAM,
+# pour une comparaison rigoureuse entre les 4 mecanismes a 4 positions
+# identiques. Voir pipelines/attention_position_ablation.py.
+def _register_attention_position_ablation_models():
+    try:
+        from pipelines.attention_position_ablation import register_attention_position_ablation_models
+        register_attention_position_ablation_models(MODEL_BUILDERS)
+    except ImportError as e:
+        print(f"  \u26a0\ufe0f  Ablation de position SE/CBAM/Triplet non disponible ({e})")
+
+_register_attention_position_ablation_models()
+
+
 def build_model(model_name: str, input_shape: tuple, num_classes: int,
                  freeze_base: bool = True) -> keras.Model:
     """
