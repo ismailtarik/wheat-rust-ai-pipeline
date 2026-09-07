@@ -144,12 +144,28 @@ class TextureAttentionModule(layers.Layer):
     """
 
     def __init__(self, n_orientations: int = 8, ksize: int = 7,
-                 trainable_gate: bool = True, bypass: bool = False, **kwargs):
+                 trainable_gate: bool = True, bypass: bool = False,
+                 gate_bias_init: float = -5.0, **kwargs):
+        """
+        gate_bias_init : biais initial du gate sigmoid (avant tout
+            entraînement). Par défaut -5.0 -> sigmoid(-5)≈0.0067, donc
+            la sortie initiale est quasi x + x*0.0067 ≈ x (identité).
+            AVANT ce correctif, le biais par défaut de Keras était 0.0,
+            ce qui donne sigmoid(0)=0.5 -> sortie initiale x + x*0.5 =
+            1.5*x : TAM amplifiait de moitié TOUTES les features
+            pré-entraînées dès l'initialisation, avant tout apprentissage.
+            Avec seulement 2 paramètres entraînables dans tout le module
+            (gate_conv : 1 poids + 1 biais), TAM avait très peu de
+            capacité pour corriger cette perturbation initiale.
+            Mettre gate_bias_init=0.0 restaure l'ancien comportement
+            (utile pour reproduire les résultats antérieurs à ce fix).
+        """
         super().__init__(**kwargs)
         self.n_orientations = n_orientations
         self.ksize = ksize
         self.trainable_gate = trainable_gate
         self.bypass = bypass
+        self.gate_bias_init = gate_bias_init
 
     def build(self, input_shape):
         self.n_channels = input_shape[-1]
@@ -171,6 +187,7 @@ class TextureAttentionModule(layers.Layer):
         # orientations en un masque d'attention (H, W, 1)
         self.gate_conv = layers.Conv2D(
             1, kernel_size=1, activation="sigmoid",
+            bias_initializer=keras.initializers.Constant(self.gate_bias_init),
             trainable=self.trainable_gate, name="tam_gate"
         )
         super().build(input_shape)
@@ -216,6 +233,7 @@ class TextureAttentionModule(layers.Layer):
             "ksize": self.ksize,
             "trainable_gate": self.trainable_gate,
             "bypass": self.bypass,
+            "gate_bias_init": self.gate_bias_init,
         })
         return config
 
