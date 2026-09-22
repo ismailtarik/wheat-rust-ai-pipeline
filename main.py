@@ -34,6 +34,12 @@ from pathlib import Path
 # Helpers
 # ─────────────────────────────────────────────────────────────
  
+# Graine consideree comme "par defaut" : les runs avec cette graine
+# ecrivent dans les dossiers historiques (outputs/phase2_classification*),
+# toute autre graine est isolee dans un dossier suffixe _seed<N>.
+_DEFAULT_SEED = 42
+
+
 def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Charge le fichier de configuration YAML."""
     path = Path(config_path)
@@ -229,6 +235,17 @@ def run_phase2(config: dict, models: list = None,
     config["classes"]["num_classes"] = metadata["num_classes"]
  
     # Redirige les dossiers de sortie sans modifier le fichier config.yaml
+    # Isolation multi-seeds : une graine non-defaut ecrit dans un dossier
+    # dedie (_seed<N>) pour que les runs repetes ne s'ecrasent pas. La
+    # graine par defaut (42) conserve les chemins historiques, afin de ne
+    # pas invalider les resultats deja produits.
+    seed = config["project"]["seed"]
+    if seed != _DEFAULT_SEED:
+        cls_output_dir = f"{cls_output_dir}_seed{seed}"
+        det_output_dir = f"{det_output_dir}_seed{seed}"
+        print(f"  \U0001f331 Graine {seed} (non-defaut) \u2014 sorties isolees dans "
+              f"{cls_output_dir}")
+
     config["phase2"]["paths"]["classification_outputs"] = cls_output_dir
     config["phase2"]["paths"]["detection_outputs"] = det_output_dir
  
@@ -556,6 +573,14 @@ def main():
              "Par défaut : tous les modèles de config.yaml."
     )
     parser.add_argument(
+        "--seed", type=int, default=None,
+        help="Graine aleatoire. Remplace project.seed du config.yaml. "
+             "Quand elle est fournie ET differente de la graine par "
+             "defaut du config, les resultats de Phase 2 sont ecrits "
+             "dans un dossier suffixe _seed<N> afin que les runs "
+             "multi-seeds ne s'ecrasent pas entre eux."
+    )
+    parser.add_argument(
         "--no_skip_existing", action="store_true",
         help="Phase 2 uniquement. Force le ré-entraînement même si un "
              "modèle a déjà été entraîné lors d'une session précédente "
@@ -605,6 +630,8 @@ def main():
     print_banner(args.phase)
     config = load_config(args.config)
     print_full_config(config)
+    if args.seed is not None:
+        config["project"]["seed"] = args.seed
     set_seeds(config["project"]["seed"])
 
     # Dispatch vers la phase sélectionnée

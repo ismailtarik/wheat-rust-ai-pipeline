@@ -347,22 +347,44 @@ def _evaluate_model(model, test_ds, num_classes: int, idx2label: dict,
 
 def _plot_training_history(history_stage1, history_stage2, model_name: str,
                             model_dir: Path) -> None:
-    """Génère les courbes d'apprentissage (loss & accuracy)."""
+    """
+    Génère les courbes d'apprentissage (loss & accuracy).
+
+    Note (robustesse reprise) : si un stage était déjà marqué "complet"
+    dans son fichier de progression au moment de la reprise (initial_epoch
+    >= epochs), model.fit() exécute 0 epoch et renvoie un History avec
+    .history == {} (pas de clé "loss"). Ce cas est géré ici sans crash —
+    les epochs de ce stage-là ne sont alors pas re-traçables (l'historique
+    détaillé d'un run antérieur n'est pas persisté ailleurs), mais le
+    reste du pipeline (poids, métriques test) reste valide et n'est pas
+    affecté.
+    """
+    h1 = history_stage1.history if history_stage1 else {}
+    h2 = history_stage2.history if history_stage2 else {}
+
+    if not h1.get("loss") and not h2.get("loss"):
+        print(f"  ⚠️  {model_name} : historique d'entraînement vide des deux "
+              f"stages (reprise sur stages déjà marqués complets) — "
+              f"courbes non générées.")
+        return
+
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     fig.suptitle(f"Courbes d'apprentissage — {model_name}",
                  fontsize=13, fontweight="bold")
 
-    h1 = history_stage1.history
-    epochs1 = range(1, len(h1["loss"]) + 1)
-
-    axes[0].plot(epochs1, h1["loss"], label="Train (stage1)", color="#3498DB")
-    axes[0].plot(epochs1, h1["val_loss"], label="Val (stage1)", color="#E74C3C")
-    axes[1].plot(epochs1, h1["accuracy"], label="Train (stage1)", color="#3498DB")
-    axes[1].plot(epochs1, h1["val_accuracy"], label="Val (stage1)", color="#E74C3C")
-
-    if history_stage2:
-        h2 = history_stage2.history
+    offset = 0
+    if h1.get("loss"):
+        epochs1 = range(1, len(h1["loss"]) + 1)
+        axes[0].plot(epochs1, h1["loss"], label="Train (stage1)", color="#3498DB")
+        axes[0].plot(epochs1, h1["val_loss"], label="Val (stage1)", color="#E74C3C")
+        axes[1].plot(epochs1, h1["accuracy"], label="Train (stage1)", color="#3498DB")
+        axes[1].plot(epochs1, h1["val_accuracy"], label="Val (stage1)", color="#E74C3C")
         offset = len(h1["loss"])
+    else:
+        print(f"  ⚠️  {model_name} : historique stage1 vide (reprise) — "
+              f"courbes stage1 omises.")
+
+    if h2.get("loss"):
         epochs2 = range(offset + 1, offset + len(h2["loss"]) + 1)
         axes[0].plot(epochs2, h2["loss"], label="Train (fine-tune)",
                      color="#2ECC71", linestyle="--")
@@ -372,8 +394,12 @@ def _plot_training_history(history_stage1, history_stage2, model_name: str,
                      color="#2ECC71", linestyle="--")
         axes[1].plot(epochs2, h2["val_accuracy"], label="Val (fine-tune)",
                      color="#F39C12", linestyle="--")
-        axes[0].axvline(offset, color="gray", linestyle=":", alpha=0.6)
-        axes[1].axvline(offset, color="gray", linestyle=":", alpha=0.6)
+        if offset > 0:
+            axes[0].axvline(offset, color="gray", linestyle=":", alpha=0.6)
+            axes[1].axvline(offset, color="gray", linestyle=":", alpha=0.6)
+    elif history_stage2 is not None:
+        print(f"  ⚠️  {model_name} : historique fine-tuning vide (reprise) — "
+              f"courbes fine-tuning omises.")
 
     axes[0].set_title("Loss")
     axes[0].set_xlabel("Epoch")
