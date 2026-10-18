@@ -1,0 +1,35 @@
+project_root: /content/wheat-rust-ai-pipeline
+raw_root: data/raw
+processed_root: data/processed
+reports_root: data/reports/classification_v3_build
+benchmark_name: classification_v3
+seed: 42
+image_extensions: [.jpg, .jpeg, .png, .bmp, .webp]
+expected:
+  images: 12484
+  classes: 17
+  splits: {train: 8761, val: 1859, test: 1864}
+# Labels from notebook cells 56-57. Extend only after reviewing source labels.
+canonical_labels:
+  Aphid: Aphid
+  Black Rust: Black_Rust
+  Blast: Wheat_Blast
+  Brown Rust: Brown_Rust
+  Common Root Rot: Common_Root_Rot
+  Fusarium Head Blight: Fusarium_Head_Blight
+  Healthy: Healthy
+  Leaf Blight: Leaf_Blight
+  Mildew: Powdery_Mildew
+  Mite: Mite
+  Septoria: Septoria
+  Smut: Smut
+  Stem fly: Stem_Fly
+  Tan spot: Tan_Spot
+  Yellow Rust: Yellow_Rust
+  BlackPoint: Black_Point
+  FusariumFootRot: Fusarium_Foot_Rot
+  HealthyLeaf: Healthy
+  LeafBlight: Leaf_Blight
+  WheatBlast: Wheat_Blast
+  BrownRust: Brown_Rust
+  YellowRust: Yellow_Rust
