@@ -31,10 +31,11 @@ AUGMENT, DIFF_LR = False, False  # fixés par --augment / --diff-lr
 
 IMAGE_SIZE, BATCH_SIZE, EPOCHS = 224, 32, 20
 LEARNING_RATE, PATIENCE, NUM_WORKERS = 1e-4, 5, 2
-VARIANTS = ("E0", "E1", "E2", "E3", "E4", "E5", "E6")
+VARIANTS = ("E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8")
 NAMES = {"E0":"ResNet50", "E1":"ResNet50_SE", "E2":"ResNet50_CBAM",
          "E3":"ResNet50_TripletAttention", "E4":"ResNet50_TAM_Gabor",
-         "E5":"ResNet50_TAMv2_after_layer4", "E6":"ResNet50_TAMv2_after_layer3"}
+         "E5":"ResNet50_TAMv2_after_layer4", "E6":"ResNet50_TAMv2_after_layer3",
+         "E7":"ResNet50_TAMv2_learned_after_layer4", "E8":"ResNet50_TAMv2_nofilter_after_layer4"}
 EXPECTED_CLASSES = sorted([
     "Aphid", "Black_Point", "Black_Rust", "Brown_Rust", "Common_Root_Rot",
     "Fusarium_Foot_Rot", "Fusarium_Head_Blight", "Healthy", "Leaf_Blight",
@@ -148,6 +149,8 @@ class AttentionResNet50(nn.Module):
         self.tam3=nn.Identity()
         if variant=="E5": self.attention=TAMv2(2048,k=3)   # carte 7x7 -> noyau 3x3
         if variant=="E6": self.tam3=TAMv2(1024,k=5)        # carte 14x14 -> noyau 5x5
+        if variant=="E7": self.attention=TAMv2(2048,k=3,mode="learned")  # ablation : filtres appris
+        if variant=="E8": self.attention=TAMv2(2048,k=3,mode="none")     # ablation : sans filtrage spatial
         self.variant=variant
     def forward(self,x):
         x=self.maxpool(self.relu(self.bn1(self.conv1(x))))

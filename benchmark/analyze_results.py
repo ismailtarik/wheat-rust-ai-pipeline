@@ -3,7 +3,8 @@
 Usage :
     python analyze_results.py /content/drive/MyDrive/wheat_attention_v2 ResNet50 ResNet50_TAMv2_after_layer4
 
-Arguments : dossier de sortie du benchmark, modèle de référence, modèle à comparer (noms de dossiers).
+Arguments : dossier de sortie du benchmark, modèle de référence, modèle à comparer (noms de dossiers),
+et (optionnel) liste de seeds à retenir, ex. 42,123,2024 (recommandé : même seeds pour tous les modèles).
 Lit, pour chaque seed, <dossier>/<modèle>/seed_N/test_evaluation/{test_predictions.csv, classification_report.csv}.
 Produit : tableau moyenne ± écart-type de tous les modèles, F1 par classe (réf. vs comparé), McNemar par seed.
 """
@@ -18,6 +19,11 @@ from sklearn.metrics import accuracy_score, f1_score
 base = Path(sys.argv[1])
 ref = sys.argv[2] if len(sys.argv) > 2 else "ResNet50"
 cmp_ = sys.argv[3] if len(sys.argv) > 3 else "ResNet50_TAMv2_after_layer4"
+SEEDS = {f"seed_{x}" for x in sys.argv[4].split(",")} if len(sys.argv) > 4 else None
+
+
+def seed_dirs(model):
+    return [d for d in sorted((base / model).glob("seed_*")) if SEEDS is None or d.name in SEEDS]
 
 
 def load_preds(model, seed_dir):
@@ -27,7 +33,7 @@ def load_preds(model, seed_dir):
 # ---- 1. Tableau global : moyenne ± std sur les seeds -------------------------------------------
 rows = []
 for model_dir in sorted(p for p in base.iterdir() if p.is_dir()):
-    for seed_dir in sorted(model_dir.glob("seed_*")):
+    for seed_dir in seed_dirs(model_dir.name):
         f = seed_dir / "test_evaluation" / "test_predictions.csv"
         if not f.is_file():
             continue
@@ -49,7 +55,7 @@ agg.to_csv(base / "analysis_summary.csv")
 # ---- 2. F1 par classe : référence vs comparé ----------------------------------------------------
 def class_f1(model):
     out = []
-    for seed_dir in sorted((base / model).glob("seed_*")):
+    for seed_dir in seed_dirs(model):
         f = seed_dir / "test_evaluation" / "classification_report.csv"
         if f.is_file():
             r = pd.read_csv(f, index_col=0)
@@ -67,7 +73,7 @@ if a is not None and b is not None:
 
 # ---- 3. McNemar exact par seed ------------------------------------------------------------------
 print(f"\n=== McNemar exact : {ref} vs {cmp_} ===")
-for seed_dir in sorted((base / ref).glob("seed_*")):
+for seed_dir in seed_dirs(ref):
     s = seed_dir.name
     fa = seed_dir / "test_evaluation" / "test_predictions.csv"
     fb = base / cmp_ / s / "test_evaluation" / "test_predictions.csv"

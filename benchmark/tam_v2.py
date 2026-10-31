@@ -74,21 +74,37 @@ class TAMv2(nn.Module):
                 -> sortie = x * (1 + gamma * carte), gamma initialisé à 0  => identité exacte à l'init.
     """
 
-    def __init__(self, c, m=8, k=5, n_orient=8, **gabor_kw):
+    def __init__(self, c, m=8, k=5, n_orient=8, mode="gabor", **gabor_kw):
+        """mode : "gabor"   = filtres de Gabor fixes (E5/E6, version d'origine)
+                  "learned" = mêmes dimensions, convolutions depthwise apprises, init aléatoire (ablation E7)
+                  "none"    = aucun filtrage spatial, seulement projection 1x1 + gate (ablation E8)"""
         super().__init__()
-        bank = make_gabor_bank_v2(k=k, n_orient=n_orient, **gabor_kw)       # (O,1,k,k)
-        self.register_buffer("gabor", bank.repeat(m, 1, 1, 1))              # (m*O,1,k,k), groups=m
-        self.m, self.k = m, k
+        if mode not in ("gabor", "learned", "none"):
+            raise ValueError(mode)
+        self.m, self.k, self.mode = m, k, mode
+        gate_in = m * n_orient
+        if mode == "gabor":
+            bank = make_gabor_bank_v2(k=k, n_orient=n_orient, **gabor_kw)   # (O,1,k,k)
+            self.register_buffer("gabor", bank.repeat(m, 1, 1, 1))          # (m*O,1,k,k), groups=m
+        elif mode == "learned":
+            self.filt = nn.Conv2d(m, m * n_orient, k, padding=k // 2, groups=m, bias=False)
+        else:
+            gate_in = m
         self.reduce = nn.Sequential(nn.Conv2d(c, m, 1, bias=False), nn.BatchNorm2d(m))
         self.gate = nn.Sequential(
-            nn.Conv2d(m * n_orient, m, 1, bias=False), nn.BatchNorm2d(m), nn.ReLU(inplace=True),
+            nn.Conv2d(gate_in, m, 1, bias=False), nn.BatchNorm2d(m), nn.ReLU(inplace=True),
             nn.Conv2d(m, 1, 1),
         )
         self.gamma = nn.Parameter(torch.zeros(1))
 
     def forward(self, x):
         t = self.reduce(x)
-        r = F.conv2d(t, self.gabor, padding=self.k // 2, groups=self.m).abs()
+        if self.mode == "gabor":
+            r = F.conv2d(t, self.gabor, padding=self.k // 2, groups=self.m).abs()
+        elif self.mode == "learned":
+            r = self.filt(t).abs()
+        else:
+            r = t.abs()
         a = torch.tanh(self.gate(r))
         return x * (1.0 + self.gamma * a)
 
