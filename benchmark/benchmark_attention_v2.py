@@ -27,7 +27,7 @@ from torchvision import transforms
 from torchvision.models import resnet50, ResNet50_Weights
 from tam_v2 import TAMv2, make_optimizer, diagnose_old_tam  # tam_v2.py doit être dans le même dossier
 
-AUGMENT, DIFF_LR = False, False  # fixés par --augment / --diff-lr
+AUGMENT, DIFF_LR, TRAIN_FRACTION = False, False, 1.0  # fixés par --augment / --diff-lr / --train-fraction
 
 IMAGE_SIZE, BATCH_SIZE, EPOCHS = 224, 32, 20
 LEARNING_RATE, PATIENCE, NUM_WORKERS = 1e-4, 5, 2
@@ -181,10 +181,20 @@ def load_data(base_dir):
         transforms.RandomRotation(15,fill=(128,128,128)),transforms.ColorJitter(.1,.1,.1)]+norm) if AUGMENT else tfm
     return {s:WheatDataset(d,class_to_idx,train_tfm if s=="train" else tfm) for s,d in parts.items()},class_to_idx,classes
 
+def subsample_train(train_ds,fraction,seed):
+    """Sous-échantillon stratifié du train (au moins 1 image par classe). Même sous-ensemble pour tous les
+    modèles d'une même seed (dépend uniquement de la seed et de la fraction)."""
+    if fraction>=1.0: return train_ds
+    rng=np.random.default_rng(seed); keep=[]
+    for _,g in train_ds.df.groupby("canonical_class"):
+        keep.extend(rng.choice(g.index.values,size=max(1,round(len(g)*fraction)),replace=False).tolist())
+    return WheatDataset(train_ds.df.loc[sorted(keep)],train_ds.class_to_idx,train_ds.transform)
+
 def make_loaders(ds,seed):
     gen=torch.Generator().manual_seed(seed); pin=torch.cuda.is_available()
+    train_ds=subsample_train(ds["train"],TRAIN_FRACTION,seed)
     return {
-      "train":DataLoader(ds["train"],batch_size=BATCH_SIZE,shuffle=True,num_workers=NUM_WORKERS,pin_memory=pin,generator=gen),
+      "train":DataLoader(train_ds,batch_size=BATCH_SIZE,shuffle=True,num_workers=NUM_WORKERS,pin_memory=pin,generator=gen),
       "val":DataLoader(ds["val"],batch_size=BATCH_SIZE,shuffle=False,num_workers=NUM_WORKERS,pin_memory=pin),
       "test":DataLoader(ds["test"],batch_size=BATCH_SIZE,shuffle=False,num_workers=NUM_WORKERS,pin_memory=pin)
     }
@@ -265,7 +275,7 @@ def train_one(variant,seed,ds,class_to_idx,classes,outroot,device):
     summary={"variant":variant,"architecture":NAMES[variant],"seed":seed,"best_epoch":best_epoch,"best_validation_macro_f1":best,
              "epochs_completed":len(history),"training_seconds":time.time()-start,"device":str(device),"batch_size":BATCH_SIZE,
              "image_size":IMAGE_SIZE,"learning_rate":LEARNING_RATE,"optimizer":"Adam","loss":"CrossEntropyLoss",
-             "augment":AUGMENT,"diff_lr":DIFF_LR,"selection_metric":"validation macro-F1","pretrained_weights":"ImageNet"}
+             "augment":AUGMENT,"diff_lr":DIFF_LR,"train_fraction":TRAIN_FRACTION,"epochs_max":EPOCHS,"selection_metric":"validation macro-F1","pretrained_weights":"ImageNet"}
     (run/"training_summary.json").write_text(json.dumps(summary,indent=2),encoding="utf-8")
     saved=torch.load(ckpt,map_location=device,weights_only=False); model.load_state_dict(saved["model_state_dict"])
     test=evaluate(model,loaders["test"],device,classes,run/"test_evaluation")
@@ -283,7 +293,14 @@ def main():
     ap.add_argument("--variants",default="E0,E1,E2,E3,E4")
     ap.add_argument("--augment",action="store_true",help="augmentation de données (train uniquement)")
     ap.add_argument("--diff-lr",action="store_true",help="LR x10 pour modules neufs + fc, AdamW")
-    args=ap.parse_args(); global AUGMENT,DIFF_LR; AUGMENT,DIFF_LR=args.augment,args.diff_lr; out=args.output_dir or args.base_dir/"experiments"/"attention_benchmark"
+    ap.add_argument("--train-fraction",type=float,default=1.0,help="fraction stratifiée du train (ex. 0.1 = 10 %%)")
+    ap.add_argument("--epochs",type=int,default=None,help="nombre max d'epochs (défaut 20)")
+    args=ap.parse_args(); global AUGMENT,DIFF_LR,TRAIN_FRACTION,EPOCHS
+    AUGMENT,DIFF_LR,TRAIN_FRACTION=args.augment,args.diff_lr,args.train_fraction
+    if args.epochs: EPOCHS=args.epochs
+    if not 0<TRAIN_FRACTION<=1: raise SystemExit("--train-fraction doit être dans ]0,1]")
+    if TRAIN_FRACTION<1: print(f"[low-data] {100*TRAIN_FRACTION:.0f} % du train (stratifié), epochs max={EPOCHS}")
+    out=args.output_dir or args.base_dir/"experiments"/"attention_benchmark"
     device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device={device}\nDataset={args.base_dir}\nOutput={out}")
     ds,class_to_idx,classes=load_data(args.base_dir)
